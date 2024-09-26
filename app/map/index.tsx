@@ -1,12 +1,7 @@
-import { View, Text } from 'react-native'
-import { SafeAreaView } from 'react-native-safe-area-context'
+import { Map } from '@pages/map/Map.page'
 
-const Map = () => {
-  return (
-    <SafeAreaView>
-      <Text style={{ fontSize: 20, fontFamily: 'ComicSans' }}>Map</Text>
-    </SafeAreaView>
-  )
+const Index = () => {
+  return <Map />
 }
 
-export default Map
+export default Index
