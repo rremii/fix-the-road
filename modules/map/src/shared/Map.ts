@@ -1,4 +1,8 @@
-export const mapHTML = `
+import { MapType } from '../../types'
+import { MapNativeScripts } from './Map.native'
+import { MapWebScripts } from './Map.web'
+
+export const createHTMLMap = (type:MapType) => `
 <!DOCTYPE html>
 <html>
   <head>
@@ -25,11 +29,11 @@ export const mapHTML = `
   <body>
     <div id="map"></div>  
   </body>
+  ${type === 'web' ? MapWebScripts : MapNativeScripts}
+
   <script>
-
-
-     const map = L.map("map").setView([49.2125578, 16.62662018], 14); //starting position
-      L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
+    const map = L.map("map").setView([49.2125578, 16.62662018], 14); //starting position
+    L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
         maxZoom: 19,
         attribution:
           '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
@@ -54,26 +58,18 @@ export const mapHTML = `
         group.addTo(map);
       }
 
-     
-
       const handleMapClick = (lat, lng) => {
-        window.ReactNativeWebView.postMessage(
-          JSON.stringify({
-            type: "addMarker",
+       sendMsgToReact({
+            type: "click",
             payload: {
               lat,
               lng,
-            },
-          })
+            }
+          }
         );
       };
 
-      const removeMarker = (index) => {
-        const marker = markers[index];
-        marker.remove();
-        markers.splice(markers.indexOf(marker), 1);
-      };
-
+   
       map.on("click", function (e) {
         handleMapClick(e.latlng.lat, e.latlng.lng);
       });
