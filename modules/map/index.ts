@@ -1,1 +1,1 @@
-export {MapView,MapViewWeb} from './src'
+export { Map } from './src/Map'

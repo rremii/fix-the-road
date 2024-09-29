@@ -1,9 +1,9 @@
 import { MapType } from '../../types'
-import { MapNativeScripts } from './Map.native'
-import { MapWebScripts } from './Map.web'
+import { MapNativeScripts } from '../nativeMap/Map.scripts'
+import { MapWebScripts } from '../webMap/Map.sctipts'
 
-export const createHTMLMap = (type:MapType) => `
-<!DOCTYPE html>
+export const createHTMLMap = (type: MapType) => `
+<!doctype html>
 <html>
   <head>
     <meta
@@ -27,53 +27,102 @@ export const createHTMLMap = (type:MapType) => `
     </style>
   </head>
   <body>
-    <div id="map"></div>  
+    <div id="map"></div>
   </body>
   ${type === 'web' ? MapWebScripts : MapNativeScripts}
 
   <script>
-    const map = L.map("map").setView([49.2125578, 16.62662018], 14); //starting position
-    L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
-        maxZoom: 19,
-        attribution:
-          '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
-      }).addTo(map);
+    const map = L.map('map').setView([49.2125578, 16.62662018], 14)
 
-     
-      let group = L.layerGroup();
+    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      maxZoom: 19,
+      attribution:
+        '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+    }).addTo(map)
 
-      const drawAllMarkers=(markers)=>{
-        
-        group.clearLayers();
+    function centerMap(lat, lng) {
 
-        markers.forEach((markerData) => {
-          const marker = L.marker({
+      const curZoom = map.getZoom()
+
+      map.setView([lat, lng],curZoom)
+    }
+
+    let group = L.layerGroup()
+
+    function drawAllMarkers(markers) {
+      group.clearLayers()
+
+      markers.forEach((markerData) => {
+        const marker = L.marker(
+          {
             lat: markerData.lat,
             lng: markerData.lng,
+          },
+          {
+            icon: L.icon({
+              iconUrl: markerData.icon || 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png',
+            }),
+            draggable: markerData.draggable || false,
+          },
+        )
+
+        marker.on('dragend', function (e) {
+
+          const newMarkerData = {
+            ...markerData,
+            lat: e.target._latlng.lat,
+            lng: e.target._latlng.lng,
+          }
+          sendMsgToReact({
+            type: 'dragMarker',
+            payload: newMarkerData,
           })
-            
-          marker.addTo(group);
+        })
+        marker.on('click', function (e) {
+          sendMsgToReact({
+            type: 'clickMarker',
+            payload: markerData,
+          })
         })
 
-        group.addTo(map);
+        marker.addTo(group)
+      })
+
+      group.addTo(map)
+    }
+
+    function handleMapClick(lat, lng) {
+      sendMsgToReact({
+        type: 'clickMap',
+        payload: {
+          lat,
+          lng,
+        },
+      })
+    }
+
+
+
+    function onReactMessage(message) {
+      switch (message.type) {
+            case 'drawMarkers':
+                drawAllMarkers(message.payload)
+                break;
+            case 'centerMap':
+                centerMap(message.payload.lat, message.payload.lng)
+                break;
       }
+    }
 
-      const handleMapClick = (lat, lng) => {
-       sendMsgToReact({
-            type: "click",
-            payload: {
-              lat,
-              lng,
-            }
-          }
-        );
-      };
+    map.on('click', function (e) {
+      handleMapClick(e.latlng.lat, e.latlng.lng)
+    })
+  </script>
+  <script>
 
-   
-      map.on("click", function (e) {
-        handleMapClick(e.latlng.lat, e.latlng.lng);
-      });
-      
+  const extraMapLabel = document.querySelector('.leaflet-control-attribution')
+  extraMapLabel.style.display = 'none'
+  
   </script>
 </html>
 `

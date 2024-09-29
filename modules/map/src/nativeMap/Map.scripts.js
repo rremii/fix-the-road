@@ -1,10 +1,9 @@
 export const MapNativeScripts = `
  <script>
     function handleReactMassage(msg) {
-      const msg = JSON.parse(event.data)
+    
+      onReactMessage(msg)
 
-
-      alert(msg)
     }
   </script>
   <script>
@@ -15,5 +14,3 @@ export const MapNativeScripts = `
     };
   </script>
 `
-
-

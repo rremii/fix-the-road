@@ -1,7 +1,7 @@
-import { Map } from '@pages/map/Map.page'
+import MapPage from '@pages/map/Map.page'
 
 const Index = () => {
-  return <Map />
+  return <MapPage />
 }
 
 export default Index
