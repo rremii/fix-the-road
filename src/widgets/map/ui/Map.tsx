@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useRef, useState } from 'react'
 import { Coords, IMap, Marker } from 'modules/map/types'
 import { Map as MapModule } from '@modules/map'
 

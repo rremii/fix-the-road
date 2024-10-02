@@ -1,9 +1,4 @@
-import { _updatePropsJS } from './../../../../node_modules/react-native-reanimated/src/js-reanimated/index'
-import { BottomTabBarProps } from '@react-navigation/bottom-tabs'
-import {
-  BottomTabNavigationConfig,
-  BottomTabNavigationProp,
-} from '@react-navigation/bottom-tabs/lib/typescript/src/types'
+import { BottomTabNavigationProp } from '@react-navigation/bottom-tabs/lib/typescript/src/types'
 import { StackNavigationProp } from '@react-navigation/stack'
 
 export type RootNavigationParam = {

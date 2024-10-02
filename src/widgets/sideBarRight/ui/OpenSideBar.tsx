@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { View, Text, Pressable, StyleSheet, Platform } from 'react-native'
+import { Text, Pressable, StyleSheet, Platform } from 'react-native'
 import React from 'react'
 import { SideBarRight } from './SideBarRight'
 import Arrow from '@icons/arrow.svg'

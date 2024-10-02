@@ -1,10 +1,8 @@
 import { Portal } from '@gorhom/portal'
-import { Layout } from '@react-navigation/stack/lib/typescript/src/types'
 import { Overlay } from '@shared/Overlay'
 import React, { PropsWithChildren, useEffect, useState } from 'react'
-import { View, Text, StyleSheet, LayoutChangeEvent } from 'react-native'
+import { StyleSheet, LayoutChangeEvent } from 'react-native'
 import Animated, {
-  interpolate,
   useAnimatedStyle,
   useSharedValue,
   withTiming,

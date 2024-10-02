@@ -1,8 +1,6 @@
 import {
-  IMap,
   MapAdapter,
   MapAdapterProps,
-  MapProps,
   MapReceiveEvents,
   MapSendEvents,
 } from 'modules/map/types'

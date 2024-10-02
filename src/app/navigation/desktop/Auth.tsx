@@ -1,4 +1,4 @@
-import { AuthNavigationParam, RootNavigationParam } from './types'
+import { AuthNavigationParam } from './types'
 import React from 'react'
 import {
   createStackNavigator,

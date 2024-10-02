@@ -1,10 +1,5 @@
 import React, { useEffect } from 'react'
-import {
-  Dimensions,
-  Pressable,
-  StyleSheet,
-  TouchableOpacity,
-} from 'react-native'
+import { Pressable, StyleSheet } from 'react-native'
 import Animated, {
   useAnimatedStyle,
   useSharedValue,

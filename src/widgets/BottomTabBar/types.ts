@@ -1,5 +1,4 @@
 import { ReactNode } from 'react'
-import { HomeNavigationParam } from 'src/app/navigation/mobile/types'
 
 export type BottomTabsRouteNames = 'map' | 'newPost' | 'profile'
 

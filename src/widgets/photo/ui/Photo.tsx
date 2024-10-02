@@ -1,23 +1,19 @@
-import { CameraView, CameraType, useCameraPermissions } from 'expo-camera'
-import React, { useEffect, useRef } from 'react'
+import { CameraView } from 'expo-camera'
+import React, { useRef } from 'react'
 import { useState } from 'react'
 import {
   ActivityIndicator,
-  Button,
   ImageBackground,
   Platform,
   StyleSheet,
   Text,
-  TouchableOpacity,
   View,
 } from 'react-native'
 import { Pressable } from 'react-native'
-import { Image } from 'react-native'
 import { useHandleCameraPermission } from '../model/useHandleCameraPermission'
 import { useNavigation } from '@react-navigation/native'
 import { StackNavigationProp } from '@react-navigation/stack'
 import { NewPostNavigationParam } from 'src/app/navigation/mobile/types'
-import { useUIStore } from '@shared/store/UIStore'
 
 const cameraFacing = 'back'
 
