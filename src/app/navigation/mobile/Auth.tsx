@@ -3,7 +3,6 @@ import {
   createStackNavigator,
   StackNavigationOptions,
 } from '@react-navigation/stack'
-import { View, Text } from 'react-native'
 import { AuthNavigationParam } from './types'
 import SignUpNavigation from './SignUp'
 import { SignInPage } from '@pages/mobile/auth/SignIn.page'

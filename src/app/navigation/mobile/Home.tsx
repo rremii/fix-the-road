@@ -1,6 +1,5 @@
-import React, { FC, ReactNode, useEffect, useState } from 'react'
-import { View, Text } from 'react-native'
-import { HomeNavigationParam, RootNavigationParam } from './types'
+import React from 'react'
+import { HomeNavigationParam } from './types'
 import {
   BottomTabNavigationOptions,
   createBottomTabNavigator,
@@ -9,18 +8,6 @@ import NewPostNavigation from './NewPost'
 import { MapPage } from '@pages/mobile/home/Map.page'
 import { ProfilePage } from '@pages/mobile/home/Profile.page'
 
-import {
-  createNavigationContainerRef,
-  useNavigation,
-  useNavigationState,
-  useRoute,
-} from '@react-navigation/native'
-import {
-  SharedValue,
-  useAnimatedStyle,
-  useSharedValue,
-  withTiming,
-} from 'react-native-reanimated'
 import { BottomTabBar } from '@widgets/bottomTabBar/ui/BottomTabBar'
 import { BottomTabsRouteNames } from '@widgets/bottomTabBar/types'
 

@@ -4,7 +4,6 @@ import {
   createStackNavigator,
   StackNavigationOptions,
 } from '@react-navigation/stack'
-import { View, Text } from 'react-native'
 import { EmailPage } from '@pages/desktop/auth/SignUp/Email.page'
 import { CodePage } from '@pages/desktop/auth/SignUp/Code.page'
 import { InfoPage } from '@pages/desktop/auth/SignUp/Info.page'

@@ -1,24 +1,11 @@
-import {
-  BottomTabBarProps,
-  BottomTabNavigationProp,
-} from '@react-navigation/bottom-tabs'
-import {
-  NavigationProp,
-  useNavigation,
-  useNavigationState,
-  useRoute,
-} from '@react-navigation/native'
-import React, { useEffect, useState } from 'react'
-import { Pressable, View, Text, StyleSheet } from 'react-native'
+import { BottomTabBarProps } from '@react-navigation/bottom-tabs'
+import React, { useEffect } from 'react'
+import { Pressable, Text, StyleSheet } from 'react-native'
 import Animated, {
   useAnimatedStyle,
   useSharedValue,
   withTiming,
 } from 'react-native-reanimated'
-import { ScreenProps } from 'react-native-screens'
-import { HomeNavigationParam } from 'src/app/navigation/mobile/types'
-import { iconSize } from '../constants/sizes'
-import { Image } from 'react-native'
 import { getRouteDataByName } from '../utils/getRouteDataByName'
 import { BottomTabsRouteNames } from '../types'
 import { tabBarHeight } from '@shared/constants'

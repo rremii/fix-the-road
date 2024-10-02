@@ -13,5 +13,6 @@
       "@fonts/*": ["./assets/fonts/*"],
       "@modules/*": ["./modules/*"]
     }
-  }
+  },
+  "include": [".eslintrc.js", "**/*.ts", "**/*.tsx", "**/*.js", "**/*.jsx"]
 }

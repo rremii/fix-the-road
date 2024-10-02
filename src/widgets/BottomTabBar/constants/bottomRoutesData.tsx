@@ -1,6 +1,3 @@
-import { ReactNode } from 'react'
-import { HomeNavigationParam } from 'src/app/navigation/mobile/types'
-
 import Camera from '@icons/camera.svg'
 import CameraGray from '@icons/camera-gray.svg'
 import Map from '@icons/map.svg'

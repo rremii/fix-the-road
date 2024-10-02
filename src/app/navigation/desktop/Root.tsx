@@ -5,7 +5,6 @@ import {
 } from '@react-navigation/stack'
 import { RootNavigationParam } from './types'
 import AuthNavigation from './Auth'
-import { View, Text } from 'react-native'
 import { MapPage } from '@pages/desktop/home/Map.page'
 
 const RootStack = createStackNavigator<RootNavigationParam>()

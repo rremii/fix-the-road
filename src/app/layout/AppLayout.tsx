@@ -2,7 +2,7 @@ import { PortalProvider } from '@gorhom/portal'
 import { useDownloadFonts } from '@shared/hooks/useDownloadFonts'
 import React from 'react'
 import { FC, PropsWithChildren } from 'react'
-import { View, StyleSheet } from 'react-native'
+import { StyleSheet } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 
 interface Props extends PropsWithChildren {}

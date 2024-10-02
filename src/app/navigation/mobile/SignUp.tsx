@@ -3,7 +3,6 @@ import {
   createStackNavigator,
   StackNavigationOptions,
 } from '@react-navigation/stack'
-import { View, Text } from 'react-native'
 import { SignUpNavigationParam } from './types'
 import { EmailPage } from '@pages/mobile/auth/SignUp/Email.page'
 import { CodePage } from '@pages/mobile/auth/SignUp/Code.page'
