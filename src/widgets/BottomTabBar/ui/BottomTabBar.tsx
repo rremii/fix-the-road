@@ -17,45 +17,65 @@ import Animated, {
 } from 'react-native-reanimated'
 import { ScreenProps } from 'react-native-screens'
 import { HomeNavigationParam } from 'src/app/navigation/mobile/types'
+import { iconSize } from '../constants/sizes'
+import { Image } from 'react-native'
+import { getRouteDataByName } from '../utils/getRouteDataByName'
+import { BottomTabsRouteNames } from '../types'
+import { tabBarHeight } from '@shared/constants'
+import { useUIStore } from '@shared/store/UIStore'
 
-const iconSize = 25
-const tabBarHeight = 50
 export const BottomTabBar = ({ state, navigation }: BottomTabBarProps) => {
-  const isBottomTabsHidden = true
+  const isBottomTabsHidden = useUIStore((state) => state.isBottomTabBarHidden)
 
-  //   const slideAnim = useSharedValue(0)
+  const slideAnim = useSharedValue(0)
 
-  //   useEffect(() => {
-  //     if (isBottomTabsHidden) {
-  //       slideAnim.value = withTiming(tabBarHeight)
-  //     } else {
-  //       slideAnim.value = withTiming(0)
-  //     }
-  //   }, [isBottomTabsHidden])
+  useEffect(() => {
+    if (isBottomTabsHidden) {
+      slideAnim.value = withTiming(tabBarHeight)
+    } else {
+      slideAnim.value = withTiming(0)
+    }
+  }, [isBottomTabsHidden])
 
-  //   const slideStyles = useAnimatedStyle(() => ({
-  //     transform: [{ translateY: slideAnim.value }],
-  //   }))
+  const slideStyles = useAnimatedStyle(() => ({
+    transform: [{ translateY: slideAnim.value }],
+  }))
 
   const goTo = (path: string) => {
     navigation.navigate(path)
   }
 
-  console.log(state.routes)
   return (
-    <Animated.View style={[styles.container]}>
-      {state.routes.map((route) => {
-        return (
-          <Pressable
-            key={route.key}
-            style={styles.tabBarItemStyle}
-            onPress={() => goTo(route.name)}
-          >
-            <Text style={styles.tabBarLabelStyle}>{route.name}</Text>
-          </Pressable>
-        )
-      })}
-    </Animated.View>
+    <>
+      <Animated.View style={[styles.container, slideStyles]}>
+        {state.routes.map((route, index) => {
+          const isFocused = state.index === index
+
+          const routeData = getRouteDataByName(
+            route.name as BottomTabsRouteNames,
+          )
+
+          const { icon, iconGray, title, color } = routeData
+          return (
+            <Pressable
+              key={route.key}
+              style={styles.tabBarItemStyle}
+              onPress={() => goTo(route.name)}
+            >
+              {isFocused ? icon : iconGray}
+              <Text
+                style={[
+                  styles.tabBarLabelStyle,
+                  { color: isFocused ? color : '#656565' },
+                ]}
+              >
+                {title}
+              </Text>
+            </Pressable>
+          )
+        })}
+      </Animated.View>
+    </>
   )
 }
 const styles = StyleSheet.create({
@@ -63,20 +83,16 @@ const styles = StyleSheet.create({
     position: 'absolute',
     bottom: 0,
     height: 50,
+    width: '100%',
     flexDirection: 'row',
-    transform: [{ translateY: -12 }],
   },
   tabBarItemStyle: {
+    paddingTop: 5,
     justifyContent: 'center',
     alignItems: 'center',
 
     flex: 1,
-    backgroundColor: 'red',
-  },
-  tabBarIconStyle: {
-    width: iconSize,
-    height: iconSize,
-    flex: 0,
+    backgroundColor: 'white',
   },
   tabBarLabelStyle: {
     fontSize: 12,

@@ -1,5 +1,6 @@
 import { RouteProp, useRoute } from '@react-navigation/native'
 import { StackNavigationProp } from '@react-navigation/stack'
+import { tabBarHeight } from '@shared/constants'
 import { PostPreview } from '@widgets/postPreview/ui/PostPreview'
 import React from 'react'
 import { View, Text, StyleSheet } from 'react-native'

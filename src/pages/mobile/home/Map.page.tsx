@@ -2,6 +2,7 @@ import React from 'react'
 import { View, StyleSheet } from 'react-native'
 
 import { Map } from '@widgets/map/ui/Map'
+import { tabBarHeight } from '@shared/constants'
 
 export const MapPage = () => {
   return (
@@ -13,5 +14,6 @@ export const MapPage = () => {
 const styles = StyleSheet.create({
   pageContainer: {
     flex: 1,
+    paddingBottom: tabBarHeight,
   },
 })
