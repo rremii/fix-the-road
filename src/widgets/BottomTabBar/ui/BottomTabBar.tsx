@@ -10,6 +10,7 @@ import { getRouteDataByName } from '../utils/getRouteDataByName'
 import { BottomTabsRouteNames } from '../types'
 import { tabBarHeight } from '@shared/constants'
 import { useUIStore } from '@shared/store/UIStore'
+import { Portal } from '@gorhom/portal'
 
 export const BottomTabBar = ({ state, navigation }: BottomTabBarProps) => {
   const isBottomTabsHidden = useUIStore((state) => state.isBottomTabBarHidden)
@@ -34,39 +35,42 @@ export const BottomTabBar = ({ state, navigation }: BottomTabBarProps) => {
 
   return (
     <>
-      <Animated.View style={[styles.container, slideStyles]}>
-        {state.routes.map((route, index) => {
-          const isFocused = state.index === index
+      <Portal>
+        <Animated.View style={[styles.container, slideStyles]}>
+          {state.routes.map((route, index) => {
+            const isFocused = state.index === index
 
-          const routeData = getRouteDataByName(
-            route.name as BottomTabsRouteNames,
-          )
+            const routeData = getRouteDataByName(
+              route.name as BottomTabsRouteNames,
+            )
 
-          const { icon, iconGray, title, color } = routeData
-          return (
-            <Pressable
-              key={route.key}
-              style={styles.tabBarItemStyle}
-              onPress={() => goTo(route.name)}
-            >
-              {isFocused ? icon : iconGray}
-              <Text
-                style={[
-                  styles.tabBarLabelStyle,
-                  { color: isFocused ? color : '#656565' },
-                ]}
+            const { icon, iconGray, title, color } = routeData
+            return (
+              <Pressable
+                key={route.key}
+                style={styles.tabBarItemStyle}
+                onPress={() => goTo(route.name)}
               >
-                {title}
-              </Text>
-            </Pressable>
-          )
-        })}
-      </Animated.View>
+                {isFocused ? icon : iconGray}
+                <Text
+                  style={[
+                    styles.tabBarLabelStyle,
+                    { color: isFocused ? color : '#656565' },
+                  ]}
+                >
+                  {title}
+                </Text>
+              </Pressable>
+            )
+          })}
+        </Animated.View>
+      </Portal>
     </>
   )
 }
 const styles = StyleSheet.create({
   container: {
+    zIndex: 10,
     position: 'absolute',
     bottom: 0,
     height: 50,
