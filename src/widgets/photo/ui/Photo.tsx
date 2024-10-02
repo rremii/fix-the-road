@@ -1,5 +1,5 @@
 import { CameraView } from 'expo-camera'
-import React, { useRef } from 'react'
+import React, { useEffect, useRef } from 'react'
 import { useState } from 'react'
 import {
   ActivityIndicator,
@@ -14,14 +14,18 @@ import { useHandleCameraPermission } from '../model/useHandleCameraPermission'
 import { useNavigation } from '@react-navigation/native'
 import { StackNavigationProp } from '@react-navigation/stack'
 import { NewPostNavigationParam } from 'src/app/navigation/mobile/types'
+import { GestureDetector } from 'react-native-gesture-handler'
+import { useCameraZoom } from '../model/useCameraZoom'
+import { useUnlockScreenOrientation } from '@shared/hooks/useUnlockScreenOrientation'
 
 const cameraFacing = 'back'
-
 export default function Photo() {
   const navigation =
     useNavigation<StackNavigationProp<NewPostNavigationParam, 'photo'>>()
   useHandleCameraPermission()
+  useUnlockScreenOrientation()
 
+  const { pinch, zoom } = useCameraZoom()
   const [photoUri, setPhotoUri] = useState('')
   const [isTakingPhoto, setTaking] = useState(false)
   const camera = useRef<CameraView>(null)
@@ -72,11 +76,18 @@ export default function Photo() {
           </View>
         </ImageBackground>
       ) : (
-        <CameraView ref={camera} style={styles.camera} facing={cameraFacing}>
-          <Pressable style={styles.button} onPress={takePhoto}>
-            <Text style={styles.btnText}>Take Photo</Text>
-          </Pressable>
-        </CameraView>
+        <GestureDetector gesture={pinch}>
+          <CameraView
+            zoom={zoom}
+            ref={camera}
+            style={styles.camera}
+            facing={cameraFacing}
+          >
+            <Pressable style={styles.button} onPress={takePhoto}>
+              <Text style={styles.btnText}>Take Photo</Text>
+            </Pressable>
+          </CameraView>
+        </GestureDetector>
       )}
     </View>
   )
