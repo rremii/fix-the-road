@@ -21,7 +21,10 @@ export type MapNavigationParam = {
 
 export type NewPostNavigationParam = {
   photo: undefined
-  preview: undefined
+  preview: PreviewParams
+}
+type PreviewParams = {
+  postPhotoUri: string
 }
 
 export type AuthNavigationParam = {

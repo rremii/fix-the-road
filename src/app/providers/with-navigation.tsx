@@ -1,4 +1,7 @@
-import { NavigationContainer } from '@react-navigation/native'
+import {
+  createNavigationContainerRef,
+  NavigationContainer,
+} from '@react-navigation/native'
 import React, { FC } from 'react'
 
 export const withNavigation = (Component: FC): FC => {
