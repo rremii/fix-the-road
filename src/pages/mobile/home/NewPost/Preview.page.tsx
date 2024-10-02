@@ -1,10 +1,16 @@
+import { RouteProp, useRoute } from '@react-navigation/native'
+import { StackNavigationProp } from '@react-navigation/stack'
+import { PostPreview } from '@widgets/postPreview/ui/PostPreview'
 import React from 'react'
 import { View, Text, StyleSheet } from 'react-native'
+import { NewPostNavigationParam } from 'src/app/navigation/mobile/types'
 
 export const PreviewPage = () => {
+  const route = useRoute<RouteProp<NewPostNavigationParam, 'preview'>>()
+
   return (
     <View style={styles.pageContainer}>
-      <Text>not implemented</Text>
+      <PostPreview postPhotoUri={route.params.postPhotoUri} />
     </View>
   )
 }

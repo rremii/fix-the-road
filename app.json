@@ -41,6 +41,12 @@
             "./assets/fonts/SpaceMono-Regular.ttf"
           ]
         }
+      ],
+      [
+        "expo-camera",
+        {
+          "cameraPermission": "Allow $(PRODUCT_NAME) to access your camera"
+        }
       ]
     ]
   }

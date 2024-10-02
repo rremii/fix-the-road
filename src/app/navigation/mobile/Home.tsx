@@ -1,4 +1,4 @@
-import React, { FC, ReactNode } from 'react'
+import React, { FC, ReactNode, useEffect, useState } from 'react'
 import { View, Text } from 'react-native'
 import { HomeNavigationParam, RootNavigationParam } from './types'
 import {
@@ -15,9 +15,22 @@ import Map from '@icons/map.svg'
 import MapGray from '@icons/map-gray.svg'
 import Profile from '@icons/profile.svg'
 import ProfileGray from '@icons/profile-gray.svg'
+import {
+  createNavigationContainerRef,
+  useNavigation,
+  useNavigationState,
+  useRoute,
+} from '@react-navigation/native'
+import {
+  SharedValue,
+  useAnimatedStyle,
+  useSharedValue,
+  withTiming,
+} from 'react-native-reanimated'
+import { BottomTabBar } from '@widgets/BottomTabBar/ui/BottomTabBar'
 
-const iconSize = 25
 const HomeTabs = createBottomTabNavigator<HomeNavigationParam>()
+const iconSize = 25
 
 const HomeNavigation = () => {
   const routes: {
@@ -25,14 +38,17 @@ const HomeNavigation = () => {
     component: React.FC
     icon: ReactNode
     iconGray: ReactNode
+    title: string
   }[] = [
     {
+      title: 'Map',
       name: 'map',
       component: MapPage,
       icon: <Map width={iconSize} height={iconSize} />,
       iconGray: <MapGray width={iconSize} height={iconSize} />,
     },
     {
+      title: 'New Post',
       name: 'newPost',
       component: NewPostNavigation,
       icon: <Camera width={iconSize} height={iconSize} />,
@@ -40,6 +56,7 @@ const HomeNavigation = () => {
     },
     {
       name: 'profile',
+      title: 'Profile',
       component: ProfilePage,
       icon: <Profile width={iconSize} height={iconSize} />,
       iconGray: <ProfileGray width={iconSize} height={iconSize} />,
@@ -47,14 +64,28 @@ const HomeNavigation = () => {
   ]
 
   return (
-    <HomeTabs.Navigator screenOptions={TabsOptions} initialRouteName={'map'}>
+    // <HomeTabs.Navigator screenOptions={tabsOptions} initialRouteName={'map'}>
+    //   {routes.map((route, index) => (
+    //     <HomeTabs.Screen
+    //       key={index}
+    //       options={{
+    //         title: route.title,
+    //         tabBarIcon: ({ focused }) =>
+    //           focused ? route.icon : route.iconGray,
+    //       }}
+    //       name={route.name}
+    //       component={route.component}
+    //     />
+    //   ))}
+    // </HomeTabs.Navigator>
+    <HomeTabs.Navigator
+      screenOptions={tabsOptions}
+      tabBar={BottomTabBar}
+      initialRouteName={'map'}
+    >
       {routes.map((route, index) => (
         <HomeTabs.Screen
           key={index}
-          options={{
-            tabBarIcon: ({ focused }) =>
-              focused ? route.icon : route.iconGray,
-          }}
           name={route.name}
           component={route.component}
         />
@@ -63,18 +94,6 @@ const HomeNavigation = () => {
   )
 }
 export default HomeNavigation
-const TabsOptions: BottomTabNavigationOptions = {
+const tabsOptions: BottomTabNavigationOptions = {
   headerShown: false,
-  tabBarItemStyle: {
-    paddingTop: 5,
-    justifyContent: 'center',
-  },
-  tabBarIconStyle: {
-    width: iconSize,
-    height: iconSize,
-    flex: 0,
-  },
-  tabBarLabelStyle: {
-    fontSize: 12,
-  },
 }
