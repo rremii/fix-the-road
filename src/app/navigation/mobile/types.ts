@@ -1,3 +1,4 @@
+import { _updatePropsJS } from './../../../../node_modules/react-native-reanimated/src/js-reanimated/index'
 import { BottomTabBarProps } from '@react-navigation/bottom-tabs'
 import {
   BottomTabNavigationConfig,
@@ -15,6 +16,7 @@ export type HomeNavigationParam = {
   profile: undefined
   newPost: StackNavigationProp<NewPostNavigationParam>
 }
+
 export type MapNavigationParam = {
   postId?: number
 }

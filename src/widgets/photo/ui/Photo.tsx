@@ -17,6 +17,7 @@ import { useHandleCameraPermission } from '../model/useHandleCameraPermission'
 import { useNavigation } from '@react-navigation/native'
 import { StackNavigationProp } from '@react-navigation/stack'
 import { NewPostNavigationParam } from 'src/app/navigation/mobile/types'
+import { useUIStore } from '@shared/store/UIStore'
 
 const cameraFacing = 'back'
 
@@ -47,7 +48,6 @@ export default function Photo() {
 
   const submit = () => {
     if (!photoUri) return
-
     navigation.push('preview', {
       postPhotoUri: photoUri,
     })
