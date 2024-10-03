@@ -13,8 +13,8 @@ interface Props {
 }
 
 export const PostPreview = ({ postPhotoUri }: Props) => {
-  const [isOpen, setIsOpen] = useState(false)
   const { errorMsg, location } = useLocation()
+  const [isOpen, setIsOpen] = useState(false)
   const [marker, setMarker] = useState<Marker | null>(null)
 
   const map = useRef<IMap>(null)
@@ -77,7 +77,7 @@ export const PostPreview = ({ postPhotoUri }: Props) => {
           }}
         />
         <Pressable style={styles.centerMapBtn} onPress={() => centerMap()}>
-          <Text style={styles.centerText}>Center Map</Text>
+          <Text style={styles.centerText}>center</Text>
         </Pressable>
       </View>
       <CreatePostModal
@@ -97,8 +97,11 @@ const styles = StyleSheet.create({
   },
   centerMapBtn: {
     position: 'absolute',
-    top: 0,
-    right: 0,
+    top: 70,
+    right: 10,
+    padding: 10,
+    borderRadius: 10,
+    backgroundColor: 'white',
     justifyContent: 'center',
     alignItems: 'center',
   },
