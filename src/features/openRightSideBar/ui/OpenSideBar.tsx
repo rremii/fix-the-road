@@ -1,27 +1,20 @@
 import { useState } from 'react'
 import { Text, Pressable, StyleSheet, Platform } from 'react-native'
 import React from 'react'
-import { SideBarRight } from './SideBarRight'
+import { SideBarRight } from '../../../widgets/sideBarRight/ui/SideBarRight'
 import Arrow from '@icons/arrow.svg'
+import { useUIStore } from '@shared/store/UIStore'
 
-export const OpenSideBar = () => {
-  const [isOpen, setOpen] = useState(false)
+export const OpenRightSideBar = () => {
+  const setRightSideBar = useUIStore((state) => state.setRightSideBar)
 
-  const open = () => {
-    setOpen(true)
-  }
-  const close = () => {
-    setOpen(false)
-  }
+  const openSideBar = () => setRightSideBar(true)
 
   return (
     <>
-      <Pressable style={[styles.btn, webStyles?.burger]} onPress={open}>
+      <Pressable style={[styles.btn, webStyles?.burger]} onPress={openSideBar}>
         <Arrow width={25} height={25} />
       </Pressable>
-      <SideBarRight close={close} isOpen={isOpen}>
-        <Text>qwe</Text>
-      </SideBarRight>
     </>
   )
 }
@@ -35,6 +28,7 @@ const webStyles =
     : null
 const styles = StyleSheet.create({
   btn: {
+    zIndex: 1,
     position: 'absolute',
     top: 20,
     right: 10,

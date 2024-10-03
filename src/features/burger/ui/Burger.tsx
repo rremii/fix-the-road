@@ -1,28 +1,23 @@
 import { useState } from 'react'
 import { View, Text, Pressable, StyleSheet, Platform } from 'react-native'
 import React from 'react'
-import { SideBarLeft } from './SideBarLeft'
+import { useUIStore } from '@shared/store/UIStore'
 
 export const Burger = () => {
-  const [isOpen, setOpen] = useState(false)
+  const setLeftSideBar = useUIStore((state) => state.setLeftSideBar)
 
-  const open = () => {
-    setOpen(true)
-  }
-  const close = () => {
-    setOpen(false)
-  }
+  const openSideBar = () => setLeftSideBar(true)
 
   return (
     <>
-      <Pressable style={[styles.burger, webStyles?.burger]} onPress={open}>
+      <Pressable
+        style={[styles.burger, webStyles?.burger]}
+        onPress={openSideBar}
+      >
         <View style={styles.bar} />
         <View style={styles.bar} />
         <View style={styles.bar} />
       </Pressable>
-      <SideBarLeft close={close} isOpen={isOpen}>
-        <Text>qwe</Text>
-      </SideBarLeft>
     </>
   )
 }
@@ -36,6 +31,7 @@ const webStyles =
     : null
 const styles = StyleSheet.create({
   burger: {
+    zIndex: 1,
     position: 'absolute',
     top: 20,
     left: 10,
