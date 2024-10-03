@@ -8,42 +8,42 @@ import React, { PropsWithChildren, useEffect, useState } from 'react'
 import { LayoutChangeEvent, Pressable, StyleSheet } from 'react-native'
 import { tabBarHeight } from '@shared/constants'
 import WideArrow from '@icons/wide-arrow.svg'
-import { slideDelay, toggleHeaderHeight } from '@widgets/postPreview/constants'
+import { slideDelay, openHeaderHeight } from '@widgets/postPreview/constants'
 
 interface Props {
   isOpen: boolean
   onClick: () => void
 }
 
-export const ToggleHeader = ({ isOpen, onClick }: Props) => {
-  const slideAnimToggleHeader = useSharedValue(-toggleHeaderHeight)
+export const OpenHeader = ({ isOpen, onClick }: Props) => {
+  const slideAnimOpenHeader = useSharedValue(-openHeaderHeight)
 
-  const slideStylesToggleHeader = useAnimatedStyle(() => ({
-    transform: [{ translateY: slideAnimToggleHeader.value }],
+  const slideStylesOpenHeader = useAnimatedStyle(() => ({
+    transform: [{ translateY: slideAnimOpenHeader.value }],
   }))
 
   useEffect(() => {
     if (isOpen) {
-      slideAnimToggleHeader.value = withDelay(
+      slideAnimOpenHeader.value = withDelay(
         slideDelay,
-        withTiming(-toggleHeaderHeight),
+        withTiming(-openHeaderHeight),
       )
     } else {
-      slideAnimToggleHeader.value = withDelay(slideDelay, withTiming(0))
+      slideAnimOpenHeader.value = withDelay(slideDelay, withTiming(0))
     }
   }, [isOpen])
 
   return (
     <Pressable onPress={onClick}>
-      <Animated.View style={[styles.toggleHeader, slideStylesToggleHeader]}>
+      <Animated.View style={[styles.openHeader, slideStylesOpenHeader]}>
         <WideArrow color={'#1ccb82'} width={200} height={15} />
       </Animated.View>
     </Pressable>
   )
 }
 const styles = StyleSheet.create({
-  toggleHeader: {
-    height: toggleHeaderHeight,
+  openHeader: {
+    height: openHeaderHeight,
     width: '100%',
     justifyContent: 'center',
     alignItems: 'center',
