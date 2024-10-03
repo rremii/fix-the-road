@@ -3,6 +3,7 @@ import { useDownloadFonts } from '@shared/hooks/useDownloadFonts'
 import React from 'react'
 import { FC, PropsWithChildren } from 'react'
 import { StyleSheet } from 'react-native'
+import { GestureHandlerRootView } from 'react-native-gesture-handler'
 import { SafeAreaView } from 'react-native-safe-area-context'
 
 interface Props extends PropsWithChildren {}

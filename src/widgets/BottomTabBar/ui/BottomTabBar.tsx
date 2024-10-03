@@ -35,36 +35,34 @@ export const BottomTabBar = ({ state, navigation }: BottomTabBarProps) => {
 
   return (
     <>
-      <Portal>
-        <Animated.View style={[styles.container, slideStyles]}>
-          {state.routes.map((route, index) => {
-            const isFocused = state.index === index
+      <Animated.View style={[styles.container, slideStyles]}>
+        {state.routes.map((route, index) => {
+          const isFocused = state.index === index
 
-            const routeData = getRouteDataByName(
-              route.name as BottomTabsRouteNames,
-            )
+          const routeData = getRouteDataByName(
+            route.name as BottomTabsRouteNames,
+          )
 
-            const { icon, iconGray, title, color } = routeData
-            return (
-              <Pressable
-                key={route.key}
-                style={styles.tabBarItemStyle}
-                onPress={() => goTo(route.name)}
+          const { icon, iconGray, title, color } = routeData
+          return (
+            <Pressable
+              key={route.key}
+              style={styles.tabBarItemStyle}
+              onPress={() => goTo(route.name)}
+            >
+              {isFocused ? icon : iconGray}
+              <Text
+                style={[
+                  styles.tabBarLabelStyle,
+                  { color: isFocused ? color : '#656565' },
+                ]}
               >
-                {isFocused ? icon : iconGray}
-                <Text
-                  style={[
-                    styles.tabBarLabelStyle,
-                    { color: isFocused ? color : '#656565' },
-                  ]}
-                >
-                  {title}
-                </Text>
-              </Pressable>
-            )
-          })}
-        </Animated.View>
-      </Portal>
+                {title}
+              </Text>
+            </Pressable>
+          )
+        })}
+      </Animated.View>
     </>
   )
 }
