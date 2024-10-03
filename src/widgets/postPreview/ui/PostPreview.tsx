@@ -2,11 +2,12 @@ import { View, StyleSheet, Text, Pressable } from 'react-native'
 import React, { useEffect, useRef, useState } from 'react'
 import { Map } from '@modules/map'
 import { CreatePostModal } from './CreatePostModal/CreatePostModal'
-import { useLocation } from '../model/useLocation'
+import { useLocation } from '@shared/hooks/useLocation'
 import { FallbackView } from '@shared/ui/FallbackView'
 import { Coords, IMap, Marker } from '@modules/map/types'
 
 import { Location } from '@shared/types'
+import { CenterMap } from '@modules/map/src/ui/CenterMap'
 
 interface Props {
   postPhotoUri: string
@@ -76,9 +77,6 @@ export const PostPreview = ({ postPhotoUri }: Props) => {
             lng: location.coords.longitude,
           }}
         />
-        <Pressable style={styles.centerMapBtn} onPress={() => centerMap()}>
-          <Text style={styles.centerText}>center</Text>
-        </Pressable>
       </View>
       <CreatePostModal
         location={postLocation}
@@ -94,19 +92,5 @@ const styles = StyleSheet.create({
   container: {
     position: 'relative',
     flex: 1,
-  },
-  centerMapBtn: {
-    position: 'absolute',
-    top: 70,
-    right: 10,
-    padding: 10,
-    borderRadius: 10,
-    backgroundColor: 'white',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  centerText: {
-    fontSize: 20,
-    fontWeight: 'bold',
   },
 })

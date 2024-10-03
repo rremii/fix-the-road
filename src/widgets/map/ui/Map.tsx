@@ -1,66 +1,54 @@
-import React, { useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { Coords, IMap, Marker } from 'modules/map/types'
 import { Map as MapModule } from '@modules/map'
+import { CenterMap } from '@modules/map/src/ui/CenterMap'
+import { useLocation } from '@shared/hooks/useLocation'
+import { err } from 'react-native-svg'
+import { FallbackView } from '@shared/ui/FallbackView'
+import { Location } from '@shared/types'
 
 export const Map = () => {
-  const ref = useRef<IMap>(null)
+  const map = useRef<IMap>(null)
+  const { errorMsg: locationErr, location } = useLocation()
+  const [markers, setMarkers] = useState<Marker[]>([])
 
-  const centerMap = (coords: Coords) => {
-    if (!ref.current) return
-    ref.current?.center(coords)
+  useEffect(() => {
+    if (location) {
+      map.current?.center({
+        lat: location?.coords.latitude,
+        lng: location?.coords.longitude,
+      })
+      setMarkers([
+        {
+          draggable: false,
+          id: 1,
+          lat: location?.coords.latitude || 0,
+          lng: location?.coords.longitude || 0,
+          icon: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png',
+        },
+      ])
+    }
+  }, [location])
+
+  const initCoors: Location = {
+    lat: location?.coords.latitude || 0,
+    lng: location?.coords.longitude || 0,
   }
 
-  const [markers, setMarkers] = useState<Marker[]>([
-    {
-      id: 1,
-      lat: 49.2125578,
-      lng: 16.62662018,
-      draggable: false,
-      icon: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png',
-    },
-  ])
-
-  const initCoors: Coords = {
-    lat: 49.212,
-    lng: 16.6266,
-  }
-
-  const onDragMarker = (dragMarker: Marker) => {
-    const newMarkers = markers.map((marker) => {
-      if (marker.id === dragMarker.id) {
-        return {
-          ...marker,
-          lat: dragMarker.lat,
-          lng: dragMarker.lng,
-        }
-      }
-      return marker
-    })
-    setMarkers(newMarkers)
-  }
   const onClickMarker = (marker: Marker) => {
     console.log('click marker', marker)
   }
 
-  const onMapClick = (coords: Coords) => {
-    const marker: Marker = {
-      lat: coords.lat,
-      lng: coords.lng,
-      draggable: true,
-      icon: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png',
-      id: markers.length + 1,
-    }
-    setMarkers((prevMarkers) => [...prevMarkers, marker])
-    centerMap(coords)
-  }
+  if (locationErr) return <FallbackView msg={locationErr} />
+  if (!location) return <FallbackView msg={'fetching location'} />
   return (
-    <MapModule
-      ref={ref}
-      markers={markers}
-      initCoords={initCoors}
-      onClick={onMapClick}
-      onClickMarker={onClickMarker}
-      onDragMarker={onDragMarker}
-    />
+    <>
+      <MapModule
+        ref={map}
+        markers={markers}
+        initCoords={initCoors}
+        onClickMarker={onClickMarker}
+      />
+    </>
   )
 }

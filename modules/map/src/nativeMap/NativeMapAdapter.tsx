@@ -42,15 +42,17 @@ export const NativeMapAdapter = forwardRef<MapAdapter, MapAdapterProps>(
       [isLoaded],
     )
     return (
-      <WebView
-        onLoad={() => setIsLoaded(true)}
-        ref={mapRef}
-        style={styles.map}
-        javaScriptEnabled={true}
-        domStorageEnabled={true}
-        onMessage={handleMessage}
-        source={{ html: createHTMLMap('native') }}
-      />
+      <>
+        <WebView
+          onLoad={() => setIsLoaded(true)}
+          ref={mapRef}
+          style={styles.map}
+          javaScriptEnabled={true}
+          domStorageEnabled={true}
+          onMessage={handleMessage}
+          source={{ html: createHTMLMap('native') }}
+        />
+      </>
     )
   },
 )

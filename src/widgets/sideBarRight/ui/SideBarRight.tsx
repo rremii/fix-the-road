@@ -1,4 +1,5 @@
 import { Portal } from '@gorhom/portal'
+import { useUIStore } from '@shared/store/UIStore'
 import { Overlay } from '@shared/ui/Overlay'
 import React, { PropsWithChildren, useEffect, useState } from 'react'
 import { StyleSheet, LayoutChangeEvent } from 'react-native'
@@ -8,24 +9,27 @@ import Animated, {
   withTiming,
 } from 'react-native-reanimated'
 
-interface Props extends PropsWithChildren {
-  isOpen: boolean
-  close: () => void
-}
+interface Props extends PropsWithChildren {}
 
-export const SideBarRight = ({ children, close, isOpen }: Props) => {
+export const SideBarRight = ({ children }: Props) => {
+  const isOpen = useUIStore((state) => state.isRightSideBar)
+  const setRightSideBar = useUIStore((state) => state.setRightSideBar)
+
   const [contWidth, setContWidth] = useState(0)
   const slideAnim = useSharedValue(0)
 
   useEffect(() => {
     if (isOpen) slideAnim.value = withTiming(-contWidth)
     else slideAnim.value = withTiming(0)
-  })
+  }, [isOpen])
 
   const slideStyles = useAnimatedStyle(() => ({
     transform: [{ translateX: slideAnim.value }],
   }))
 
+  const close = () => {
+    setRightSideBar(false)
+  }
   const onLayout = (e: LayoutChangeEvent) => {
     const contWidth = e.nativeEvent.layout.width
     setContWidth(contWidth)

@@ -39,6 +39,7 @@ export interface MapAdapterProps {
 export interface MapProps {
   markers?: Marker[]
   initCoords: Coords
+  hideCenterBtn?: boolean
 
   onClick?: (coords: Coords) => void
   onClickMarker?: (marker: Marker) => void

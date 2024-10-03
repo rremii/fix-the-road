@@ -4,7 +4,7 @@ import React, {
   useImperativeHandle,
   useRef,
 } from 'react'
-import { Platform } from 'react-native'
+import { Platform, View, StyleSheet } from 'react-native'
 import {
   Coords,
   IMap,
@@ -15,9 +15,17 @@ import {
 } from './../types'
 import { NativeMapAdapter } from './nativeMap/NativeMapAdapter'
 import { WebMapAdapter } from './webMap/WebMapAdapter'
+import { CenterMap } from './ui/CenterMap'
 
 export const Map = forwardRef<IMap, MapProps>((props, ref) => {
-  const { initCoords, markers, onClick, onClickMarker, onDragMarker } = props
+  const {
+    initCoords,
+    markers,
+    onClick,
+    onClickMarker,
+    onDragMarker,
+    hideCenterBtn,
+  } = props
 
   const mapAdapter = useRef<MapAdapter>(null)
 
@@ -41,6 +49,7 @@ export const Map = forwardRef<IMap, MapProps>((props, ref) => {
   }
 
   const centerMap = (coords?: Coords) => {
+    console.log(coords, initCoords)
     sendMsgToMap({
       type: 'centerMap',
       payload: coords || initCoords,
@@ -66,9 +75,20 @@ export const Map = forwardRef<IMap, MapProps>((props, ref) => {
     [centerMap],
   )
 
-  return Platform.OS === 'web' ? (
-    <WebMapAdapter onMessage={onMessage} ref={mapAdapter} />
-  ) : (
-    <NativeMapAdapter onMessage={onMessage} ref={mapAdapter} />
+  return (
+    <View style={styles.container}>
+      {!hideCenterBtn && <CenterMap onClick={centerMap} />}
+      {Platform.OS === 'web' ? (
+        <WebMapAdapter onMessage={onMessage} ref={mapAdapter} />
+      ) : (
+        <NativeMapAdapter onMessage={onMessage} ref={mapAdapter} />
+      )}
+    </View>
   )
+})
+const styles = StyleSheet.create({
+  container: {
+    position: 'relative',
+    flex: 1,
+  },
 })

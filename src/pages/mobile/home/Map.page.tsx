@@ -15,5 +15,6 @@ const styles = StyleSheet.create({
   pageContainer: {
     flex: 1,
     paddingBottom: tabBarHeight,
+    position: 'relative',
   },
 })
