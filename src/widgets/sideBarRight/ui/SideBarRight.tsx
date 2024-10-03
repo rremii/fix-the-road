@@ -1,5 +1,5 @@
 import { Portal } from '@gorhom/portal'
-import { Overlay } from '@shared/Overlay'
+import { Overlay } from '@shared/ui/Overlay'
 import React, { PropsWithChildren, useEffect, useState } from 'react'
 import { StyleSheet, LayoutChangeEvent } from 'react-native'
 import Animated, {

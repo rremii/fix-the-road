@@ -1,9 +1,12 @@
-import { View, StyleSheet } from 'react-native'
-import React, { useEffect, useState } from 'react'
+import { View, StyleSheet, Text, Pressable } from 'react-native'
+import React, { useEffect, useRef, useState } from 'react'
 import { Map } from '@modules/map'
-import { Portal } from '@gorhom/portal'
-import { CreatePostModal } from './CreatePostModal'
-import { Overlay } from '@shared/Overlay'
+import { CreatePostModal } from './CreatePostModal/CreatePostModal'
+import { useLocation } from '../model/useLocation'
+import { FallbackView } from '@shared/ui/FallbackView'
+import { Coords, IMap, Marker } from '@modules/map/types'
+
+import { Location } from '@shared/types'
 
 interface Props {
   postPhotoUri: string
@@ -11,28 +14,77 @@ interface Props {
 
 export const PostPreview = ({ postPhotoUri }: Props) => {
   const [isOpen, setIsOpen] = useState(false)
+  const { errorMsg, location } = useLocation()
+  const [marker, setMarker] = useState<Marker | null>(null)
 
-  const openModal = () => {
-    setIsOpen(true)
+  const map = useRef<IMap>(null)
+
+  useEffect(() => {
+    if (location) {
+      centerMap({
+        lat: location?.coords.latitude,
+        lng: location?.coords.longitude,
+      })
+      setMarker({
+        draggable: true,
+        id: 0,
+        lat: location?.coords.latitude || 0,
+        lng: location?.coords.longitude || 0,
+        icon: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png',
+      })
+    }
+  }, [location])
+
+  const openModal = () => setIsOpen(true)
+  const closeModal = () => setIsOpen(false)
+
+  const centerMap = (coords?: Location) => {
+    if (map && map.current) map.current.center(coords)
   }
-  const closeModal = () => {
-    setIsOpen(false)
+  const onMapClick = ({ lat, lng }: Location) => {
+    setMarker((marker) => {
+      if (!marker) return null
+      return {
+        ...marker,
+        lat,
+        lng,
+      }
+    })
+    centerMap({ lat, lng })
+  }
+  const onDragMarker = (marker: Marker) => {
+    setMarker(marker)
   }
 
+  if (errorMsg) return <FallbackView msg={errorMsg} />
+  if (!location) return <FallbackView msg={'fetching location'} />
+
+  const postLocation = {
+    lat: marker?.lat || location.coords.latitude,
+    lng: marker?.lng || location.coords.longitude,
+  }
   return (
     <>
       <View style={styles.container}>
-        <Map initCoords={{ lat: 49.212, lng: 16.6266 }} />
+        <Map
+          ref={map}
+          markers={marker ? [marker] : []}
+          onDragMarker={onDragMarker}
+          onClick={onMapClick}
+          initCoords={{
+            lat: location.coords.latitude,
+            lng: location.coords.longitude,
+          }}
+        />
+        <Pressable style={styles.centerMapBtn} onPress={() => centerMap()}>
+          <Text style={styles.centerText}>Center Map</Text>
+        </Pressable>
       </View>
-      <Overlay
-        backgroundColor="transparent"
-        zIndex={1}
-        onPress={closeModal}
-        isActive={isOpen}
-      />
       <CreatePostModal
+        location={postLocation}
         postPhotoUri={postPhotoUri}
         openModal={openModal}
+        closeModal={closeModal}
         isOpen={isOpen}
       />
     </>
@@ -42,5 +94,16 @@ const styles = StyleSheet.create({
   container: {
     position: 'relative',
     flex: 1,
+  },
+  centerMapBtn: {
+    position: 'absolute',
+    top: 0,
+    right: 0,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  centerText: {
+    fontSize: 20,
+    fontWeight: 'bold',
   },
 })
