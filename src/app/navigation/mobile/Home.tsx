@@ -8,8 +8,8 @@ import NewPostNavigation from './NewPost'
 import { MapPage } from '@pages/mobile/home/Map.page'
 import { ProfilePage } from '@pages/mobile/home/Profile.page'
 
-import { BottomTabBar } from '@widgets/bottomTabBar/ui/BottomTabBar'
-import { BottomTabsRouteNames } from '@widgets/bottomTabBar/types'
+import { BottomTabsRouteNames } from './../../../widgets/BottomTabBar/types'
+import { BottomTabBar } from './../../../widgets/BottomTabBar/ui/BottomTabBar'
 
 const HomeTabs = createBottomTabNavigator<HomeNavigationParam>()
 
@@ -34,15 +34,6 @@ const HomeNavigation = () => {
 
   return (
     <HomeTabs.Navigator
-      // screenListeners={({ navigation }) => ({
-      //   state: () => {
-      //     const state = navigation.getState()
-
-      //     const currentRoute = state.routes[state.index]
-
-      //     console.log('state changed', currentRoute)
-      //   },
-      // })}
       screenOptions={tabsOptions}
       tabBar={(props) => <BottomTabBar {...props} />}
       initialRouteName={'map'}

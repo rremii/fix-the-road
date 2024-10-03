@@ -1,4 +1,4 @@
-<svg width="885" height="173" viewBox="0 0 885 173" fill="none" xmlns="http://www.w3.org/2000/svg">
-<rect width="474.579" height="54.4114" rx="27.2057" transform="matrix(0.966795 -0.255554 0.482959 0.875643 0.0965576 121.678)" fill="black"/>
-<rect width="473.516" height="54.6195" rx="27.3097" transform="matrix(0.9645 0.264083 -0.496061 0.868288 428.095 0)" fill="black"/>
+<svg width="885" color="white" height="173" viewBox="0 0 885 173" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect width="474.579" height="54.4114" rx="27.2057" transform="matrix(0.966795 -0.255554 0.482959 0.875643 0.0965576 121.678)" fill="currentColor"/>
+<rect width="473.516" height="54.6195" rx="27.3097" transform="matrix(0.9645 0.264083 -0.496061 0.868288 428.095 0)" fill="currentColor"/>
 </svg>
