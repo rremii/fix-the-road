@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { Text, Pressable, StyleSheet, Platform } from 'react-native'
 import React from 'react'
-import { SideBarRight } from '../../../widgets/sideBarRight/ui/SideBarRight'
+import { SideBarRight } from '../../../shared/ui/SideBarRight'
 import Arrow from '@icons/arrow.svg'
 import { useUIStore } from '@shared/store/UIStore'
 

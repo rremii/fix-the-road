@@ -19,10 +19,9 @@ import { AppOrigin } from '../constants'
 export const WebMapAdapter = forwardRef<MapAdapter, MapAdapterProps>(
   ({ onMessage }, ref) => {
     const [isLoaded, setIsLoaded] = useState(false)
-
     const iframeRef = useRef<HTMLIFrameElement>(null)
 
-    function sendMsgToIframe(msg: MapSendEvents) {
+    const sendMsgToIframe = (msg: MapSendEvents) => {
       const iframe = iframeRef.current
       if (!iframe) return
       const window = iframe.contentWindow
@@ -42,6 +41,14 @@ export const WebMapAdapter = forwardRef<MapAdapter, MapAdapterProps>(
         window.removeEventListener('message', handleMessage)
       }
     }, [handleMessage, isLoaded])
+
+    useEffect(() => {
+      if (!isLoaded) return
+      onMessage({
+        type: 'mapLoaded',
+        payload: undefined,
+      })
+    }, [isLoaded])
 
     useImperativeHandle(
       ref,

@@ -37,12 +37,14 @@ type ClickMap = Event<'clickMap', Coords>
 type ClickMarker = Event<'clickMarker', Marker>
 type DragMarker = Event<'dragMarker', Marker>
 type BoundsChange = Event<'boundsChange', Bounds>
+type MapLoaded = Event<'mapLoaded', undefined>
 
 export type MapReceiveEvents =
   | ClickMap
   | ClickMarker
   | DragMarker
   | BoundsChange
+  | MapLoaded
 
 export interface MapAdapter {
   sendMessage: (message: MapSendEvents) => void
@@ -56,6 +58,7 @@ export interface MapProps {
   initCoords: Coords
   hideCenterBtn?: boolean
 
+  onMapLoaded?: () => void
   onClick?: (coords: Coords) => void
   onClickMarker?: (marker: Marker) => void
   onDragMarker?: (marker: Marker) => void

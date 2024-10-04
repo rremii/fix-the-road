@@ -1,4 +1,10 @@
-import React, { forwardRef, useImperativeHandle, useRef, useState } from 'react'
+import React, {
+  forwardRef,
+  useEffect,
+  useImperativeHandle,
+  useRef,
+  useState,
+} from 'react'
 import WebView from 'react-native-webview'
 import { createHTMLMap } from '../shared/Map'
 import { WebViewMessageEvent } from 'react-native-webview'
@@ -34,6 +40,13 @@ export const NativeMapAdapter = forwardRef<MapAdapter, MapAdapterProps>(
       onMessage(message)
     }
 
+    useEffect(() => {
+      if (!isLoaded) return
+      onMessage({
+        type: 'mapLoaded',
+        payload: undefined,
+      })
+    }, [isLoaded])
     useImperativeHandle(
       ref,
       () => ({

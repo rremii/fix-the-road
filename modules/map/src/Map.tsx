@@ -25,6 +25,7 @@ export const Map = forwardRef<IMap, MapProps>((props, ref) => {
     onClickMarker,
     onDragMarker,
     onBoundsChange,
+    onMapLoaded,
     hideCenterBtn,
   } = props
 
@@ -49,6 +50,9 @@ export const Map = forwardRef<IMap, MapProps>((props, ref) => {
         break
       case 'boundsChange':
         if (onBoundsChange) onBoundsChange(message.payload)
+        break
+      case 'mapLoaded':
+        if (onMapLoaded) onMapLoaded()
         break
     }
   }

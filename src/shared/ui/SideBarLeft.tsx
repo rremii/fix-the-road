@@ -9,12 +9,11 @@ import Animated, {
   withTiming,
 } from 'react-native-reanimated'
 
-interface Props extends PropsWithChildren {}
+interface Props extends PropsWithChildren {
+  isOpen: boolean
+}
 
-export const SideBarLeft = ({ children }: Props) => {
-  const isOpen = useUIStore((state) => state.isLeftSideBar)
-  const setLeftSideBar = useUIStore((state) => state.setLeftSideBar)
-
+export const SideBarLeft = ({ children, isOpen }: Props) => {
   const [contWidth, setContWidth] = useState(0)
   const slideAnim = useSharedValue(0)
 
@@ -27,16 +26,12 @@ export const SideBarLeft = ({ children }: Props) => {
     else slideAnim.value = withTiming(0)
   }, [isOpen])
 
-  const close = () => {
-    setLeftSideBar(false)
-  }
   const onLayout = (e: LayoutChangeEvent) => {
     const contWidth = e.nativeEvent.layout.width
     setContWidth(contWidth)
   }
   return (
     <Portal>
-      <Overlay isActive={isOpen} onPress={close} />
       <Animated.View
         onLayout={onLayout}
         style={[styles.container, slideStyles]}

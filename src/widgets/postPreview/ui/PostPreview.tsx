@@ -17,6 +17,7 @@ interface Props {
 export const PostPreview = ({ postPhotoUri }: Props) => {
   const { errorMsg, location } = useLocation()
   const [isOpen, setIsOpen] = useState(false)
+  const [isMapLoaded, setMapLoaded] = useState(false)
   const [marker, setMarker] = useState<Marker | null>(null)
   const [assets] = useAssets([GeolocationMarker])
   const geolocationMarkerUri = assets?.at(0)?.uri || ''
@@ -24,24 +25,24 @@ export const PostPreview = ({ postPhotoUri }: Props) => {
   const map = useRef<IMap>(null)
 
   useEffect(() => {
-    if (location) {
-      centerMap({
-        lat: location?.coords.latitude,
-        lng: location?.coords.longitude,
-      })
-      setMarker({
-        draggable: true,
-        id: 0,
-        lat: location?.coords.latitude || 0,
-        lng: location?.coords.longitude || 0,
-        icon: {
-          iconUrl: geolocationMarkerUri,
-          iconSize: [geolocationMarkerSize, geolocationMarkerSize],
-          iconAnchor: [geolocationMarkerSize / 2, geolocationMarkerSize],
-        },
-      })
-    }
-  }, [location])
+    if (!location || !isMapLoaded) return
+
+    centerMap({
+      lat: location?.coords.latitude,
+      lng: location?.coords.longitude,
+    })
+    setMarker({
+      draggable: true,
+      id: 0,
+      lat: location?.coords.latitude || 0,
+      lng: location?.coords.longitude || 0,
+      icon: {
+        iconUrl: geolocationMarkerUri,
+        iconSize: [geolocationMarkerSize, geolocationMarkerSize],
+        iconAnchor: [geolocationMarkerSize / 2, geolocationMarkerSize],
+      },
+    })
+  }, [location, isMapLoaded])
 
   const openModal = () => setIsOpen(true)
   const closeModal = () => setIsOpen(false)
@@ -75,6 +76,7 @@ export const PostPreview = ({ postPhotoUri }: Props) => {
     <>
       <View style={styles.container}>
         <Map
+          onMapLoaded={() => setMapLoaded(true)}
           ref={map}
           markers={marker ? [marker] : []}
           onDragMarker={onDragMarker}
