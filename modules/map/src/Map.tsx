@@ -24,6 +24,7 @@ export const Map = forwardRef<IMap, MapProps>((props, ref) => {
     onClick,
     onClickMarker,
     onDragMarker,
+    onBoundsChange,
     hideCenterBtn,
   } = props
 
@@ -45,11 +46,14 @@ export const Map = forwardRef<IMap, MapProps>((props, ref) => {
         break
       case 'dragMarker':
         if (onDragMarker) onDragMarker(message.payload)
+        break
+      case 'boundsChange':
+        if (onBoundsChange) onBoundsChange(message.payload)
+        break
     }
   }
 
   const centerMap = (coords?: Coords) => {
-    console.log(coords, initCoords)
     sendMsgToMap({
       type: 'centerMap',
       payload: coords || initCoords,

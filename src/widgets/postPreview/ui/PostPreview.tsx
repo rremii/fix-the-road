@@ -5,9 +5,10 @@ import { CreatePostModal } from './CreatePostModal/CreatePostModal'
 import { useLocation } from '@shared/hooks/useLocation'
 import { FallbackView } from '@shared/ui/FallbackView'
 import { Coords, IMap, Marker } from '@modules/map/types'
-
+import GeolocationMarker from '@icons/marker-geolocation.png'
 import { Location } from '@shared/types'
-import { CenterMap } from '@modules/map/src/ui/CenterMap'
+import { useAssets } from 'expo-asset'
+import { geolocationMarkerSize } from '@shared/constants'
 
 interface Props {
   postPhotoUri: string
@@ -17,6 +18,8 @@ export const PostPreview = ({ postPhotoUri }: Props) => {
   const { errorMsg, location } = useLocation()
   const [isOpen, setIsOpen] = useState(false)
   const [marker, setMarker] = useState<Marker | null>(null)
+  const [assets] = useAssets([GeolocationMarker])
+  const geolocationMarkerUri = assets?.at(0)?.uri || ''
 
   const map = useRef<IMap>(null)
 
@@ -31,7 +34,11 @@ export const PostPreview = ({ postPhotoUri }: Props) => {
         id: 0,
         lat: location?.coords.latitude || 0,
         lng: location?.coords.longitude || 0,
-        icon: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png',
+        icon: {
+          iconUrl: geolocationMarkerUri,
+          iconSize: [geolocationMarkerSize, geolocationMarkerSize],
+          iconAnchor: [geolocationMarkerSize / 2, geolocationMarkerSize],
+        },
       })
     }
   }, [location])
