@@ -10,9 +10,17 @@ import MarkerRedIcon from '@icons/marker-red.png'
 import MarkerBlueIcon from '@icons/marker-blue.png'
 import { useAssets } from 'expo-asset'
 import { markerSize } from '@shared/constants'
+import { useNavigation } from '@react-navigation/native'
+import { BottomTabNavigationProp } from '@react-navigation/bottom-tabs'
+import { HomeNavigationParam } from 'src/app/navigation/mobile/types'
+import { useGetPosts } from 'src/entities/post/model/useGetPosts'
+import { useGetMe } from 'src/entities/user/model/useGetMe'
 
 export const Map = () => {
+  const navigation =
+    useNavigation<BottomTabNavigationProp<HomeNavigationParam>>()
   const map = useRef<IMap>(null)
+  const [isMapLoaded, setMapLoaded] = useState(false)
   const { errorMsg: locationErr, location } = useLocation()
   const [markers, setMarkers] = useState<Marker[]>([])
   const [assets] = useAssets([MarkerBlueIcon, MarkerRedIcon])
@@ -20,62 +28,57 @@ export const Map = () => {
   const redMarkerUri = assets?.at(0)?.uri || ''
   const blueMarkerUri = assets?.at(1)?.uri || ''
 
+  const posts = useGetPosts()
+  const me = useGetMe()
+
   useEffect(() => {
-    if (location) {
-      map.current?.center({
-        lat: location?.coords.latitude,
-        lng: location?.coords.longitude,
-      })
-      setMarkers([
-        {
-          draggable: false,
-          id: 1,
-          lat: location?.coords.latitude || 0,
-          lng: location?.coords.longitude || 0,
-          icon: {
-            iconUrl: redMarkerUri,
-            iconAnchor: [markerSize / 2, markerSize / 2],
-            iconSize: [markerSize, markerSize],
-          },
+    if (!location || !posts.length || !me || !isMapLoaded) return
+
+    map.current?.center({
+      lat: location?.coords.latitude,
+      lng: location?.coords.longitude,
+    })
+
+    const markers: Marker[] = posts.map((post) => {
+      const isMyMarker = post.userId === me.id
+      return {
+        draggable: false,
+        id: post.id,
+        lat: post.lat,
+        lng: post.lng,
+        icon: {
+          iconUrl: isMyMarker ? blueMarkerUri : redMarkerUri,
+          iconAnchor: [markerSize / 2, markerSize / 2],
+          iconSize: [markerSize, markerSize],
         },
-      ])
-    }
-  }, [location])
+      }
+    })
+
+    setMarkers(markers)
+  }, [isMapLoaded, location, posts, me])
+
+  const onClickMarker = (marker: Marker) => {
+    navigation.setParams({
+      postId: marker.id,
+    })
+  }
+
+  const onBoundsChange = (bounds: Bounds) => {
+    console.log('bounds change', bounds.southWest, bounds.northEast)
+  }
 
   const initCoors: Location = {
     lat: location?.coords.latitude || 0,
     lng: location?.coords.longitude || 0,
   }
 
-  const onClickMarker = (marker: Marker) => {
-    console.log('click marker', marker)
-  }
-
-  const onClickMap = (coords: Coords) => {
-    const marker: Marker = {
-      draggable: false,
-      id: 1,
-      lat: coords.lat || 0,
-      lng: coords.lng || 0,
-      icon: {
-        iconUrl: blueMarkerUri,
-        iconAnchor: [markerSize / 2, markerSize / 2],
-        iconSize: [markerSize, markerSize],
-      },
-    }
-    setMarkers([marker])
-  }
-
-  const onBoundsChange = (bounds: Bounds) => {
-    console.log('bounds change', bounds.southWest, bounds.northEast)
-  }
   if (locationErr) return <FallbackView msg={locationErr} />
   if (!location) return <FallbackView msg={'fetching location'} />
   return (
     <>
       <MapModule
+        onMapLoaded={() => setMapLoaded(true)}
         ref={map}
-        onClick={onClickMap}
         onBoundsChange={onBoundsChange}
         markers={markers}
         initCoords={initCoors}

@@ -35,6 +35,7 @@ export const createHTMLMap = (type: MapType) => `
   ${type === 'web' ? MapWebScripts : MapNativeScripts}
 
   <script>
+    
     const map = L.map('map').setView([49.2125578, 16.62662018], 18)
 
     L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -120,6 +121,8 @@ export const createHTMLMap = (type: MapType) => `
 
 
     function onReactMessage(message) {
+      console.log('send msg to iframe', message)
+
       switch (message.type) {
             case 'drawMarkers':
                 drawAllMarkers(message.payload)
@@ -162,8 +165,6 @@ export const createHTMLMap = (type: MapType) => `
   
     const controls = document.querySelector('.leaflet-control-zoom')
     controls.style.transform= "translateY(70px)"
-
-    
 
   </script>
 </html>
