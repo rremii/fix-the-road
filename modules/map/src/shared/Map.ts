@@ -25,6 +25,9 @@ export const createHTMLMap = (type: MapType) => `
         left: 0;
       }
     </style>
+
+  <link rel="prefetch" href="./marker.png">
+
   </head>
   <body>
     <div id="map"></div>
@@ -54,6 +57,11 @@ export const createHTMLMap = (type: MapType) => `
       group.clearLayers()
 
       markers.forEach((markerData) => {
+        const iconData = markerData.icon || {
+          iconUrl:  'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png',
+          iconAnchor: [15, 30],
+          iconSize: [30, 30],
+        }
         const marker = L.marker(
           {
             lat: markerData.lat,
@@ -61,7 +69,14 @@ export const createHTMLMap = (type: MapType) => `
           },
           {
             icon: L.icon({
-              iconUrl: markerData.icon || 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png',
+              iconUrl:
+               iconData.iconUrl ,
+              iconSize: iconData.iconSize,
+              iconAnchor: iconData.iconAnchor,
+              popupAnchor: iconData.iconAnchor,
+              shadowUrl:
+                "https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png",
+              shadowSize: [0,0]
             }),
             draggable: markerData.draggable || false,
           },
@@ -114,9 +129,30 @@ export const createHTMLMap = (type: MapType) => `
                 break;
       }
     }
+    
+    function getBounds() {
+      const bounds = map.getBounds()
+      return {
+        northEast: bounds._northEast,
+        southWest: bounds._southWest,
+      }
+    }
 
     map.on('click', function (e) {
       handleMapClick(e.latlng.lat, e.latlng.lng)
+    })
+
+
+    map.on('zoomend', function (e) {
+
+      sendMsgToReact({
+        type: 'boundsChange',
+        payload: getBounds(),
+      })
+    })
+    sendMsgToReact({
+      type: 'boundsChange',
+      payload: getBounds(),
     })
   </script>
   <script>

@@ -2,13 +2,23 @@ export type Coords = {
   lat: number
   lng: number
 }
+export type Bounds = {
+  northEast: Coords
+  southWest: Coords
+}
 
 export type MapType = 'web' | 'native'
+
+type Icon = {
+  iconUrl: string
+  iconAnchor: [number, number]
+  iconSize: [number, number]
+}
 
 export interface Marker extends Coords {
   id: number
   draggable: boolean
-  icon: string
+  icon?: Icon
 }
 
 type Event<T, P> = {
@@ -26,8 +36,13 @@ export type MapSendEvents = DrawMarkers | CenterMap
 type ClickMap = Event<'clickMap', Coords>
 type ClickMarker = Event<'clickMarker', Marker>
 type DragMarker = Event<'dragMarker', Marker>
+type BoundsChange = Event<'boundsChange', Bounds>
 
-export type MapReceiveEvents = ClickMap | ClickMarker | DragMarker
+export type MapReceiveEvents =
+  | ClickMap
+  | ClickMarker
+  | DragMarker
+  | BoundsChange
 
 export interface MapAdapter {
   sendMessage: (message: MapSendEvents) => void
@@ -44,6 +59,7 @@ export interface MapProps {
   onClick?: (coords: Coords) => void
   onClickMarker?: (marker: Marker) => void
   onDragMarker?: (marker: Marker) => void
+  onBoundsChange?: (bounds: Bounds) => void
 }
 export interface IMap {
   center: (coords?: Coords) => void
