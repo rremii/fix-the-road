@@ -1,4 +1,5 @@
 import { Portal } from '@gorhom/portal'
+import { tabBarHeight } from '@shared/constants'
 import React from 'react'
 import { PropsWithChildren, useEffect, useState } from 'react'
 import { LayoutChangeEvent, StyleSheet } from 'react-native'
@@ -14,11 +15,11 @@ interface Props extends PropsWithChildren {
 
 export const BottomModal = ({ children, isOpen }: Props) => {
   const [modalHeight, setModalHeight] = useState(0)
-  const slideAnim = useSharedValue(0)
+  const slideAnim = useSharedValue(tabBarHeight)
 
   useEffect(() => {
     if (isOpen) slideAnim.value = withTiming(-modalHeight)
-    else slideAnim.value = withTiming(0)
+    else slideAnim.value = withTiming(tabBarHeight)
   }, [isOpen])
 
   const slideStyles = useAnimatedStyle(() => ({
