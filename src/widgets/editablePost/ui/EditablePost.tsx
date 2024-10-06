@@ -1,5 +1,5 @@
 import { OpenPhoto } from '@features/openPhoto/ui/OpenPhoto'
-import React from 'react'
+import React, { useState } from 'react'
 import {
   View,
   Text,
@@ -8,25 +8,47 @@ import {
   TouchableOpacity,
 } from 'react-native'
 import { IPost } from 'src/entities/post/types'
+import { AuthorInfo } from '../../../features/authorInfo/ui/AuthorInfo'
+import { Button } from '@shared/ui/button'
+import { EditPostForm } from '@features/editPostForm/ui/EditPostForm'
+import { InfoPost } from '@features/infoPost/ui/InfoPost'
+import { useEditPostStore } from 'src/entities/post/model/editPostStore'
 
 interface Props extends IPost {}
 
-export const EditablePost = (props: Props) => {
-  const { title, description, photoUri, id, lat, lng, userId } = props
+export const EditablePost = ({ ...post }: Props) => {
+  const setEditPost = useEditPostStore((state) => state.setEditPost)
+
+  const [isEditing, setIsEditing] = useState(false)
+
+  const onSubmit = () => {
+    setIsEditing(false)
+  }
+
+  const startEditing = () => {
+    setEditPost(post)
+    setIsEditing(true)
+  }
+
   return (
     <View style={styles.container}>
       <View style={styles.btnSection}>
         <OpenPhoto />
       </View>
-      <Text>Editable post</Text>
-      <View style={styles.btnSection}>
-        <TouchableOpacity>
-          <Text>Remove</Text>
-        </TouchableOpacity>
-        <TouchableOpacity>
-          <Text>Edit</Text>
-        </TouchableOpacity>
-      </View>
+      <AuthorInfo userId={post.userId} />
+      {isEditing ? (
+        <EditPostForm onSubmit={onSubmit} />
+      ) : (
+        <InfoPost {...post} />
+      )}
+      {!isEditing && (
+        <View style={styles.btnSection}>
+          <Button type="danger">Remove</Button>
+          <Button onPress={startEditing} type="filled">
+            Edit
+          </Button>
+        </View>
+      )}
     </View>
   )
 }

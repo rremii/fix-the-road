@@ -1,7 +1,7 @@
 import { View, StyleSheet, Text, Pressable } from 'react-native'
 import React, { useEffect, useRef, useState } from 'react'
 import { Map } from '@modules/map'
-import { CreatePostModal } from './CreatePostModal/CreatePostModal'
+import { CreatePostModal } from '../../createPostModal/ui/CreatePostModal'
 import { useLocation } from '@shared/hooks/useLocation'
 import { FallbackView } from '@shared/ui/FallbackView'
 import { Coords, IMap, Marker } from '@modules/map/types'
@@ -9,14 +9,13 @@ import GeolocationMarker from '@icons/marker-geolocation.png'
 import { Location } from '@shared/types'
 import { useAssets } from 'expo-asset'
 import { geolocationMarkerSize } from '@shared/constants'
+import { useCreatePostStore } from 'src/entities/post/model/createPostStore'
 
-interface Props {
-  postPhotoUri: string
-}
-
-export const PostPreview = ({ postPhotoUri }: Props) => {
+export const PostPreview = () => {
+  const setCreatePostLocation = useCreatePostStore(
+    (state) => state.setCreatePostLocation,
+  )
   const { errorMsg, location } = useLocation()
-  const [isOpen, setIsOpen] = useState(false)
   const [isMapLoaded, setMapLoaded] = useState(false)
   const [marker, setMarker] = useState<Marker | null>(null)
   const [assets] = useAssets([GeolocationMarker])
@@ -44,9 +43,6 @@ export const PostPreview = ({ postPhotoUri }: Props) => {
     })
   }, [location, isMapLoaded])
 
-  const openModal = () => setIsOpen(true)
-  const closeModal = () => setIsOpen(false)
-
   const centerMap = (coords?: Location) => {
     if (map && map.current) map.current.center(coords)
   }
@@ -65,13 +61,16 @@ export const PostPreview = ({ postPhotoUri }: Props) => {
     setMarker(marker)
   }
 
+  useEffect(() => {
+    if (!location) return
+    setCreatePostLocation({
+      lat: marker?.lat || location.coords.latitude,
+      lng: marker?.lng || location.coords.longitude,
+    })
+  }, [location, marker])
+
   if (errorMsg) return <FallbackView msg={errorMsg} />
   if (!location) return <FallbackView msg={'fetching location'} />
-
-  const postLocation = {
-    lat: marker?.lat || location.coords.latitude,
-    lng: marker?.lng || location.coords.longitude,
-  }
   return (
     <>
       <View style={styles.container}>
@@ -87,13 +86,6 @@ export const PostPreview = ({ postPhotoUri }: Props) => {
           }}
         />
       </View>
-      <CreatePostModal
-        location={postLocation}
-        postPhotoUri={postPhotoUri}
-        openModal={openModal}
-        closeModal={closeModal}
-        isOpen={isOpen}
-      />
     </>
   )
 }

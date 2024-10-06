@@ -15,10 +15,12 @@ import { BottomTabNavigationProp } from '@react-navigation/bottom-tabs'
 import { HomeNavigationParam } from 'src/app/navigation/mobile/types'
 import { useGetPosts } from 'src/entities/post/model/useGetPosts'
 import { useGetMe } from 'src/entities/user/model/useGetMe'
+import { useMapStore } from 'src/entities/map/model/mapStore'
 
 export const Map = () => {
   const navigation =
     useNavigation<BottomTabNavigationProp<HomeNavigationParam>>()
+  const setBounds = useMapStore((state) => state.setBounds)
   const map = useRef<IMap>(null)
   const [isMapLoaded, setMapLoaded] = useState(false)
   const { errorMsg: locationErr, location } = useLocation()
@@ -64,7 +66,7 @@ export const Map = () => {
   }
 
   const onBoundsChange = (bounds: Bounds) => {
-    console.log('bounds change', bounds.southWest, bounds.northEast)
+    setBounds(bounds)
   }
 
   const initCoors: Location = {

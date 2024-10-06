@@ -50,7 +50,7 @@ const styles = StyleSheet.create({
     top: 0,
     left: '100%',
     bottom: 0,
-    minWidth: 300,
+    minWidth: 450,
     borderTopStartRadius: 15,
     borderBottomStartRadius: 15,
   },

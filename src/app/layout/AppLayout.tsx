@@ -12,9 +12,9 @@ export const AppLayout: FC<Props> = ({ children }) => {
   useDownloadFonts()
 
   return (
-    <SafeAreaView style={styles.container}>
-      <PortalProvider>{children}</PortalProvider>
-    </SafeAreaView>
+    <PortalProvider>
+      <SafeAreaView style={styles.container}>{children}</SafeAreaView>
+    </PortalProvider>
   )
 }
 

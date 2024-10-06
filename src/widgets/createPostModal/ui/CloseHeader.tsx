@@ -12,7 +12,7 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native'
-import { slideDelay } from '@widgets/postPreview/constants'
+import { slideDelay } from '@widgets/createPostModal/constants'
 import Cross from '@icons/cross.svg'
 
 interface Props {

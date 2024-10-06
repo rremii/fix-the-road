@@ -17,6 +17,7 @@ import { NewPostNavigationParam } from 'src/app/navigation/mobile/types'
 import { GestureDetector } from 'react-native-gesture-handler'
 import { useCameraZoom } from '../model/useCameraZoom'
 import { useUnlockScreenOrientation } from '@shared/hooks/useUnlockScreenOrientation'
+import { useCreatePostStore } from 'src/entities/post/model/createPostStore'
 
 const cameraFacing = 'back'
 export default function Photo() {
@@ -24,6 +25,9 @@ export default function Photo() {
     useNavigation<StackNavigationProp<NewPostNavigationParam, 'photo'>>()
   useHandleCameraPermission()
   useUnlockScreenOrientation()
+  const setCreatePostPhotoUri = useCreatePostStore(
+    (state) => state.setCreatePostPhotoUri,
+  )
 
   const { pinch, zoom } = useCameraZoom()
   const [photoUri, setPhotoUri] = useState('')
@@ -48,9 +52,8 @@ export default function Photo() {
 
   const submit = () => {
     if (!photoUri) return
-    navigation.push('preview', {
-      postPhotoUri: photoUri,
-    })
+    setCreatePostPhotoUri(photoUri)
+    navigation.push('preview')
   }
 
   const clearPhoto = () => {

@@ -7,7 +7,7 @@ import Animated, {
 import React, { PropsWithChildren, useEffect, useState } from 'react'
 import { LayoutChangeEvent, StyleSheet } from 'react-native'
 import { tabBarHeight } from '@shared/constants'
-import { openHeaderHeight } from '@widgets/postPreview/constants'
+import { openHeaderHeight } from '@widgets/createPostModal/constants'
 
 interface Props extends PropsWithChildren {
   isOpen: boolean
