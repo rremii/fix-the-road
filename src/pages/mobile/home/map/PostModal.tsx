@@ -8,7 +8,7 @@ import { Overlay } from '@shared/ui/Overlay'
 import { EditablePost } from '@widgets/editablePost/ui/EditablePost'
 import { Post } from '@widgets/post/ui/Post'
 import React, { useEffect, useState } from 'react'
-import { Text } from 'react-native'
+import { Text, StyleSheet } from 'react-native'
 import {
   HomeNavigationParam,
   MapNavigationParam,
@@ -35,9 +35,15 @@ export const PostModal = () => {
   }, [params])
 
   const closeModal = () => {
-    navigation.setParams({
-      postId: undefined,
-    })
+    setIsOpen(false)
+
+    const timeout = setTimeout(() => {
+      navigation.setParams({
+        postId: undefined,
+      })
+
+      clearTimeout(timeout)
+    }, 300) //todo
   }
   const isMyPost = post?.userId === me?.id
 

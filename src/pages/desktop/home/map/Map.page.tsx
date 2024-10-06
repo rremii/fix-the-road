@@ -6,6 +6,7 @@ import { Burger } from '@features/burger/ui/Burger'
 import { SideBarRight } from '@shared/ui/SideBarRight'
 import { SideBarLeft } from '@shared/ui/SideBarLeft'
 import { useUIStore } from '@shared/store/UIStore'
+import { Posts } from '@pages/desktop/home/map/Posts'
 
 export const MapPage = () => {
   const isLeftSideBarOpen = useUIStore((state) => state.isLeftSideBar)
@@ -19,7 +20,9 @@ export const MapPage = () => {
       <Map />
 
       <SideBarLeft isOpen={isLeftSideBarOpen}></SideBarLeft>
-      <SideBarRight isOpen={isRightSideBarOpen}></SideBarRight>
+      <SideBarRight isOpen={isRightSideBarOpen}>
+        <Posts />
+      </SideBarRight>
     </View>
   )
 }

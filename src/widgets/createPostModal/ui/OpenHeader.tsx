@@ -8,7 +8,10 @@ import React, { PropsWithChildren, useEffect, useState } from 'react'
 import { LayoutChangeEvent, Pressable, StyleSheet } from 'react-native'
 import { tabBarHeight } from '@shared/constants'
 import WideArrow from '@icons/wide-arrow.svg'
-import { slideDelay, openHeaderHeight } from '@widgets/postPreview/constants'
+import {
+  slideDelay,
+  openHeaderHeight,
+} from '@widgets/createPostModal/constants'
 
 interface Props {
   isOpen: boolean

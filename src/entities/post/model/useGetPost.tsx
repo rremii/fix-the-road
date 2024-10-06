@@ -43,5 +43,5 @@ const posts: IPost[] = [
 export const useGetPost = (postId?: IPost['id']): IPost | undefined => {
   const post = posts.find((post) => post.id === postId)
 
-  return useMemo(() => post, [])
+  return useMemo(() => post, [postId])
 }

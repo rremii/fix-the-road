@@ -5,7 +5,7 @@ import {
   createBottomTabNavigator,
 } from '@react-navigation/bottom-tabs'
 import NewPostNavigation from './NewPost'
-import { MapPage } from '@pages/mobile/home/Map.page'
+import { MapPage } from '@pages/mobile/home/map/Map.page'
 import { ProfilePage } from '@pages/mobile/home/Profile.page'
 
 import { BottomTabsRouteNames } from '../../../widgets/bottomTabBar/types'

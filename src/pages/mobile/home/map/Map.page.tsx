@@ -3,7 +3,7 @@ import { View, StyleSheet } from 'react-native'
 
 import { Map } from '@widgets/map/ui/Map'
 import { tabBarHeight } from '@shared/constants'
-import { PostModal } from '@widgets/postModal/ui/PostModal'
+import { PostModal } from '@pages/mobile/home/map/PostModal'
 
 export const MapPage = () => {
   return (

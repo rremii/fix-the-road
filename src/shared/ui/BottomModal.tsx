@@ -15,12 +15,12 @@ interface Props extends PropsWithChildren {
 
 export const BottomModal = ({ children, isOpen }: Props) => {
   const [modalHeight, setModalHeight] = useState(0)
-  const slideAnim = useSharedValue(tabBarHeight)
+  const slideAnim = useSharedValue(0)
 
   useEffect(() => {
     if (isOpen) slideAnim.value = withTiming(-modalHeight)
-    else slideAnim.value = withTiming(tabBarHeight)
-  }, [isOpen])
+    else slideAnim.value = withTiming(0)
+  }, [isOpen, modalHeight])
 
   const slideStyles = useAnimatedStyle(() => ({
     transform: [{ translateY: slideAnim.value }],
@@ -32,14 +32,20 @@ export const BottomModal = ({ children, isOpen }: Props) => {
   }
 
   return (
-    <Animated.View onLayout={onLayout} style={[styles.container, slideStyles]}>
-      {children}
-    </Animated.View>
+    <Portal>
+      <Animated.View
+        onLayout={onLayout}
+        style={[styles.container, slideStyles]}
+      >
+        {children}
+      </Animated.View>
+    </Portal>
   )
 }
 const styles = StyleSheet.create({
   container: {
-    zIndex: 1,
+    paddingBottom: tabBarHeight,
+    zIndex: 2,
     flex: 1,
     backgroundColor: 'white',
     position: 'absolute',
