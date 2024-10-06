@@ -25,15 +25,11 @@ export const Posts = () => {
   )
 }
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: 'white',
-    padding: 20,
-    gap: 25,
-  },
+  container: {},
   separator: {
     height: 2,
-    backgroundColor: 'black',
+    backgroundColor: '#d0bfff51',
+
     width: '100%',
   },
 })

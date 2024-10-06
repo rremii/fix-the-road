@@ -30,7 +30,6 @@ export const InfoPost = (post: Props) => {
 }
 const styles = StyleSheet.create({
   container: {
-    padding: 20,
-    gap: 25,
+    gap: 10,
   },
 })

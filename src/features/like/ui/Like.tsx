@@ -5,10 +5,12 @@ import LikeIcon from '@icons/like.svg'
 export const Like = () => {
   return (
     <TouchableOpacity style={styles.btn}>
-      <LikeIcon width={30} height={30} />
+      <LikeIcon color="transparent" width={35} height={35} />
     </TouchableOpacity>
   )
 }
 const styles = StyleSheet.create({
-  btn: {},
+  btn: {
+    transform: [{ translateY: -2 }], //todo change img to good one
+  },
 })

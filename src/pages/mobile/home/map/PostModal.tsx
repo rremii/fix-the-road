@@ -20,6 +20,7 @@ export const PostModal = () => {
   const navigation =
     useNavigation<BottomTabNavigationProp<HomeNavigationParam>>()
   const { params } = useRoute<RouteProp<HomeNavigationParam>>()
+  //todo move to page
   const [isOpen, setIsOpen] = useState(false)
 
   const me = useGetMe()

@@ -21,8 +21,13 @@ export const Post = (props: Props) => {
   )
 }
 const styles = StyleSheet.create({
-  container: {},
+  container: {
+    padding: 25,
+    paddingTop: 15,
+    paddingBottom: 15,
+  },
   btnSection: {
+    alignItems: 'center',
     width: '100%',
     flexDirection: 'row',
     justifyContent: 'flex-end',

@@ -1,10 +1,17 @@
-import { useHideTabBar } from '@widgets/bottomTabBar/model/useHideTabBar'
+import { useOnPageSwitch } from '@shared/hooks/useOnPageSwitch'
+import { useUIStore } from '@shared/store/UIStore'
 import Photo from '@widgets/photo/ui/Photo'
 import React from 'react'
 import { View, StyleSheet } from 'react-native'
 
 export const PhotoPage = () => {
-  useHideTabBar()
+  const hideTabBar = useUIStore((state) => state.hideTabBar)
+  const showTabBar = useUIStore((state) => state.showTabBar)
+
+  useOnPageSwitch({
+    onEnter: hideTabBar,
+    onLeave: showTabBar,
+  })
 
   return (
     <View style={styles.pageContainer}>

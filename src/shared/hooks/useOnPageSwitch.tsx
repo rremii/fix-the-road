@@ -2,22 +2,24 @@ import { useNavigation } from '@react-navigation/native'
 import { useUIStore } from '@shared/store/UIStore'
 import { useEffect } from 'react'
 
-export const useHideTabBar = () => {
-  const hideTabBar = useUIStore((state) => state.hideTabBar)
-  const showTabBar = useUIStore((state) => state.showTabBar)
+interface Params {
+  onEnter?: () => void
+  onLeave?: () => void
+}
 
+export const useOnPageSwitch = ({ onEnter, onLeave }: Params) => {
   const navigation = useNavigation()
 
   useEffect(() => {
     const unsubscribeBlur = navigation.addListener('blur', () => {
-      showTabBar()
+      if (onLeave) onLeave()
     })
     const unsubscribeFocus = navigation.addListener('focus', () => {
-      hideTabBar()
+      if (onEnter) onEnter()
     })
 
     return () => {
-      showTabBar()
+      if (onLeave) onLeave()
       unsubscribeBlur()
       unsubscribeFocus()
     }

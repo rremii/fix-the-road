@@ -80,12 +80,8 @@ export const EditPostForm = (props: Props) => {
       </View>
 
       <View style={styles.btnSection}>
-        <Button
-          type="filled"
-          mainColor="green"
-          onPress={handleSubmit(onSubmit)}
-        >
-          <Text>Edit</Text>
+        <Button type="filled" onPress={handleSubmit(onSubmit)}>
+          <Text>Save</Text>
         </Button>
       </View>
     </View>
@@ -93,11 +89,11 @@ export const EditPostForm = (props: Props) => {
 }
 const styles = StyleSheet.create({
   container: {
-    padding: 20,
-    gap: 25,
+    gap: 10,
   },
 
   input: {
+    height: 35,
     width: '100%',
     padding: 5,
     paddingLeft: 20,
@@ -109,23 +105,5 @@ const styles = StyleSheet.create({
   btnSection: {
     flexDirection: 'row',
     justifyContent: 'flex-end',
-  },
-  submitBtn: {
-    padding: 7,
-    paddingLeft: 25,
-    paddingRight: 25,
-    borderRadius: 10,
-    backgroundColor: '#1ccb82',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  submitText: {
-    color: 'white',
-    fontSize: 17,
-  },
-  crossHeader: {
-    flexDirection: 'row',
-    justifyContent: 'flex-end',
-    paddingRight: 20,
   },
 })
