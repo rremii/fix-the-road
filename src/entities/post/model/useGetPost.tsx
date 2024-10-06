@@ -4,7 +4,6 @@ import { IPost } from '../types'
 const posts: IPost[] = [
   {
     id: 1,
-    title: 'post 1',
     description: 'post 1 description',
     photoUri: 'https://picsum.photos/id/10/200/300',
     userId: 1,
@@ -13,7 +12,6 @@ const posts: IPost[] = [
   },
   {
     id: 2,
-    title: 'post 2',
     description: 'post 2 description',
     photoUri: 'https://picsum.photos/id/10/200/300',
     userId: 2,
@@ -22,7 +20,6 @@ const posts: IPost[] = [
   },
   {
     id: 3,
-    title: 'post 3',
     description: 'post 3 description',
     photoUri: 'https://picsum.photos/id/10/200/300',
     userId: 1,
@@ -31,17 +28,32 @@ const posts: IPost[] = [
   },
   {
     id: 4,
-    title: 'post 4',
     description: 'post 4 description',
     photoUri: 'https://picsum.photos/id/10/200/300',
     userId: 2,
     lat: 54.2836,
     lng: 30.9828,
   },
+  {
+    id: 5,
+    description: 'post 5 description',
+    photoUri: 'https://picsum.photos/id/10/200/300',
+    userId: 1,
+    lat: 55.193,
+    lng: 30.2228790521,
+  },
+  {
+    id: 6,
+    description: 'post 6 description',
+    photoUri: 'https://picsum.photos/id/10/200/300',
+    userId: 2,
+    lat: 55.19430611515601,
+    lng: 30.222879052162174,
+  },
 ]
 
 export const useGetPost = (postId?: IPost['id']): IPost | undefined => {
   const post = posts.find((post) => post.id === postId)
 
-  return useMemo(() => post, [postId])
+  return useMemo(() => post, [postId, posts])
 }

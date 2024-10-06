@@ -7,11 +7,10 @@ export const sectionStyles = StyleSheet.create({
   sectionRow: {
     gap: 5,
     flexDirection: 'row',
-    justifyContent: 'space-between',
     alignItems: 'center',
   },
   title: {
-    fontSize: 20,
+    fontSize: 16,
     fontWeight: 'bold',
     color: 'black',
   },
@@ -22,7 +21,8 @@ export const sectionStyles = StyleSheet.create({
     overflow: 'hidden',
   },
   label: {
-    fontSize: 20,
+    lineHeight: 35,
+    fontSize: 18,
     color: 'black',
   },
   withPadding: {

@@ -5,7 +5,7 @@ import PhotoIcon from '@icons/photo.svg'
 export const OpenPhoto = () => {
   return (
     <TouchableOpacity style={styles.btn}>
-      <PhotoIcon width={30} height={30} />
+      <PhotoIcon width={35} height={35} />
     </TouchableOpacity>
   )
 }

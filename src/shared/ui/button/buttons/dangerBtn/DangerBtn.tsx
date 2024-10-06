@@ -34,7 +34,8 @@ export const DangerBtn: FC<DangerBtnProps> = ({
 }) => {
   const styles = getStyles({ pending, ...colors })
   return (
-    <Pressable
+    <TouchableOpacity
+      activeOpacity={0.8}
       disabled={pending}
       onPress={onPress}
       style={[styles.btn, btnStyles]}
@@ -48,7 +49,7 @@ export const DangerBtn: FC<DangerBtnProps> = ({
       ) : (
         <Text style={[styles.text, textStyles]}>{children}</Text>
       )}
-    </Pressable>
+    </TouchableOpacity>
   )
 }
 

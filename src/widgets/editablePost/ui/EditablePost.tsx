@@ -19,6 +19,8 @@ interface Props extends IPost {}
 export const EditablePost = ({ ...post }: Props) => {
   const setEditPost = useEditPostStore((state) => state.setEditPost)
 
+  console.log('render modal')
+
   const [isEditing, setIsEditing] = useState(false)
 
   const onSubmit = () => {
@@ -53,8 +55,15 @@ export const EditablePost = ({ ...post }: Props) => {
   )
 }
 const styles = StyleSheet.create({
-  container: {},
+  container: {
+    gap: 10,
+    padding: 25,
+    paddingTop: 15,
+    paddingBottom: 15,
+  },
   btnSection: {
+    alignItems: 'center',
+
     flexDirection: 'row',
     justifyContent: 'flex-end',
     gap: 10,

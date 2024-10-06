@@ -17,7 +17,7 @@ export const AuthorInfo = ({ userId }: Props) => {
       <View>
         <Text style={sectionStyles.title}>Posted by</Text>
       </View>
-      <View style={[sectionStyles.section, sectionStyles.withPadding]}>
+      <View style={[sectionStyles.sectionRow, sectionStyles.withPadding]}>
         <View style={sectionStyles.image}>
           <Avatar width={50} height={50} />
         </View>
@@ -28,7 +28,7 @@ export const AuthorInfo = ({ userId }: Props) => {
 }
 const styles = StyleSheet.create({
   container: {
-    padding: 20,
     gap: 15,
+    marginBottom: 10,
   },
 })
