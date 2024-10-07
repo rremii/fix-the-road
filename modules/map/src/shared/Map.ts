@@ -84,7 +84,6 @@ export const createHTMLMap = (type: MapType) => `
         )
 
         marker.on('dragend', function (e) {
-
           const newMarkerData = {
             ...markerData,
             lat: e.target._latlng.lat,
@@ -101,6 +100,7 @@ export const createHTMLMap = (type: MapType) => `
             payload: markerData,
           })
         })
+      
 
         marker.addTo(group)
       })
@@ -147,7 +147,13 @@ export const createHTMLMap = (type: MapType) => `
 
 
     map.on('zoomend', function (e) {
+      sendMsgToReact({
+        type: 'boundsChange',
+        payload: getBounds(),
+      })
+    })
 
+    map.on('moveend', function (e) {
       sendMsgToReact({
         type: 'boundsChange',
         payload: getBounds(),
