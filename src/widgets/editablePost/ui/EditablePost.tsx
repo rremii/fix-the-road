@@ -16,7 +16,7 @@ import { useEditPostStore } from 'src/entities/post/model/editPostStore'
 
 interface Props extends IPost {}
 
-export const EditablePost = ({ ...post }: Props) => {
+export const EditablePost = (post: Props) => {
   const setEditPost = useEditPostStore((state) => state.setEditPost)
 
   const [isEditing, setIsEditing] = useState(false)
@@ -33,7 +33,7 @@ export const EditablePost = ({ ...post }: Props) => {
   return (
     <View style={styles.container}>
       <View style={styles.btnSection}>
-        <OpenPhoto />
+        <OpenPhoto photoUri={post.photoUri} />
       </View>
       <AuthorInfo userId={post.userId} />
       {isEditing ? (

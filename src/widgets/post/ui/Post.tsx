@@ -8,15 +8,15 @@ import { IPost } from 'src/entities/post/types'
 
 interface Props extends IPost {}
 
-export const Post = (props: Props) => {
+export const Post = (post: Props) => {
   return (
     <View style={styles.container}>
       <View style={styles.btnSection}>
-        <OpenPhoto />
+        <OpenPhoto photoUri={post.photoUri} />
         <Like />
       </View>
-      <AuthorInfo userId={props.userId} />
-      <InfoPost {...props} />
+      <AuthorInfo userId={post.userId} />
+      <InfoPost {...post} />
     </View>
   )
 }

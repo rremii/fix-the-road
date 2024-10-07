@@ -8,6 +8,7 @@ import { FallbackView } from '@shared/ui/FallbackView'
 import { Location } from '@shared/types'
 import MarkerRedIcon from '@icons/marker-red.png'
 import MarkerBlueIcon from '@icons/marker-blue.png'
+import MarkerGreenIcon from '@icons/marker-green.png'
 import { useAssets } from 'expo-asset'
 import { markerSize } from '@shared/constants'
 import { useNavigation } from '@react-navigation/native'
@@ -20,18 +21,49 @@ import { useMapStore } from 'src/entities/map/model/mapStore'
 export const Map = () => {
   const navigation =
     useNavigation<BottomTabNavigationProp<HomeNavigationParam>>()
+  const setChosenMarker = useMapStore((state) => state.setChosenMarkerId)
+  const chosenMarkerId = useMapStore((state) => state.chosenMarkerId)
   const setBounds = useMapStore((state) => state.setBounds)
+  const [assets] = useAssets([MarkerRedIcon, MarkerBlueIcon, MarkerGreenIcon])
   const map = useRef<IMap>(null)
   const [isMapLoaded, setMapLoaded] = useState(false)
-  const { errorMsg: locationErr, location } = useLocation()
   const [markers, setMarkers] = useState<Marker[]>([])
-  const [assets] = useAssets([MarkerBlueIcon, MarkerRedIcon])
+  const { errorMsg: locationErr, location } = useLocation()
 
   const redMarkerUri = assets?.at(0)?.uri || ''
   const blueMarkerUri = assets?.at(1)?.uri || ''
+  const greenMarkerUri = assets?.at(2)?.uri || ''
 
   const posts = useGetPosts()
   const me = useGetMe()
+
+  const getMarkerFromPosts = (): Marker[] => {
+    if (!me) return []
+    return posts.map((post) => {
+      const isMyMarker = post.userId === me.id
+      const isChosen = post.id === chosenMarkerId
+
+      let iconUrl
+      if (isChosen) iconUrl = greenMarkerUri
+      else iconUrl = isMyMarker ? blueMarkerUri : redMarkerUri
+      return {
+        draggable: false,
+        id: post.id,
+        lat: post.lat,
+        lng: post.lng,
+        icon: {
+          iconUrl,
+          iconAnchor: [markerSize / 2, markerSize / 2],
+          iconSize: [markerSize, markerSize],
+        },
+      }
+    })
+  }
+
+  useEffect(() => {
+    const markers = getMarkerFromPosts()
+    setMarkers(markers)
+  }, [chosenMarkerId])
 
   useEffect(() => {
     if (!location || !posts.length || !me || !isMapLoaded) return
@@ -41,28 +73,19 @@ export const Map = () => {
       lng: location?.coords.longitude,
     })
 
-    const markers: Marker[] = posts.map((post) => {
-      const isMyMarker = post.userId === me.id
-      return {
-        draggable: false,
-        id: post.id,
-        lat: post.lat,
-        lng: post.lng,
-        icon: {
-          iconUrl: isMyMarker ? blueMarkerUri : redMarkerUri,
-          iconAnchor: [markerSize / 2, markerSize / 2],
-          iconSize: [markerSize, markerSize],
-        },
-      }
-    })
-
+    const markers = getMarkerFromPosts()
     setMarkers(markers)
   }, [isMapLoaded, location, posts, me])
 
   const onClickMarker = (marker: Marker) => {
+    setChosenMarker(marker.id)
     navigation.setParams({
       postId: marker.id,
     })
+  }
+
+  const clearChosenMarker = () => {
+    setChosenMarker(null)
   }
 
   const onBoundsChange = (bounds: Bounds) => {
@@ -81,6 +104,7 @@ export const Map = () => {
       <MapModule
         onMapLoaded={() => setMapLoaded(true)}
         ref={map}
+        onClick={clearChosenMarker}
         onBoundsChange={onBoundsChange}
         markers={markers}
         initCoords={initCoors}

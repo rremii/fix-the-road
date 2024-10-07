@@ -28,7 +28,6 @@ export const Map = forwardRef<IMap, MapProps>((props, ref) => {
     onMapLoaded,
     hideCenterBtn,
   } = props
-
   const mapAdapter = useRef<MapAdapter>(null)
 
   const sendMsgToMap = (message: MapSendEvents) => {
