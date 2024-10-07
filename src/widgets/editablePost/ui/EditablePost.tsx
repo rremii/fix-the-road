@@ -19,8 +19,6 @@ interface Props extends IPost {}
 export const EditablePost = ({ ...post }: Props) => {
   const setEditPost = useEditPostStore((state) => state.setEditPost)
 
-  console.log('render modal')
-
   const [isEditing, setIsEditing] = useState(false)
 
   const onSubmit = () => {

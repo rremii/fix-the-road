@@ -6,7 +6,7 @@ import Animated, {
 } from 'react-native-reanimated'
 import React, { PropsWithChildren, useEffect, useState } from 'react'
 import { LayoutChangeEvent, StyleSheet } from 'react-native'
-import { tabBarHeight } from '@shared/constants'
+import { modalSlideAnimDuration, tabBarHeight } from '@shared/constants'
 import { openHeaderHeight } from '@widgets/createPostModal/constants'
 
 interface Props extends PropsWithChildren {
@@ -23,9 +23,13 @@ export const ModalView = ({ isOpen, children }: Props) => {
 
   useEffect(() => {
     if (isOpen) {
-      slideAnim.value = withTiming(-modalHeight - tabBarHeight)
+      slideAnim.value = withTiming(-modalHeight - tabBarHeight, {
+        duration: modalSlideAnimDuration,
+      })
     } else {
-      slideAnim.value = withTiming(-tabBarHeight - openHeaderHeight)
+      slideAnim.value = withTiming(-tabBarHeight - openHeaderHeight, {
+        duration: modalSlideAnimDuration,
+      })
     }
   }, [isOpen, modalHeight])
   const onLayout = (e: LayoutChangeEvent) => {
