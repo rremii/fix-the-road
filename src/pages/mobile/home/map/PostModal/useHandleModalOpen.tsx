@@ -4,12 +4,14 @@ import { modalSlideAnimDuration } from '@shared/constants'
 import { useOnPageSwitch } from '@shared/hooks/useOnPageSwitch'
 import { useEffect, useState } from 'react'
 import { HomeNavigationParam } from 'src/app/navigation/mobile/types'
+import { useMapStore } from 'src/entities/map/model/mapStore'
 
 export const useHandleModalOpen = () => {
   const navigation =
     useNavigation<BottomTabNavigationProp<HomeNavigationParam>>()
-
   const { params } = useRoute<RouteProp<HomeNavigationParam, 'map'>>()
+
+  const setChosenMarker = useMapStore((state) => state.setChosenMarkerId)
   const [isOpen, setIsOpen] = useState(false)
 
   useEffect(() => {
@@ -23,7 +25,7 @@ export const useHandleModalOpen = () => {
 
   const closeModal = () => {
     setIsOpen(false)
-
+    setChosenMarker(null)
     const timeout = setTimeout(() => {
       navigation.setParams({
         postId: undefined,

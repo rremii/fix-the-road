@@ -1,9 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { Bounds, Coords, IMap, Marker } from 'modules/map/types'
 import { Map as MapModule } from '@modules/map'
-import { CenterMap } from '@modules/map/src/ui/CenterMap'
 import { useLocation } from '@shared/hooks/useLocation'
-import { err } from 'react-native-svg'
 import { FallbackView } from '@shared/ui/FallbackView'
 import { Location } from '@shared/types'
 import MarkerRedIcon from '@icons/marker-red.png'
@@ -11,7 +9,7 @@ import MarkerBlueIcon from '@icons/marker-blue.png'
 import MarkerGreenIcon from '@icons/marker-green.png'
 import { useAssets } from 'expo-asset'
 import { markerSize } from '@shared/constants'
-import { useNavigation } from '@react-navigation/native'
+import { RouteProp, useNavigation, useRoute } from '@react-navigation/native'
 import { BottomTabNavigationProp } from '@react-navigation/bottom-tabs'
 import { HomeNavigationParam } from 'src/app/navigation/mobile/types'
 import { useGetPosts } from 'src/entities/post/model/useGetPosts'
@@ -23,6 +21,7 @@ export const Map = () => {
     useNavigation<BottomTabNavigationProp<HomeNavigationParam>>()
   const setChosenMarker = useMapStore((state) => state.setChosenMarkerId)
   const chosenMarkerId = useMapStore((state) => state.chosenMarkerId)
+  const { params } = useRoute<RouteProp<HomeNavigationParam, 'map'>>()
   const setBounds = useMapStore((state) => state.setBounds)
   const [assets] = useAssets([MarkerRedIcon, MarkerBlueIcon, MarkerGreenIcon])
   const map = useRef<IMap>(null)
@@ -86,6 +85,9 @@ export const Map = () => {
 
   const clearChosenMarker = () => {
     setChosenMarker(null)
+    navigation.setParams({
+      postId: undefined,
+    })
   }
 
   const onBoundsChange = (bounds: Bounds) => {

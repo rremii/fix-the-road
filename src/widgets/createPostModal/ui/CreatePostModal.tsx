@@ -15,7 +15,7 @@ export const CreatePostModal = () => {
   return (
     <>
       <Overlay zIndex={1} onPress={closeModal} isActive={isOpen} />
-      <ModalView isOpen={isOpen}>
+      <ModalView closeModal={closeModal} openModal={openModal} isOpen={isOpen}>
         <OpenHeader isOpen={isOpen} onClick={openModal} />
         <CloseHeader isOpen={isOpen} onClick={closeModal} />
 
