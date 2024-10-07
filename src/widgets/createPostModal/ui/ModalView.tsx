@@ -2,12 +2,15 @@ import Animated, {
   runOnJS,
   useAnimatedStyle,
   useSharedValue,
-  withDelay,
   withTiming,
 } from 'react-native-reanimated'
 import React, { PropsWithChildren, useEffect, useState } from 'react'
 import { LayoutChangeEvent, StyleSheet } from 'react-native'
-import { modalSlideAnimDuration, tabBarHeight } from '@shared/constants'
+import {
+  modalSlideAnimDuration,
+  panGestureBreak,
+  tabBarHeight,
+} from '@shared/constants'
 import { openHeaderHeight } from '@widgets/createPostModal/constants'
 import { Gesture, GestureDetector } from 'react-native-gesture-handler'
 
@@ -25,36 +28,28 @@ export const ModalView = ({
 }: Props) => {
   const [modalHeight, setModalHeight] = useState(0)
 
-  const panAnim = useSharedValue(0)
-  const [savedPanAnim, savePanAnim] = useState(0)
+  const modalOpenY = -modalHeight - tabBarHeight
+  const modalCloseY = -tabBarHeight - openHeaderHeight
+
   const slideAnim = useSharedValue(0)
+  const slideStyles = useAnimatedStyle(() => {
+    return {
+      transform: [{ translateY: slideAnim.value }],
+    }
+  })
 
-  const panGesture = Gesture.Pan()
-    .onChange((e) => {
-      panAnim.value = e.translationY
-
-      if (e.translationY < -50) return runOnJS(openModal)()
-      if (e.translationY > 50) return runOnJS(closeModal)()
-      panAnim.value = e.translationY + savedPanAnim
-    })
-    .onEnd(() => {
-      runOnJS(savePanAnim)(panAnim.value)
-    })
-
-  const panStyles = useAnimatedStyle(() => ({
-    transform: [{ translateY: panAnim.value + slideAnim.value }],
-  }))
-  const slideStyles = useAnimatedStyle(() => ({
-    transform: [{ translateY: slideAnim.value }],
-  }))
+  const panGesture = Gesture.Pan().onChange((e) => {
+    if (e.translationY < -panGestureBreak) return runOnJS(openModal)()
+    if (e.translationY > panGestureBreak) return runOnJS(closeModal)()
+  })
 
   useEffect(() => {
     if (isOpen) {
-      slideAnim.value = withTiming(-modalHeight - tabBarHeight, {
+      slideAnim.value = withTiming(modalOpenY, {
         duration: modalSlideAnimDuration,
       })
     } else {
-      slideAnim.value = withTiming(-tabBarHeight - openHeaderHeight, {
+      slideAnim.value = withTiming(modalCloseY, {
         duration: modalSlideAnimDuration,
       })
     }
@@ -66,7 +61,7 @@ export const ModalView = ({
 
   return (
     <GestureDetector gesture={panGesture}>
-      <Animated.View onLayout={onLayout} style={[styles.modal, panStyles]}>
+      <Animated.View onLayout={onLayout} style={[styles.modal, slideStyles]}>
         {children}
       </Animated.View>
     </GestureDetector>

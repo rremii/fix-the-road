@@ -31,7 +31,7 @@ export const PostModal = () => {
         onPress={closeModal}
         isActive={isOpen}
       />
-      <BottomModal isOpen={isOpen}>
+      <BottomModal closeModal={closeModal} isOpen={isOpen}>
         {!post && <PendingView msg="Loading post..." withSpinner />}
         {post && isMyPost && <EditablePost {...post} />}
         {post && !isMyPost && <Post {...post} />}
