@@ -1,4 +1,5 @@
 import Animated, {
+  runOnJS,
   useAnimatedStyle,
   useSharedValue,
   withDelay,
@@ -8,15 +9,41 @@ import React, { PropsWithChildren, useEffect, useState } from 'react'
 import { LayoutChangeEvent, StyleSheet } from 'react-native'
 import { modalSlideAnimDuration, tabBarHeight } from '@shared/constants'
 import { openHeaderHeight } from '@widgets/createPostModal/constants'
+import { Gesture, GestureDetector } from 'react-native-gesture-handler'
 
 interface Props extends PropsWithChildren {
   isOpen: boolean
+  closeModal: () => void
+  openModal: () => void
 }
 
-export const ModalView = ({ isOpen, children }: Props) => {
+export const ModalView = ({
+  isOpen,
+  children,
+  closeModal,
+  openModal,
+}: Props) => {
   const [modalHeight, setModalHeight] = useState(0)
 
+  const panAnim = useSharedValue(0)
+  const [savedPanAnim, savePanAnim] = useState(0)
   const slideAnim = useSharedValue(0)
+
+  const panGesture = Gesture.Pan()
+    .onChange((e) => {
+      panAnim.value = e.translationY
+
+      if (e.translationY < -50) return runOnJS(openModal)()
+      if (e.translationY > 50) return runOnJS(closeModal)()
+      panAnim.value = e.translationY + savedPanAnim
+    })
+    .onEnd(() => {
+      runOnJS(savePanAnim)(panAnim.value)
+    })
+
+  const panStyles = useAnimatedStyle(() => ({
+    transform: [{ translateY: panAnim.value + slideAnim.value }],
+  }))
   const slideStyles = useAnimatedStyle(() => ({
     transform: [{ translateY: slideAnim.value }],
   }))
@@ -32,14 +59,17 @@ export const ModalView = ({ isOpen, children }: Props) => {
       })
     }
   }, [isOpen, modalHeight])
+
   const onLayout = (e: LayoutChangeEvent) => {
     setModalHeight(e.nativeEvent.layout.height)
   }
 
   return (
-    <Animated.View onLayout={onLayout} style={[styles.modal, slideStyles]}>
-      {children}
-    </Animated.View>
+    <GestureDetector gesture={panGesture}>
+      <Animated.View onLayout={onLayout} style={[styles.modal, panStyles]}>
+        {children}
+      </Animated.View>
+    </GestureDetector>
   )
 }
 const styles = StyleSheet.create({
