@@ -43,6 +43,14 @@ export const PostPreview = () => {
     })
   }, [location, isMapLoaded])
 
+  useEffect(() => {
+    if (!location) return
+    setCreatePostLocation({
+      lat: marker?.lat || location.coords.latitude,
+      lng: marker?.lng || location.coords.longitude,
+    })
+  }, [location, marker])
+
   const centerMap = (coords?: Location) => {
     if (map && map.current) map.current.center(coords)
   }
@@ -60,14 +68,6 @@ export const PostPreview = () => {
   const onDragMarker = (marker: Marker) => {
     setMarker(marker)
   }
-
-  useEffect(() => {
-    if (!location) return
-    setCreatePostLocation({
-      lat: marker?.lat || location.coords.latitude,
-      lng: marker?.lng || location.coords.longitude,
-    })
-  }, [location, marker])
 
   if (errorMsg) return <FallbackView msg={errorMsg} />
   if (!location) return <FallbackView msg={'fetching location'} />

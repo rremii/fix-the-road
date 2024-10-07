@@ -1,5 +1,5 @@
 import { Portal } from '@gorhom/portal'
-import { tabBarHeight } from '@shared/constants'
+import { modalSlideAnimDuration, tabBarHeight } from '@shared/constants'
 import React from 'react'
 import { PropsWithChildren, useEffect, useState } from 'react'
 import { LayoutChangeEvent, StyleSheet } from 'react-native'
@@ -18,8 +18,11 @@ export const BottomModal = ({ children, isOpen }: Props) => {
   const slideAnim = useSharedValue(0)
 
   useEffect(() => {
-    if (isOpen) slideAnim.value = withTiming(-modalHeight)
-    else slideAnim.value = withTiming(0)
+    if (isOpen)
+      slideAnim.value = withTiming(-modalHeight, {
+        duration: modalSlideAnimDuration,
+      })
+    else slideAnim.value = withTiming(0, { duration: modalSlideAnimDuration })
   }, [isOpen, modalHeight])
 
   const slideStyles = useAnimatedStyle(() => ({
