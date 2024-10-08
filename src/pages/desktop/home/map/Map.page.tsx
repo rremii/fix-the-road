@@ -7,6 +7,7 @@ import { SideBarLeft } from '@shared/ui/SideBarLeft'
 import { useUIStore } from '@shared/store/UIStore'
 import { Posts } from '@pages/desktop/home/map/Posts'
 import { ToggleRightSideBar } from '@features/toggleRightSideBar/ui/ToggleRightSideBar'
+import { UserProfile } from '@widgets/userProife/ui/UserProfile'
 
 export const MapPage = () => {
   const isLeftSideBarOpen = useUIStore((state) => state.isLeftSideBar)
@@ -18,6 +19,7 @@ export const MapPage = () => {
 
       <SideBarLeft isOpen={isLeftSideBarOpen}>
         <Burger />
+        <UserProfile />
       </SideBarLeft>
       <SideBarRight isOpen={isRightSideBarOpen}>
         <ToggleRightSideBar />
