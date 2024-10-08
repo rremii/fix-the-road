@@ -2,7 +2,7 @@ import { useMemo } from 'react'
 import { IUser } from '../types'
 
 const me = {
-  avatar: 'https://avatars.githubusercontent.com/u/105947051?v=4',
+  avatar: '1__224d8836-a210-4f53-a5c7-f553de849540.jpg',
   userName: 'John Doe',
   email: 'johndoe@gmail.com',
   id: 1,

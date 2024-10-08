@@ -8,3 +8,5 @@ export const withProviders = compose(
   withSaveArea,
   withGestureHandler,
 )
+
+//todo check optimization

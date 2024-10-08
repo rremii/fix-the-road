@@ -14,6 +14,9 @@ interface FormData {
 export const CreatePostForm = () => {
   const { location, photoUri } = useCreatePostStore((state) => state)
 
+  const me = useGetMe()
+  const { createPost } = useCreatePost()
+
   const {
     control,
     handleSubmit,
@@ -29,10 +32,13 @@ export const CreatePostForm = () => {
     console.log(errors)
   }, [errors])
 
-  const onSubmit = (data: FormData) => {
+  const onSubmit = async (data: FormData) => {
+    if (!photoUri) return
     console.log(data, photoUri)
-    reset()
+
+    await createPost({ ...data, photoUri, ...me })
   }
+
   return (
     <View style={styles.container}>
       <View style={sectionStyles.section}>
