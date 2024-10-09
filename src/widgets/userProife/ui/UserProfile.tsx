@@ -1,22 +1,11 @@
 import React, { useEffect, useState } from 'react'
-import {
-  View,
-  StyleSheet,
-  useWindowDimensions,
-  TextInput,
-  Text,
-  Platform,
-} from 'react-native'
+import { View, StyleSheet, Text } from 'react-native'
 import { Avatar } from '../../../shared/ui/Avatar'
 import { useGetMe } from 'src/entities/user/model/useGetMe'
 import { Controller, useForm } from 'react-hook-form'
 import { Button } from '@shared/ui/button'
 import { AvatarPicker } from '@shared/ui/AvatarPicker'
 import { EditUserProfile } from './EditUserProfile'
-
-//todo
-//auth
-//profive edit
 
 export const UserProfile = () => {
   const [isEditing, setEditing] = useState(false)

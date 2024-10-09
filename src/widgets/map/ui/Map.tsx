@@ -21,7 +21,6 @@ export const Map = () => {
     useNavigation<BottomTabNavigationProp<HomeNavigationParam>>()
   const setChosenMarker = useMapStore((state) => state.setChosenMarkerId)
   const chosenMarkerId = useMapStore((state) => state.chosenMarkerId)
-  const { params } = useRoute<RouteProp<HomeNavigationParam, 'map'>>()
   const setBounds = useMapStore((state) => state.setBounds)
   const [assets] = useAssets([MarkerRedIcon, MarkerBlueIcon, MarkerGreenIcon])
   const map = useRef<IMap>(null)

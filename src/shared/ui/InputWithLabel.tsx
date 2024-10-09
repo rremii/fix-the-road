@@ -26,6 +26,7 @@ interface Props {
   label: string
   onChangeText: (text: string) => void
   onBlur?: () => void
+  onSubmitEditing?: () => void
   keyboardType?: KeyboardTypeOptions
   value?: string
   inputStyles?: StyleProp<TextStyle>
@@ -46,6 +47,7 @@ export const InputWithLabel = ({
   labelContStyles,
   inputStyles,
   labelStyles,
+  onSubmitEditing,
 }: Props) => {
   const [fieldHeight, setFieldHeight] = useState(40)
   const [labelHeight, setLabelHeight] = useState(20)
@@ -123,6 +125,7 @@ export const InputWithLabel = ({
         value={inputValue}
         ref={inputRef}
         onFocus={onFocus}
+        onSubmitEditing={onSubmitEditing}
         onBlur={onBlur}
         style={[styles.field, inputStyles]}
       />
