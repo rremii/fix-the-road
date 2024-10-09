@@ -1,12 +1,13 @@
 import { Portal } from '@gorhom/portal'
 import { Overlay } from '@shared/ui/Overlay'
 import React, { useEffect } from 'react'
-import { View, StyleSheet, Image, Pressable } from 'react-native'
+import { View, StyleSheet, Pressable } from 'react-native'
 import Animated, {
   useAnimatedStyle,
   useSharedValue,
   withTiming,
 } from 'react-native-reanimated'
+import { Image } from 'expo-image'
 
 interface Props {
   photoUri: string
@@ -33,11 +34,7 @@ export const PhotoPreview = ({ photoUri, isOpen, close }: Props) => {
     <Portal>
       <Animated.View style={[styles.container, fadeStyles]}>
         <Pressable style={styles.pressableCont} onPress={close}>
-          <Image
-            resizeMode="contain"
-            source={{ uri: photoUri }}
-            style={styles.photo}
-          />
+          <Image contentFit="contain" source={photoUri} style={styles.photo} />
         </Pressable>
       </Animated.View>
     </Portal>

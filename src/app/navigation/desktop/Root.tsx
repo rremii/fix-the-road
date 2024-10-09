@@ -6,26 +6,33 @@ import {
 import { RootNavigationParam } from './types'
 import AuthNavigation from './Auth'
 import { MapPage } from '@pages/desktop/home/map/Map.page'
+import { useAuthStore } from 'src/entities/auth/model/useAuthStore'
 
 const RootStack = createStackNavigator<RootNavigationParam>()
 
 const RootNavigation = () => {
+  const loginState = useAuthStore((state) => state.loginState)
+
   const routes: {
     name: keyof RootNavigationParam
     component: React.FC
-  }[] = [
-    {
-      name: 'map',
-      component: MapPage,
-    },
-    {
-      name: 'auth',
-      component: AuthNavigation,
-    },
-  ]
+  }[] =
+    loginState === 'success'
+      ? [
+          {
+            name: 'map',
+            component: MapPage,
+          },
+        ]
+      : [
+          {
+            name: 'auth',
+            component: AuthNavigation,
+          },
+        ]
 
   return (
-    <RootStack.Navigator screenOptions={StackOptions} initialRouteName={'map'}>
+    <RootStack.Navigator screenOptions={StackOptions} initialRouteName={'auth'}>
       {routes.map((route, index) => (
         <RootStack.Screen
           key={index}

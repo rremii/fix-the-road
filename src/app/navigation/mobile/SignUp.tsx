@@ -1,12 +1,13 @@
 import React from 'react'
 import {
+  CardStyleInterpolators,
   createStackNavigator,
   StackNavigationOptions,
 } from '@react-navigation/stack'
-import { SignUpNavigationParam } from './types'
 import { EmailPage } from '@pages/mobile/auth/SignUp/Email.page'
 import { CodePage } from '@pages/mobile/auth/SignUp/Code.page'
 import { InfoPage } from '@pages/mobile/auth/SignUp/Info.page'
+import { SignUpNavigationParam } from '../types'
 
 const SignUp = createStackNavigator<SignUpNavigationParam>()
 
@@ -14,6 +15,7 @@ const SignUpNavigation = () => {
   const routes: {
     name: keyof SignUpNavigationParam
     component: React.FC
+    options?: StackNavigationOptions
   }[] = [
     {
       name: 'email',
@@ -43,5 +45,7 @@ const SignUpNavigation = () => {
 }
 export default SignUpNavigation
 const StackOptions: StackNavigationOptions = {
-  headerShown: false,
+  headerShown: true,
+  headerTitle: 'Go back',
+  cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
 }

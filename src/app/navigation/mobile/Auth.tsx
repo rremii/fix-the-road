@@ -1,11 +1,12 @@
 import React from 'react'
 import {
+  CardStyleInterpolators,
   createStackNavigator,
   StackNavigationOptions,
 } from '@react-navigation/stack'
-import { AuthNavigationParam } from './types'
 import SignUpNavigation from './SignUp'
 import { SignInPage } from '@pages/mobile/auth/SignIn.page'
+import { AuthNavigationParam } from '../types'
 
 const AuthStack = createStackNavigator<AuthNavigationParam>()
 
@@ -13,6 +14,7 @@ const AuthNavigation = () => {
   const routes: {
     name: keyof AuthNavigationParam
     component: React.FC
+    options?: StackNavigationOptions
   }[] = [
     {
       name: 'signIn',
@@ -31,6 +33,7 @@ const AuthNavigation = () => {
     >
       {routes.map((route, index) => (
         <AuthStack.Screen
+          options={route.options}
           key={index}
           name={route.name}
           component={route.component}
@@ -42,4 +45,5 @@ const AuthNavigation = () => {
 export default AuthNavigation
 const StackOptions: StackNavigationOptions = {
   headerShown: false,
+  cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
 }
