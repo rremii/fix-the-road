@@ -2,7 +2,8 @@ import { useMemo } from 'react'
 import { IUser } from '../types'
 
 const me = {
-  avatar: '1__224d8836-a210-4f53-a5c7-f553de849540.jpg',
+  avatar:
+    'https://fastly.picsum.photos/id/10/200/300.jpg?hmac=94QiqvBcKJMHpneU69KYg2pky8aZ6iBzKrAuhSUBB9s',
   userName: 'John Doe',
   email: 'johndoe@gmail.com',
   id: 1,

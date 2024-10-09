@@ -1,4 +1,3 @@
-import { AuthNavigationParam } from './types'
 import React from 'react'
 import {
   createStackNavigator,
@@ -6,6 +5,7 @@ import {
 } from '@react-navigation/stack'
 import SignUpNavigation from './SignUp'
 import { SignInPage } from '@pages/desktop/auth/SignIn.page'
+import { AuthNavigationParam } from '../types'
 
 const AuthStack = createStackNavigator<AuthNavigationParam>()
 

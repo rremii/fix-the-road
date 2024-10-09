@@ -1,4 +1,5 @@
 import { StackNavigationProp } from '@react-navigation/stack'
+import { AuthNavigationParam } from '../types'
 
 export type RootNavigationParam = {
   auth: StackNavigationProp<AuthNavigationParam>
@@ -7,15 +8,4 @@ export type RootNavigationParam = {
 
 export type MapNavigationParam = {
   postId?: number
-}
-
-export type AuthNavigationParam = {
-  signIn: undefined
-  signUp: StackNavigationProp<SignUpNavigationParam>
-}
-
-export type SignUpNavigationParam = {
-  email: undefined
-  code: undefined
-  info: undefined
 }

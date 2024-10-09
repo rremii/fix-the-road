@@ -1,5 +1,6 @@
 import { BottomTabNavigationProp } from '@react-navigation/bottom-tabs/lib/typescript/src/types'
 import { StackNavigationProp } from '@react-navigation/stack'
+import { AuthNavigationParam } from '../types'
 
 export type RootNavigationParam = {
   auth: StackNavigationProp<AuthNavigationParam>
@@ -22,15 +23,4 @@ export type NewPostNavigationParam = {
 }
 type PreviewParams = {
   postPhotoUri: string
-}
-
-export type AuthNavigationParam = {
-  signIn: undefined
-  signUp: StackNavigationProp<SignUpNavigationParam>
-}
-
-export type SignUpNavigationParam = {
-  email: undefined
-  code: undefined
-  info: undefined
 }
