@@ -6,6 +6,8 @@ import {
   Post,
   Req,
   Res,
+  UploadedFile,
+  UseInterceptors,
   UsePipes,
   ValidationPipe,
 } from "@nestjs/common"
@@ -15,6 +17,8 @@ import { LoginUserDto } from "./dto/login-user.dto"
 import { TokenService } from "../token/token.service"
 import { Request, Response } from "express"
 import { GetCookieExpTime } from "../../common/helpers/getCookieExpTime"
+import { FileInterceptor } from "@nestjs/platform-express"
+import { getMulterConfig } from "src/common/helpers/getMulterConfig"
 
 @Controller("auth")
 export class AuthController {
@@ -23,11 +27,18 @@ export class AuthController {
     private readonly tokenService: TokenService,
   ) {}
 
-  @UsePipes(ValidationPipe)
   @Post("register")
-  async register(@Body() userInfo: CreateUserDto, @Res() response: Response) {
-    const { accessToken, refreshToken } =
-      await this.authService.registerUser(userInfo)
+  @UsePipes(ValidationPipe)
+  @UseInterceptors(FileInterceptor("avatar", getMulterConfig()))
+  async register(
+    @UploadedFile() avatar: Express.Multer.File,
+    @Body() userInfo: CreateUserDto,
+    @Res() response: Response,
+  ) {
+    const { accessToken, refreshToken } = await this.authService.registerUser({
+      ...userInfo,
+      avatar: avatar.filename,
+    })
     response.cookie("refreshToken", refreshToken, {
       httpOnly: true,
       sameSite: false,
