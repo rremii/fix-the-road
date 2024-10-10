@@ -59,4 +59,7 @@ export class UserService {
   async getByEmail(email: string): Promise<IUser> {
     return this.userRepository.findOneBy({ email })
   }
+  async getById(id: number): Promise<IUser> {
+    return this.userRepository.findOneBy({ id })
+  }
 }

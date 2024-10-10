@@ -1,5 +1,12 @@
-import { BaseEntity, Column, Entity, PrimaryGeneratedColumn } from "typeorm"
+import {
+  BaseEntity,
+  Column,
+  Entity,
+  OneToMany,
+  PrimaryGeneratedColumn,
+} from "typeorm"
 import { IUser } from "../user.interface"
+import { Post } from "src/modules/post/entities/post.entity"
 
 @Entity()
 export class User extends BaseEntity implements IUser {
@@ -20,4 +27,7 @@ export class User extends BaseEntity implements IUser {
 
   @Column({ nullable: true })
   refreshToken: string
+
+  @OneToMany(() => Post, (post) => post.user)
+  posts: Post[]
 }

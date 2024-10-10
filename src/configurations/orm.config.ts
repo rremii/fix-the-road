@@ -1,6 +1,7 @@
 import { ConfigService } from "@nestjs/config"
 import { User } from "../modules/user/entities/user.entity"
 import { Code } from "../modules/code/entities/code.entity"
+import { Post } from "src/modules/post/entities/post.entity"
 
 export const getOrmConfig = async (config: ConfigService): Promise<any> => {
   return {
@@ -13,7 +14,7 @@ export const getOrmConfig = async (config: ConfigService): Promise<any> => {
     database: config.get("db_name"),
     synchronize: true,
 
-    entities: [User, Code],
+    entities: [User, Code, Post],
 
     // ssl: true,
     // extra: {

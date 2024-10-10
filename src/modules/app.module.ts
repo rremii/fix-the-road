@@ -10,9 +10,11 @@ import { AuthModule } from "./auth/auth.module"
 import { UserModule } from "./user/user.module"
 import { ServeStaticModule } from "@nestjs/serve-static"
 import { join } from "path"
+import { PostModule } from "./post/post.module"
 
 @Module({
   imports: [
+    PostModule,
     CodeModule,
     AuthModule,
     UserModule,
