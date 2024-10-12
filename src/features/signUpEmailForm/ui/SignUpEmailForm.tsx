@@ -13,6 +13,7 @@ import {
   SignUpNavigationParam,
 } from 'src/app/navigation/types'
 import { useLogin } from 'src/entities/auth/model/useLogin'
+import { useSendCode } from 'src/entities/auth/model/useSendCode'
 
 interface FormValues {
   email: string
@@ -21,10 +22,13 @@ interface FormValues {
 export const SignUpEmailForm = () => {
   const navigation = useNavigation<StackNavigationProp<SignUpNavigationParam>>()
 
+  const { sendCode, isSuccess, isPending } = useSendCode()
+
   const {
     control,
     handleSubmit,
     reset,
+    watch,
     formState: { errors },
   } = useForm<FormValues>({
     defaultValues: {
@@ -32,11 +36,14 @@ export const SignUpEmailForm = () => {
     },
   })
 
-  const goToCode = ({ email }: FormValues) => {
-    navigation.setOptions({
-      headerShown: false,
-    })
-    navigation.navigate('code', { email })
+  useEffect(() => {
+    const email = watch('email')
+
+    if (isSuccess && email) navigation.navigate('code', { email })
+  }, [isSuccess])
+
+  const onSubmit = ({ email }: FormValues) => {
+    sendCode(email)
   }
 
   const goToSignIn = () => {
@@ -50,12 +57,10 @@ export const SignUpEmailForm = () => {
       <View style={authFormStyles.gapContainer}>
         <Controller
           control={control}
-          rules={
-            {
-              // required: true,
-              // pattern: emailRegex,
-            }
-          }
+          rules={{
+            required: true,
+            pattern: emailRegex,
+          }}
           render={({ field: { onChange, onBlur, value } }) => (
             <InputWithLabel
               keyboardType="email-address"
@@ -64,11 +69,17 @@ export const SignUpEmailForm = () => {
               onBlur={onBlur}
               onChangeText={onChange}
               value={value}
+              onSubmitEditing={handleSubmit(onSubmit)}
             />
           )}
           name="email"
         />
-        <Button onPress={handleSubmit(goToCode)} type="filled">
+        <Button
+          withSpinner
+          pending={isPending}
+          onPress={handleSubmit(onSubmit)}
+          type="filled"
+        >
           Next
         </Button>
       </View>

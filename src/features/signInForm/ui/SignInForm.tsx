@@ -1,5 +1,7 @@
+import { SingleStorage, storage } from '@modules/secureStorage'
 import { useNavigation } from '@react-navigation/native'
 import { StackNavigationProp } from '@react-navigation/stack'
+import { ACCESS_TOKEN } from '@shared/api/constants'
 import { emailRegex } from '@shared/constants/emailRegex'
 import { Button } from '@shared/ui/button'
 import { InputWithLabel } from '@shared/ui/InputWithLabel'
@@ -42,7 +44,7 @@ export const SignInForm = () => {
   }
 
   const signIn = (formValues: FormValues) => {
-    login()
+    login(formValues)
   }
 
   return (
@@ -52,12 +54,10 @@ export const SignInForm = () => {
       <View style={authFormStyles.gapContainer}>
         <Controller
           control={control}
-          rules={
-            {
-              // required: true,
-              // pattern: emailRegex,
-            }
-          }
+          rules={{
+            required: true,
+            pattern: emailRegex,
+          }}
           render={({ field: { onChange, onBlur, value } }) => (
             <InputWithLabel
               keyboardType="email-address"

@@ -8,10 +8,13 @@ import {
 } from 'react-native'
 import { Image } from 'expo-image'
 import * as ImagePicker from 'expo-image-picker'
+import { useRegister } from 'src/entities/auth/model/useRegister'
+import { Asset } from 'expo-asset'
+import { FormDataAsset } from '@shared/types'
 
 interface Props {
   initialAvatar?: string
-  onChange: (avatar: string) => void
+  onChange: (avatar: ImagePicker.ImagePickerAsset) => void
   size?: number
 }
 const fallbackAvatar = 'https://avatars.githubusercontent.com/u/100644973?v=4' //todo move to constants
@@ -19,6 +22,8 @@ const fallbackAvatar = 'https://avatars.githubusercontent.com/u/100644973?v=4' /
 export const AvatarPicker = ({ size = 50, onChange, initialAvatar }: Props) => {
   const [avatar, setAvatar] = useState(initialAvatar)
   const { width: windowWidth } = useWindowDimensions()
+
+  const { register, error } = useRegister()
 
   const pickImageAsync = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
@@ -28,9 +33,9 @@ export const AvatarPicker = ({ size = 50, onChange, initialAvatar }: Props) => {
       quality: 1,
     })
 
-    if (result.assets && result.assets.length > 0) {
+    if (result.assets && result.assets[0]) {
       setAvatar(result.assets[0].uri)
-      onChange(result.assets[0].uri)
+      onChange(result.assets[0])
     }
   }
 
