@@ -6,7 +6,7 @@ import { Location } from '@shared/types'
 import { Button } from '@shared/ui/button'
 import { useCreatePostStore } from 'src/entities/post/model/createPostStore'
 import { sectionStyles } from '@shared/ui/styles/sectionStyles'
-import { useCreatePost } from 'src/entities/post/model/useCreatePostForm'
+import { useCreatePost } from 'src/entities/post/model/useCreatePost'
 import { useGetMe } from 'src/entities/user/model/useGetMe'
 
 interface FormData {

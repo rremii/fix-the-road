@@ -162,6 +162,7 @@ const getStyles = (isError: boolean) =>
     },
 
     field: {
+      color: '#000',
       fontSize: 15,
       backgroundColor: 'white',
       borderColor: isError ? 'red' : '#000',

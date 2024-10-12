@@ -2,19 +2,18 @@ import { create } from 'zustand'
 import { Location } from '@shared/types'
 import { Bounds } from '@modules/map/types'
 
-export type LoginState = 'rejected' | 'success' | null
+export type AuthState = 'rejected' | 'success' | null
 
 type State = {
-  loginState: LoginState
+  authState: AuthState
 }
 
 type Action = {
-  setLoginState: (newState: LoginState) => void
+  setAuthState: (newState: AuthState) => void
 }
 
 export const useAuthStore = create<State & Action>((set) => ({
-  loginState: null,
+  authState: null,
 
-  setLoginState: (newState: LoginState) =>
-    set(() => ({ loginState: newState })),
+  setAuthState: (newState: AuthState) => set(() => ({ authState: newState })),
 }))

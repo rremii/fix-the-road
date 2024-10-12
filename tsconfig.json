@@ -14,5 +14,5 @@
       "@modules/*": ["./modules/*"]
     }
   },
-  "include": ["**/*.ts", "**/*.tsx"]
+  "include": ["**/*.ts", "**/*.tsx", "src/entities/auth/model/useRegister.tsx"]
 }

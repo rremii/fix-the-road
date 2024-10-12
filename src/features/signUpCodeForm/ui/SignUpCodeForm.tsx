@@ -13,6 +13,7 @@ import {
   SignUpNavigationParam,
 } from 'src/app/navigation/types'
 import { useLogin } from 'src/entities/auth/model/useLogin'
+import { useVerifyCode } from 'src/entities/auth/model/useVerifyCode'
 
 interface FormValues {
   code: string
@@ -20,8 +21,9 @@ interface FormValues {
 
 export const SignUpCodeForm = () => {
   const navigation = useNavigation<StackNavigationProp<SignUpNavigationParam>>()
-
   const { params } = useRoute<RouteProp<SignUpNavigationParam, 'code'>>()
+
+  const { verifyCode, isSuccess, isPending } = useVerifyCode()
 
   const {
     control,
@@ -34,10 +36,14 @@ export const SignUpCodeForm = () => {
     },
   })
 
-  const onSubmit = ({ code }: FormValues) => {
-    // if (!params.email) return
+  useEffect(() => {
+    if (isSuccess) navigation.navigate('info', { email: params.email })
+  }, [isSuccess])
 
-    navigation.navigate('info', { email: params.email })
+  const onSubmit = ({ code }: FormValues) => {
+    if (!params.email) return
+
+    verifyCode(code)
   }
 
   return (
@@ -47,11 +53,9 @@ export const SignUpCodeForm = () => {
       <View style={authFormStyles.gapContainer}>
         <Controller
           control={control}
-          rules={
-            {
-              // required: true,
-            }
-          }
+          rules={{
+            required: true,
+          }}
           render={({ field: { onChange, onBlur, value } }) => (
             <InputWithLabel
               isError={!!errors.code}
@@ -59,12 +63,18 @@ export const SignUpCodeForm = () => {
               onBlur={onBlur}
               onChangeText={onChange}
               value={value}
+              onSubmitEditing={handleSubmit(onSubmit)}
             />
           )}
           name="code"
         />
         <View style={authFormStyles.btnContainer}>
-          <Button onPress={handleSubmit(onSubmit)} type="filled">
+          <Button
+            withSpinner
+            pending={isPending}
+            onPress={handleSubmit(onSubmit)}
+            type="filled"
+          >
             Next
           </Button>
         </View>

@@ -11,13 +11,13 @@ import { useAuthStore } from 'src/entities/auth/model/useAuthStore'
 const RootStack = createStackNavigator<RootNavigationParam>()
 
 const RootNavigation = () => {
-  const loginState = useAuthStore((state) => state.loginState)
+  const authState = useAuthStore((state) => state.authState)
 
   const routes: {
     name: keyof RootNavigationParam
     component: React.FC
   }[] =
-    loginState === 'success'
+    authState === 'success'
       ? [
           {
             name: 'home',
