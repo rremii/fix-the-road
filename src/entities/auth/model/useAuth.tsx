@@ -5,7 +5,8 @@ import { ACCESS_TOKEN } from '@shared/api/constants'
 import { useQuery } from '@tanstack/react-query'
 import { authApi } from '../api/api'
 import { useToast } from '@shared/modules/toast'
-import { storage } from '@modules/secureStorage'
+import { storage } from '@modules/storage'
+import { Platform } from 'react-native'
 
 export const useAuth = () => {
   const setAuthState = useAuthStore((state) => state.setAuthState)
@@ -33,11 +34,11 @@ export const useAuth = () => {
 
   useEffect(() => {
     if (!error) return
-    console.log(error)
-    openToast({
-      type: 'error',
-      content: 'Session expired',
-    })
+
+    // openToast({
+    //   type: 'error',
+    //   content: 'Session expired',
+    // })
 
     setAuthState('rejected')
 

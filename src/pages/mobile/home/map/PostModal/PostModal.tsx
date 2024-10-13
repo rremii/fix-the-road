@@ -19,7 +19,7 @@ export const PostModal = () => {
   const { params } = useRoute<RouteProp<HomeNavigationParam, 'map'>>()
 
   const { isOpen, closeModal } = useHandleModalOpen()
-  const me = useGetMe()
+  const { me } = useGetMe()
   const post = useGetPost(params?.postId)
 
   const isMyPost = post?.userId === me?.id

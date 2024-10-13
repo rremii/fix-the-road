@@ -16,7 +16,7 @@ interface FormData {
 export const CreatePostForm = () => {
   const { location, photoUri } = useCreatePostStore((state) => state)
 
-  const me = useGetMe()
+  const { me } = useGetMe()
   const { createPost } = useCreatePost()
 
   const {

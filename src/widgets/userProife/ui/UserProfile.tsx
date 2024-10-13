@@ -10,7 +10,7 @@ import { EditUserProfile } from './EditUserProfile'
 export const UserProfile = () => {
   const [isEditing, setEditing] = useState(false)
 
-  const me = useGetMe()
+  const { me } = useGetMe()
 
   const startEditing = () => {
     setEditing(true)

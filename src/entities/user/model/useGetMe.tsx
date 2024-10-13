@@ -1,14 +1,36 @@
-import { useMemo } from 'react'
+import { useEffect, useMemo } from 'react'
 import { IUser } from '../types'
+import { useQuery } from '@tanstack/react-query'
+import { userApi } from '../api/api'
+import { ApiError } from '@shared/types'
+import { useToast } from '@shared/modules/toast'
 
-const me = {
-  avatar:
-    'https://fastly.picsum.photos/id/10/200/300.jpg?hmac=94QiqvBcKJMHpneU69KYg2pky8aZ6iBzKrAuhSUBB9s',
-  userName: 'John Doe',
-  email: 'johndoe@gmail.com',
-  id: 1,
-}
+export const useGetMe = () => {
+  const { openToast } = useToast()
 
-export const useGetMe = (): IUser | undefined => {
-  return useMemo(() => me, [])
+  const {
+    data: me,
+    isSuccess,
+    error,
+    isPending,
+  } = useQuery<IUser, ApiError>({
+    queryKey: ['me'],
+    queryFn: userApi.getMe,
+  })
+
+  useEffect(() => {
+    if (!error) return
+
+    openToast({
+      content: error.message,
+      type: 'error',
+    })
+  }, [error])
+
+  return {
+    me,
+    isSuccess,
+    error,
+    isPending,
+  }
 }

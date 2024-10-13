@@ -9,8 +9,8 @@ import {
 import { Image } from 'expo-image'
 import * as ImagePicker from 'expo-image-picker'
 import { useRegister } from 'src/entities/auth/model/useRegister'
-import { Asset } from 'expo-asset'
-import { FormDataAsset } from '@shared/types'
+
+import DefaultAvatar from '@icons/profile.svg'
 
 interface Props {
   initialAvatar?: string
@@ -22,8 +22,6 @@ const fallbackAvatar = 'https://avatars.githubusercontent.com/u/100644973?v=4' /
 export const AvatarPicker = ({ size = 50, onChange, initialAvatar }: Props) => {
   const [avatar, setAvatar] = useState(initialAvatar)
   const { width: windowWidth } = useWindowDimensions()
-
-  const { register, error } = useRegister()
 
   const pickImageAsync = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
@@ -42,7 +40,11 @@ export const AvatarPicker = ({ size = 50, onChange, initialAvatar }: Props) => {
   const styles = getStyles(size, windowWidth)
   return (
     <Pressable onPress={pickImageAsync} style={styles.container}>
-      <Image style={styles.image} source={avatar || fallbackAvatar} />
+      {avatar ? (
+        <Image style={styles.image} source={{ uri: avatar }} />
+      ) : (
+        <DefaultAvatar style={styles.image} />
+      )}
     </Pressable>
   )
 }

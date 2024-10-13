@@ -22,7 +22,7 @@ export const Posts = () => {
   const chosenMarkerId = useMapStore((state) => state.chosenMarkerId)
   const bounds = useMapStore((state) => state.bounds)
   const posts = useGetPosts()
-  const me = useGetMe()
+  const { me } = useGetMe()
 
   const inBoundsPosts = bounds ? filterPostsByBounds(posts, bounds) : posts
   const sortedPosts = chosenMarkerId

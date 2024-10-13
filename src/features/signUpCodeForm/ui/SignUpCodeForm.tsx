@@ -35,6 +35,7 @@ export const SignUpCodeForm = () => {
       code: '',
     },
   })
+  //todo check redirect flow
 
   useEffect(() => {
     if (isSuccess) navigation.navigate('info', { email: params.email })

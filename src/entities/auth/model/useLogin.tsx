@@ -7,7 +7,7 @@ import { AuthResponse, LoginDto } from '../types'
 import { authApi } from '../api/api'
 import { useToast } from '@shared/modules/toast'
 import { ACCESS_TOKEN } from '@shared/api/constants'
-import { storage } from '@modules/secureStorage'
+import { storage } from '@modules/storage'
 import { ApiError } from '@shared/types'
 
 export const useLogin = () => {

@@ -5,7 +5,7 @@ import * as SecureStore from 'expo-secure-store'
 import { AuthResponse, RegisterDto } from '../types'
 import { authApi } from '../api/api'
 import { ACCESS_TOKEN } from '@shared/api/constants'
-import { storage } from '@modules/secureStorage'
+import { storage } from '@modules/storage'
 import { useToast } from '@shared/modules/toast'
 import { useAuthStore } from './useAuthStore'
 

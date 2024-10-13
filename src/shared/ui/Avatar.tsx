@@ -1,18 +1,24 @@
 import React, { useEffect, useState } from 'react'
 import { View, StyleSheet, useWindowDimensions, Platform } from 'react-native'
 import { Image } from 'expo-image'
+import DefaultAvatar from '@icons/profile.svg'
 
 interface Props {
   avatar?: string
   size?: number
 }
+
 export const Avatar = ({ avatar = '', size = 50 }: Props) => {
   const { width: windowWidth } = useWindowDimensions()
 
   const styles = getStyles(size, windowWidth)
   return (
     <View style={styles.container}>
-      <Image style={styles.image} source={avatar} />
+      {avatar ? (
+        <Image style={styles.image} source={{ uri: avatar }} />
+      ) : (
+        <DefaultAvatar style={styles.image} />
+      )}
     </View>
   )
 }
