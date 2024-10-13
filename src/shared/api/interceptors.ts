@@ -1,8 +1,9 @@
 import { AxiosError, InternalAxiosRequestConfig } from 'axios'
 import { ACCESS_TOKEN } from './constants'
 import { api, apiDefault } from './api'
-import { storage } from '@modules/secureStorage'
+import { storage } from '@modules/storage'
 import { ApiError } from '@shared/types'
+import { AuthResponse } from 'src/entities/auth/types'
 
 export const authRefreshInterceptor = async (error: AxiosError<ApiError>) => {
   if (error.response?.status === 401) {
@@ -14,9 +15,7 @@ export const authRefreshInterceptor = async (error: AxiosError<ApiError>) => {
     ) {
       originalRequest._isRetry = true
       try {
-        const response = await apiDefault.post<{ accessToken: string }>(
-          'auth/refresh',
-        )
+        const response = await apiDefault.get<AuthResponse>('auth/refresh')
 
         storage.setItem(ACCESS_TOKEN, response.data.accessToken).then(() => {
           return api.request(originalRequest)
@@ -52,7 +51,7 @@ export const extractErrorInterceptor = async (
 export const withTokenInterceptor = (config: InternalAxiosRequestConfig) => {
   if (config.headers !== null) {
     storage.getItem(ACCESS_TOKEN).then((token) => {
-      if (token) config.headers.Authorization = `${token}`
+      if (token) config.headers.Authorization = `Bearer ${token}`
     })
   }
   return config

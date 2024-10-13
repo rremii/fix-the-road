@@ -47,7 +47,7 @@ export const SignUpEmailForm = () => {
   }
 
   const goToSignIn = () => {
-    navigation.navigate('signIn')
+    navigation.goBack()
   }
 
   return (

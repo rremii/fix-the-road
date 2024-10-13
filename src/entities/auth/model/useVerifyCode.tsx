@@ -7,8 +7,9 @@ import { AuthResponse, LoginDto } from '../types'
 import { authApi } from '../api/api'
 import { useToast } from '@shared/modules/toast'
 import { ACCESS_TOKEN } from '@shared/api/constants'
-import { storage } from '@modules/secureStorage'
+import { storage } from '@modules/storage'
 import { DefaultApiResponse } from '@shared/api/types'
+import { ApiError } from '@shared/types'
 
 export const useVerifyCode = () => {
   const { openToast } = useToast()
@@ -20,14 +21,14 @@ export const useVerifyCode = () => {
     mutate: mutateVerifyCode,
     isError,
     isSuccess,
-  } = useMutation<DefaultApiResponse, AxiosError, string>({
+  } = useMutation<DefaultApiResponse, ApiError, string>({
     mutationFn: authApi.verifyCode,
     onError: (error) => {
       if (!error) return
 
       openToast({
         type: 'error',
-        content: error.message,
+        content: 'Code is invalid',
       })
     },
   })

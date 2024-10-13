@@ -10,7 +10,7 @@ interface Props {
 }
 
 export const AuthorInfo = ({ userId }: Props) => {
-  const user = useGetUser(userId)
+  const { user } = useGetUser(userId)
 
   return (
     <View style={styles.container}>

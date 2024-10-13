@@ -12,6 +12,8 @@ import { useGetMe } from 'src/entities/user/model/useGetMe'
 import { Controller, useForm } from 'react-hook-form'
 import { Button } from '@shared/ui/button'
 import { AvatarPicker } from '@shared/ui/AvatarPicker'
+import { useUpdateMe } from 'src/entities/user/model/useUpdateMe'
+import { ImagePickerAsset } from 'expo-image-picker'
 
 type UserInfo = {
   userName: string
@@ -22,8 +24,9 @@ interface Props {
 }
 
 export const EditUserProfile = ({ onSubmit }: Props) => {
-  const [newAvatar, setAvatar] = useState('')
-  const me = useGetMe()
+  const { me } = useGetMe()
+  const { updateMe, isPending } = useUpdateMe()
+  const [newAvatar, setAvatar] = useState<ImagePickerAsset>()
 
   const {
     control,
@@ -37,8 +40,19 @@ export const EditUserProfile = ({ onSubmit }: Props) => {
   })
 
   const onSave = (userInfo: UserInfo) => {
-    console.log(userInfo)
+    if (!me) return
 
+    updateMe({
+      id: me.id,
+      ...userInfo,
+      avatar: newAvatar
+        ? {
+            uri: newAvatar.uri,
+            name: newAvatar.fileName || 'avatar',
+            type: newAvatar.type || 'image/jpeg',
+          }
+        : undefined,
+    })
     onSubmit()
     reset()
   }
@@ -54,7 +68,7 @@ export const EditUserProfile = ({ onSubmit }: Props) => {
         <Controller
           control={control}
           rules={{
-            required: false,
+            required: true,
           }}
           render={({ field: { onChange, onBlur, value } }) => (
             <TextInput
@@ -70,7 +84,12 @@ export const EditUserProfile = ({ onSubmit }: Props) => {
       </View>
 
       <View style={styles.btnSection}>
-        <Button onPress={handleSubmit(onSave)} type="filled">
+        <Button
+          withSpinner
+          pending={isPending}
+          onPress={handleSubmit(onSave)}
+          type="filled"
+        >
           Save
         </Button>
       </View>

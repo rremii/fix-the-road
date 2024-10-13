@@ -1,4 +1,4 @@
-import { SingleStorage, storage } from '@modules/secureStorage'
+import { SingleStorage, storage } from '@modules/storage'
 import { useNavigation } from '@react-navigation/native'
 import { StackNavigationProp } from '@react-navigation/stack'
 import { ACCESS_TOKEN } from '@shared/api/constants'
@@ -40,7 +40,7 @@ export const SignInForm = () => {
   }, [isError])
 
   const goToSignUp = () => {
-    navigation.navigate('signUp')
+    navigation.navigate('signUp', { screen: 'email' })
   }
 
   const signIn = (formValues: FormValues) => {

@@ -14,18 +14,28 @@ const SignUpNavigation = () => {
   const routes: {
     name: keyof SignUpNavigationParam
     component: React.FC
+    options?: StackNavigationOptions
   }[] = [
     {
       name: 'email',
       component: EmailPage,
+      options: {
+        title: 'Email',
+      },
     },
     {
       name: 'code',
       component: CodePage,
+      options: {
+        title: 'Code',
+      },
     },
     {
       name: 'info',
       component: InfoPage,
+      options: {
+        title: 'Info',
+      },
     },
   ]
 
@@ -36,6 +46,7 @@ const SignUpNavigation = () => {
           key={index}
           name={route.name}
           component={route.component}
+          options={route.options}
         />
       ))}
     </SignUp.Navigator>

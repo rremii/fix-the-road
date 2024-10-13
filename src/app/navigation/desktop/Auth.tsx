@@ -13,14 +13,21 @@ const AuthNavigation = () => {
   const routes: {
     name: keyof AuthNavigationParam
     component: React.FC
+    options?: StackNavigationOptions
   }[] = [
     {
       name: 'signIn',
       component: SignInPage,
+      options: {
+        title: 'Sign In',
+      },
     },
     {
       name: 'signUp',
       component: SignUpNavigation,
+      options: {
+        title: 'Sign Up',
+      },
     },
   ]
 
@@ -34,6 +41,7 @@ const AuthNavigation = () => {
           key={index}
           name={route.name}
           component={route.component}
+          options={route.options}
         />
       ))}
     </AuthStack.Navigator>

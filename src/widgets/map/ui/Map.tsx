@@ -33,7 +33,7 @@ export const Map = () => {
   const greenMarkerUri = assets?.at(2)?.uri || ''
 
   const posts = useGetPosts()
-  const me = useGetMe()
+  const { me } = useGetMe()
 
   const getMarkerFromPosts = (): Marker[] => {
     if (!me) return []
