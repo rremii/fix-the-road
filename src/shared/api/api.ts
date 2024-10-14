@@ -4,13 +4,13 @@ import {
   withTokenInterceptor,
 } from '@shared/api/interceptors'
 import axios from 'axios'
-import { API_URL } from './constants'
+import { API_URL, BASE_URL } from './constants'
 import { Platform } from 'react-native'
 import { API_NGROK } from './temp'
 
 export const api = axios.create({
   withCredentials: Platform.OS !== 'web',
-  baseURL: Platform.OS === 'web' ? API_URL : API_NGROK,
+  baseURL: BASE_URL,
 })
 
 api.interceptors.request.use(withTokenInterceptor)
