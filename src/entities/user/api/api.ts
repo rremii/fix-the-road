@@ -23,7 +23,11 @@ class UserApi {
     if (avatar && Platform.OS === 'web')
       formData.append('avatar', URIToFile(avatar.uri, avatar.name))
 
-    const result = await api.put<IUser>('user/me', formData)
+    const result = await api.put<IUser>('user/me', formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    })
 
     return result.data
   }
