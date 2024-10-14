@@ -3,6 +3,7 @@ import { IUser, UpdateMeDto } from '../types'
 import { ApiError } from '@shared/types'
 import { userApi } from '../api/api'
 import { useToast } from '@shared/modules/toast'
+import { queryApi } from '@shared/api/queryApi'
 
 export const useUpdateMe = () => {
   const { openToast } = useToast()
@@ -31,6 +32,8 @@ export const useUpdateMe = () => {
         type: 'warn',
         content: 'Successfully saved',
       })
+
+      queryApi.invalidateQueries({ queryKey: ['me'] })
     },
   })
 

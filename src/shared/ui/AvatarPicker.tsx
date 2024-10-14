@@ -10,14 +10,13 @@ import { Image } from 'expo-image'
 import * as ImagePicker from 'expo-image-picker'
 import { useRegister } from 'src/entities/auth/model/useRegister'
 
-import DefaultAvatar from '@icons/profile.svg'
+import { fallbackAvatar } from '@shared/constants'
 
 interface Props {
   initialAvatar?: string
   onChange: (avatar: ImagePicker.ImagePickerAsset) => void
   size?: number
 }
-const fallbackAvatar = 'https://avatars.githubusercontent.com/u/100644973?v=4' //todo move to constants
 
 export const AvatarPicker = ({ size = 50, onChange, initialAvatar }: Props) => {
   const [avatar, setAvatar] = useState(initialAvatar)
@@ -40,11 +39,7 @@ export const AvatarPicker = ({ size = 50, onChange, initialAvatar }: Props) => {
   const styles = getStyles(size, windowWidth)
   return (
     <Pressable onPress={pickImageAsync} style={styles.container}>
-      {avatar ? (
-        <Image style={styles.image} source={{ uri: avatar }} />
-      ) : (
-        <DefaultAvatar style={styles.image} />
-      )}
+      <Image style={styles.image} source={{ uri: avatar || fallbackAvatar }} />
     </Pressable>
   )
 }

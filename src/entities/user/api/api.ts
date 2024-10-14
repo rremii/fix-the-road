@@ -5,6 +5,8 @@ import { ApiError } from '@shared/types'
 import { Platform } from 'react-native'
 import { URIToFile } from '@shared/utils/URIToFile'
 import { IUser, UpdateMeDto } from '../types'
+import { storage } from '@modules/storage'
+import { ACCESS_TOKEN } from '@shared/api/constants'
 
 class UserApi {
   async getMe(): Promise<IUser> {
