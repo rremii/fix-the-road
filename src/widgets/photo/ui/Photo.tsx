@@ -53,7 +53,7 @@ export default function Photo() {
   const submit = () => {
     if (!photoUri) return
     setCreatePostPhotoUri(photoUri)
-    navigation.push('preview')
+    navigation.navigate('preview')
   }
 
   const clearPhoto = () => {

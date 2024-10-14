@@ -28,7 +28,7 @@ class PostApi {
     formData.append('userId', userId.toString())
     formData.append(
       'photo',
-      Platform.OS !== 'web' ? URIToFile(photo.uri, photo.name) : photo,
+      Platform.OS === 'web' ? URIToFile(photo.uri, photo.name) : photo,
     )
     const result = await api.post<IPost[]>('post', formData, {
       headers: {
