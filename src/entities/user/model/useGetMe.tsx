@@ -29,11 +29,12 @@ export const useGetMe = () => {
     })
   }, [error])
 
+  const user: IUser | undefined = me
+    ? { ...me, avatar: me.avatar ? BASE_URL + '/' + me.avatar : undefined }
+    : undefined
+
   return {
-    me: {
-      ...me,
-      avatar: me?.avatar ? BASE_URL + '/' + me.avatar : undefined, //todo котыль supposed to be done on server
-    },
+    me: user,
     isSuccess,
     error,
     isPending,

@@ -14,31 +14,34 @@ interface FormData {
 }
 
 export const CreatePostForm = () => {
+  //todo move all data to store and logic of creation to feature btn
+  //todo !!! handle uri and form data how send files
   const { location, photoUri } = useCreatePostStore((state) => state)
 
   const { me } = useGetMe()
   const { createPost } = useCreatePost()
 
-  const {
-    control,
-    handleSubmit,
-    reset,
-    formState: { errors },
-  } = useForm<FormData>({
+  const { control, handleSubmit, reset } = useForm<FormData>({
     defaultValues: {
       description: '',
     },
   })
 
-  useEffect(() => {
-    console.log(errors)
-  }, [errors])
+  const onSubmit = async ({ description }: FormData) => {
+    if (!photoUri || !me || !location) return
 
-  const onSubmit = async (data: FormData) => {
-    if (!photoUri) return
-    console.log(data, photoUri)
-
-    await createPost({ ...data, photoUri, ...me })
+    await createPost({
+      description,
+      userId: me?.id,
+      lat: location.lat,
+      lng: location.lng,
+      photo: {
+        uri: photoUri,
+        name: 'post-photo',
+        type: 'image/png',
+      },
+    })
+    reset()
   }
 
   return (
@@ -49,7 +52,7 @@ export const CreatePostForm = () => {
           <Controller
             control={control}
             rules={{
-              required: false,
+              required: true,
             }}
             render={({ field: { onChange, onBlur, value } }) => (
               <TextInput
