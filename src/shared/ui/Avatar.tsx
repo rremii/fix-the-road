@@ -7,6 +7,7 @@ interface Props {
   avatar?: string
   size?: number
 }
+const fallbackAvatar = 'ht'
 
 export const Avatar = ({ avatar = '', size = 50 }: Props) => {
   const { width: windowWidth } = useWindowDimensions()

@@ -1,33 +1,39 @@
-import { AxiosError, InternalAxiosRequestConfig } from 'axios'
+import axios, {
+  AxiosError,
+  AxiosInstance,
+  InternalAxiosRequestConfig,
+} from 'axios'
 import { ACCESS_TOKEN } from './constants'
-import { api, apiDefault } from './api'
 import { storage } from '@modules/storage'
 import { ApiError } from '@shared/types'
 import { AuthResponse } from 'src/entities/auth/types'
 
-export const authRefreshInterceptor = async (error: AxiosError<ApiError>) => {
-  if (error.response?.status === 401) {
-    const originalRequest = error.config
-    if (
-      error.response?.status === 401 &&
-      error.config &&
-      !error.config._isRetry
-    ) {
-      originalRequest._isRetry = true
-      try {
-        const response = await apiDefault.get<AuthResponse>('auth/refresh')
+export const authRefreshInterceptor =
+  (api: AxiosInstance) => async (error: AxiosError<ApiError>) => {
+    if (error.response?.status === 401) {
+      const originalRequest = error.config
+      if (
+        error.response?.status === 401 &&
+        error.config &&
+        !error.config._isRetry
+      ) {
+        originalRequest._isRetry = true
+        try {
+          const response = await axios.get<AuthResponse>('auth/refresh', {
+            withCredentials: true,
+          })
 
-        storage.setItem(ACCESS_TOKEN, response.data.accessToken).then(() => {
-          return api.request(originalRequest)
-        })
-      } catch (e) {
-        storage.removeItem(ACCESS_TOKEN)
+          storage.setItem(ACCESS_TOKEN, response.data.accessToken).then(() => {
+            return api.request(originalRequest)
+          })
+        } catch (e) {
+          storage.removeItem(ACCESS_TOKEN)
+        }
       }
+      throw error
     }
     throw error
   }
-  throw error
-}
 
 export const extractErrorInterceptor = async (
   error: AxiosError<ApiError>,
@@ -48,11 +54,13 @@ export const extractErrorInterceptor = async (
     }
 }
 
-export const withTokenInterceptor = (config: InternalAxiosRequestConfig) => {
-  if (config.headers !== null) {
-    storage.getItem(ACCESS_TOKEN).then((token) => {
-      if (token) config.headers.Authorization = `Bearer ${token}`
-    })
-  }
+export const withTokenInterceptor = async (
+  config: InternalAxiosRequestConfig,
+) => {
+  if (!config.headers) return config
+
+  const token = await storage.getItem(ACCESS_TOKEN)
+  if (token) config.headers.Authorization = `Bearer ${token}`
+
   return config
 }

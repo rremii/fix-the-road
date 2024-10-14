@@ -22,7 +22,7 @@ export const useGetMe = () => {
     if (!error) return
 
     openToast({
-      content: error.message,
+      content: "Couldn't fetch me",
       type: 'error',
     })
   }, [error])

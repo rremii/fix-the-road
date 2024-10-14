@@ -16,11 +16,10 @@ import {
 import { useLogin } from 'src/entities/auth/model/useLogin'
 import * as ImagePicker from 'expo-image-picker'
 import { AvatarPicker } from '@shared/ui/AvatarPicker'
-import DefaultAvatar from '@icons/defaultAvatar.png'
 import { RootNavigationParam } from 'src/app/navigation/desktop/types'
 import { useRegister } from 'src/entities/auth/model/useRegister'
-import { URIToFile } from '@shared/utils/uriToFile'
 import { FormDataAsset } from '@shared/types'
+import { fallbackAvatar } from '@shared/constants'
 
 interface FormValues {
   userName: string
@@ -64,11 +63,7 @@ export const SignUpInfoForm = () => {
   return (
     <View style={authFormStyles.form}>
       <View style={styles.avatarContainer}>
-        <AvatarPicker
-          size={150}
-          initialAvatar={DefaultAvatar}
-          onChange={setAvatar}
-        />
+        <AvatarPicker size={150} onChange={setAvatar} />
       </View>
       <View style={authFormStyles.gapContainer}>
         <Controller
