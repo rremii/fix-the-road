@@ -1,14 +1,8 @@
-import {
-  BaseEntity,
-  Column,
-  Entity,
-  PrimaryGeneratedColumn,
-  Unique,
-} from "typeorm"
+import { BaseEntity, Column, Entity, PrimaryGeneratedColumn } from "typeorm"
 import { ICode } from "../code.interface"
 
+// @Unique(["code"])
 @Entity()
-@Unique(["code"])
 export class Code extends BaseEntity implements ICode {
   @PrimaryGeneratedColumn()
   id: number

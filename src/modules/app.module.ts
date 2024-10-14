@@ -11,6 +11,7 @@ import { UserModule } from "./user/user.module"
 import { ServeStaticModule } from "@nestjs/serve-static"
 import { join } from "path"
 import { PostModule } from "./post/post.module"
+import { LikeModule } from './like/like.module';
 
 @Module({
   imports: [
@@ -36,6 +37,7 @@ import { PostModule } from "./post/post.module"
       useFactory: getOrmConfig,
       inject: [ConfigService],
     }),
+    LikeModule,
   ],
   controllers: [],
   providers: [],

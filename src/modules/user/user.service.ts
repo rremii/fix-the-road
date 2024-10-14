@@ -8,6 +8,7 @@ import { HashData } from "src/common/helpers/hashData"
 import { IUser, IUserInfo } from "./user.interface"
 import { ApiError } from "src/common/constants/errors"
 import { UpdateUserDto } from "./dto/update-user.dto"
+import { ConfigService } from "@nestjs/config"
 
 @Injectable()
 export class UserService {
@@ -15,6 +16,7 @@ export class UserService {
     @InjectRepository(User)
     private readonly userRepository: Repository<User>,
     private readonly tokenService: TokenService,
+    private readonly configService: ConfigService,
   ) {}
 
   async create({
@@ -38,7 +40,8 @@ export class UserService {
     if (!user) throw new BadRequestException(ApiError.USER_NOT_FOUND)
 
     if (userName) user.userName = userName
-    if (avatar) user.avatar = avatar
+    if (avatar)
+      user.avatar = this.configService.get("server_origin") + "/" + avatar
 
     return user.save()
   }
@@ -56,10 +59,10 @@ export class UserService {
 
     return user
   }
-  async getByEmail(email: string): Promise<IUser> {
+  async getByEmail(email: string): Promise<User> {
     return this.userRepository.findOneBy({ email })
   }
-  async getById(id: number): Promise<IUser> {
+  async getById(id: number): Promise<User> {
     return this.userRepository.findOneBy({ id })
   }
 }

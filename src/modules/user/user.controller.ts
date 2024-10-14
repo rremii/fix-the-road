@@ -2,6 +2,7 @@ import {
   Body,
   Controller,
   Get,
+  Param,
   Put,
   Req,
   UnauthorizedException,
@@ -35,8 +36,14 @@ export class UserController {
   @UseGuards(AccessTokenGuard)
   updateMe(
     @Body() updateDto: UpdateUserDto,
-    @UploadedFile() avatar: Express.Multer.File,
+    @UploadedFile() avatar?: Express.Multer.File,
   ) {
-    return this.userService.update({ ...updateDto, avatar: avatar.filename })
+    return this.userService.update({ ...updateDto, avatar: avatar?.filename })
+  }
+
+  @Get("/:id")
+  @UseGuards(AccessTokenGuard)
+  getById(@Param("id") id: number) {
+    return this.userService.getById(id)
   }
 }

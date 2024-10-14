@@ -3,6 +3,7 @@ import {
   Controller,
   Get,
   Param,
+  ParseIntPipe,
   Post,
   Put,
   UploadedFile,
@@ -31,7 +32,7 @@ export class PostController {
   @Get(":id")
   @UseGuards(AccessTokenGuard)
   @UsePipes(ValidationPipe)
-  async getById(@Param("id") id: number) {
+  async getById(@Param("id", ParseIntPipe) id: number) {
     return this.postService.getById(id)
   }
 

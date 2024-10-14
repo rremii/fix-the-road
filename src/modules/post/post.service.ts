@@ -6,6 +6,7 @@ import { CreatePostDto } from "./dto/create-post.dto"
 import { UpdatePostDto } from "./dto/update-post.dto"
 import { ApiError } from "src/common/constants/errors"
 import { UserService } from "../user/user.service"
+import { LikeService } from "../like/like.service"
 
 @Injectable()
 export class PostService {
@@ -17,7 +18,9 @@ export class PostService {
   ) {}
 
   async getById(id: number): Promise<Post> {
-    return this.postRepository.findOneBy({ id })
+    return await this.postRepository.findOne({
+      where: { id },
+    })
   }
 
   async getAll() {
@@ -39,7 +42,7 @@ export class PostService {
     post.lat = lat
     post.lng = lng
     post.photo = photo
-    post.userId = userId
+    post.user = user
 
     return await post.save()
   }

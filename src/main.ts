@@ -11,7 +11,9 @@ async function bootstrap() {
   const configService = app.get(ConfigService)
 
   app.use(cookieParser())
+
   app.enableCors({
+    // origin: "*",
     origin: [configService.get("client_origin")],
     methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true,

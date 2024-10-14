@@ -10,7 +10,7 @@ import { ConfirmEmailDto } from "./dto/confirm-email.dto"
 import { DefaultResponse } from "../../common/types/types"
 import { VerifyCodeDto } from "./dto/verify-code.dto"
 
-@Controller("confirm-code")
+@Controller("code")
 export class CodeController {
   constructor(private readonly codeService: CodeService) {}
 

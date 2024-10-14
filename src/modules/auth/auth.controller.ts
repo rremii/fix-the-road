@@ -37,7 +37,7 @@ export class AuthController {
   ) {
     const { accessToken, refreshToken } = await this.authService.registerUser({
       ...userInfo,
-      avatar: avatar.filename,
+      avatar: avatar?.filename,
     })
     response.cookie("refreshToken", refreshToken, {
       httpOnly: true,

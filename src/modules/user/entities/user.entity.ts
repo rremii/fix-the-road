@@ -7,6 +7,7 @@ import {
 } from "typeorm"
 import { IUser } from "../user.interface"
 import { Post } from "src/modules/post/entities/post.entity"
+import { Like } from "src/modules/like/entities/like.entity"
 
 @Entity()
 export class User extends BaseEntity implements IUser {
@@ -30,4 +31,7 @@ export class User extends BaseEntity implements IUser {
 
   @OneToMany(() => Post, (post) => post.user)
   posts: Post[]
+
+  @OneToMany(() => Like, (like) => like.user)
+  likes: Like[]
 }
