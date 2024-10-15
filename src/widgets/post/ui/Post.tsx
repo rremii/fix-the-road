@@ -1,5 +1,5 @@
 import { InfoPost } from '@features/infoPost/ui/InfoPost'
-import { Like } from '@features/like/ui/Like'
+import { Likes } from '@features/likes/ui/Likes'
 import { OpenPhoto } from '@features/openPhoto/ui/OpenPhoto'
 import { AuthorInfo } from '@features/authorInfo/ui/AuthorInfo'
 import React from 'react'
@@ -13,7 +13,7 @@ export const Post = (post: Props) => {
     <View style={styles.container}>
       <View style={styles.btnSection}>
         <OpenPhoto photoUri={post.photoUri} />
-        <Like />
+        <Likes postId={post.id} />
       </View>
       <AuthorInfo userId={post.userId} />
       <InfoPost {...post} />

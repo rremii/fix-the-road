@@ -12,7 +12,7 @@ export const useGetLikesInfo = (userId?: number, postId?: number) => {
   } = useQuery<LikesInfo, ApiError>({
     queryKey: ['likesInfo', userId, postId],
     queryFn: () => likeApi.getLikesInfo(userId || -1, postId || -1),
-    enabled: !!userId && !!postId,
+    enabled: (!!userId || userId === 0) && (!!postId || postId === 0),
   })
 
   return {

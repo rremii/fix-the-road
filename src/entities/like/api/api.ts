@@ -1,6 +1,5 @@
-import { Like } from './../../../features/like/ui/Like'
 import { api } from '@shared/api/api'
-import { AddLikeDto, ILike, LikesInfo } from '../types'
+import { AddLikeDto, ILike, LikesInfo, RemoveLikeDto } from '../types'
 
 class LikeApi {
   async getLikesInfo(userId: number, postId: number) {
@@ -18,8 +17,11 @@ class LikeApi {
     return result.data
   }
 
-  async removeLike(likeId: number) {
-    await api.delete<void>('like/' + likeId)
+  async removeLike({ postId, userId }: RemoveLikeDto) {
+    const result = await api.delete<ILike>(
+      'like/user/' + userId + '/post/' + postId,
+    )
+    return result.data
   }
 }
 export const likeApi = new LikeApi()

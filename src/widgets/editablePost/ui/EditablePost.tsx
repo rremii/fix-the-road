@@ -13,13 +13,19 @@ import { Button } from '@shared/ui/button'
 import { EditPostForm } from '@features/editPostForm/ui/EditPostForm'
 import { InfoPost } from '@features/infoPost/ui/InfoPost'
 import { useEditPostStore } from 'src/entities/post/model/editPostStore'
+import { useRemovePost } from 'src/entities/post/model/useRemovePost'
 
 interface Props extends IPost {}
 
 export const EditablePost = (post: Props) => {
   const setEditPost = useEditPostStore((state) => state.setEditPost)
-
   const [isEditing, setIsEditing] = useState(false)
+
+  const { removePost, isPending } = useRemovePost()
+
+  const remove = () => {
+    removePost(post.id)
+  }
 
   const onSubmit = () => {
     setIsEditing(false)
@@ -43,7 +49,14 @@ export const EditablePost = (post: Props) => {
       )}
       {!isEditing && (
         <View style={styles.btnSection}>
-          <Button type="danger">Remove</Button>
+          <Button
+            withSpinner
+            pending={isPending}
+            onPress={remove}
+            type="danger"
+          >
+            Remove
+          </Button>
           <Button onPress={startEditing} type="filled">
             Edit
           </Button>

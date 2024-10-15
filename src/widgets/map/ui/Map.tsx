@@ -32,30 +32,32 @@ export const Map = () => {
   const blueMarkerUri = assets?.at(1)?.uri || ''
   const greenMarkerUri = assets?.at(2)?.uri || ''
 
-  const posts = useGetPosts()
+  const { posts } = useGetPosts()
   const { me } = useGetMe()
 
   const getMarkerFromPosts = (): Marker[] => {
     if (!me) return []
-    return posts.map((post) => {
-      const isMyMarker = post.userId === me.id
-      const isChosen = post.id === chosenMarkerId
+    return (
+      posts?.map((post) => {
+        const isMyMarker = post.userId === me.id
+        const isChosen = post.id === chosenMarkerId
 
-      let iconUrl
-      if (isChosen) iconUrl = greenMarkerUri
-      else iconUrl = isMyMarker ? blueMarkerUri : redMarkerUri
-      return {
-        draggable: false,
-        id: post.id,
-        lat: post.lat,
-        lng: post.lng,
-        icon: {
-          iconUrl,
-          iconAnchor: [markerSize / 2, markerSize / 2],
-          iconSize: [markerSize, markerSize],
-        },
-      }
-    })
+        let iconUrl
+        if (isChosen) iconUrl = greenMarkerUri
+        else iconUrl = isMyMarker ? blueMarkerUri : redMarkerUri
+        return {
+          draggable: false,
+          id: post.id,
+          lat: post.lat,
+          lng: post.lng,
+          icon: {
+            iconUrl,
+            iconAnchor: [markerSize / 2, markerSize / 2],
+            iconSize: [markerSize, markerSize],
+          },
+        }
+      }) || []
+    )
   }
 
   useEffect(() => {
@@ -64,7 +66,7 @@ export const Map = () => {
   }, [chosenMarkerId])
 
   useEffect(() => {
-    if (!location || !posts.length || !me || !isMapLoaded) return
+    if (!location || !posts?.length || !me || !isMapLoaded) return
 
     map.current?.center({
       lat: location?.coords.latitude,
@@ -97,7 +99,6 @@ export const Map = () => {
     lat: location?.coords.latitude || 0,
     lng: location?.coords.longitude || 0,
   }
-
   if (locationErr) return <FallbackView msg={locationErr} />
   if (!location) return <FallbackView msg={'fetching location'} />
   return (

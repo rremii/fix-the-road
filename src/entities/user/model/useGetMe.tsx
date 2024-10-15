@@ -33,10 +33,13 @@ export const useGetMe = () => {
     ? { ...me, avatar: me.avatar ? BASE_URL + '/' + me.avatar : undefined }
     : undefined
 
-  return {
-    me: user,
-    isSuccess,
-    error,
-    isPending,
-  }
+  return useMemo(
+    () => ({
+      me: user,
+      isSuccess,
+      error,
+      isPending,
+    }),
+    [error, isPending, isSuccess, me],
+  )
 }

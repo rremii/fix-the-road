@@ -20,7 +20,7 @@ export const PostModal = () => {
 
   const { isOpen, closeModal } = useHandleModalOpen()
   const { me } = useGetMe()
-  const post = useGetPost(params?.postId)
+  const { post } = useGetPost(params?.postId)
 
   const isMyPost = post?.userId === me?.id
 

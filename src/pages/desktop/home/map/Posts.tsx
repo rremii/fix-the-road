@@ -21,7 +21,7 @@ import { useGetMe } from 'src/entities/user/model/useGetMe'
 export const Posts = () => {
   const chosenMarkerId = useMapStore((state) => state.chosenMarkerId)
   const bounds = useMapStore((state) => state.bounds)
-  const posts = useGetPosts()
+  const { posts } = useGetPosts()
   const { me } = useGetMe()
 
   const inBoundsPosts = bounds ? filterPostsByBounds(posts, bounds) : posts

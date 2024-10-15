@@ -17,7 +17,7 @@ export const useGetPosts = () => {
   })
 
   return {
-    posts,
+    posts: posts || [],
     isSuccess,
     error,
     isPending,
