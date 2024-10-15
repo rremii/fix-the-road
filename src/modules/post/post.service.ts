@@ -6,7 +6,6 @@ import { CreatePostDto } from "./dto/create-post.dto"
 import { UpdatePostDto } from "./dto/update-post.dto"
 import { ApiError } from "src/common/constants/errors"
 import { UserService } from "../user/user.service"
-import { LikeService } from "../like/like.service"
 
 @Injectable()
 export class PostService {
@@ -54,5 +53,12 @@ export class PostService {
     if (description) post.description = description
 
     return post.save()
+  }
+
+  async remove(id: number) {
+    const post = await this.postRepository.findOne({ where: { id } })
+    if (!post) throw new BadRequestException(ApiError.POST_NOT_FOUND)
+
+    return post.remove()
   }
 }

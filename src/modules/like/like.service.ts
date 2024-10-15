@@ -15,10 +15,10 @@ export class LikeService {
     private readonly postService: PostService,
   ) {}
 
-  async getLikesCount(postId: number) {
+  private async getLikesCount(postId: number) {
     return await this.likeRepository.count({ where: { postId } })
   }
-  async getIsLiked(userId: number, postId: number): Promise<boolean> {
+  private async getIsLiked(userId: number, postId: number): Promise<boolean> {
     const like = await this.likeRepository.findOneBy({ userId, postId })
 
     if (!like) return false
@@ -37,6 +37,9 @@ export class LikeService {
   }
 
   async addLike(userId: number, postId: number) {
+    const wasLiked = await this.getIsLiked(userId, postId)
+    if (wasLiked) throw new BadRequestException(ApiError.POST_LIKED)
+
     const user = await this.userService.getById(userId)
     if (!user) throw new BadRequestException(ApiError.USER_NOT_FOUND)
 
@@ -51,7 +54,10 @@ export class LikeService {
     return await like.save()
   }
 
-  async removeLike(likeId: number) {
-    return await this.likeRepository.delete({ id: likeId })
+  async removeLike(userId: number, postId: number) {
+    const like = await this.likeRepository.findOneBy({ userId, postId })
+    if (!like) throw new BadRequestException(ApiError.LIKE_NOT_FOUND)
+
+    return like.remove()
   }
 }

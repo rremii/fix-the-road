@@ -15,10 +15,10 @@ export class Post extends BaseEntity implements IPost {
   @PrimaryGeneratedColumn()
   id: number
 
-  @Column()
+  @Column({ type: "float" })
   lat: number
 
-  @Column()
+  @Column({ type: "float" })
   lng: number
 
   @Column()

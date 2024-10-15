@@ -40,8 +40,8 @@ export class UserService {
     if (!user) throw new BadRequestException(ApiError.USER_NOT_FOUND)
 
     if (userName) user.userName = userName
-    if (avatar)
-      user.avatar = this.configService.get("server_origin") + "/" + avatar
+    if (avatar) user.avatar = avatar
+    // user.avatar = this.configService.get("server_origin") + "/" + avatar
 
     return user.save()
   }

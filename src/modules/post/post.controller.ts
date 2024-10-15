@@ -1,6 +1,7 @@
 import {
   Body,
   Controller,
+  Delete,
   Get,
   Param,
   ParseIntPipe,
@@ -60,5 +61,11 @@ export class PostController {
   @UsePipes(ValidationPipe)
   async update(@Body() updatePostDto: UpdatePostDto) {
     return this.postService.update(updatePostDto)
+  }
+
+  @Delete(":id")
+  @UseGuards(AccessTokenGuard)
+  async remove(@Param("id", ParseIntPipe) id: number) {
+    return this.postService.remove(id)
   }
 }

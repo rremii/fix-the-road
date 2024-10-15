@@ -6,7 +6,7 @@ export const getMulterConfig = (): MulterOptions => {
     storage: diskStorage({
       destination: "./static",
       filename(req, file, callback) {
-        callback(null, Date.now() + file.originalname)
+        callback(null, Date.now() + "_" + file.originalname)
       },
     }),
     fileFilter(req, file, callback) {

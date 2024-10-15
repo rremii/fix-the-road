@@ -32,9 +32,12 @@ export class LikeController {
     return this.likeService.addLike(userId, postId)
   }
 
-  @Delete(":likeId")
+  @Delete("user/:userId/post/:postId")
   @UseGuards(AccessTokenGuard)
-  removeLike(@Param("likeId", ParseIntPipe) likeId: number) {
-    return this.likeService.removeLike(likeId)
+  removeLike(
+    @Param("userId", ParseIntPipe) userId: number,
+    @Param("postId", ParseIntPipe) postId: number,
+  ) {
+    return this.likeService.removeLike(userId, postId)
   }
 }
