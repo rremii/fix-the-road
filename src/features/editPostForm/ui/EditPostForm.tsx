@@ -15,6 +15,7 @@ import { IPost } from 'src/entities/post/types'
 import { Button } from '@shared/ui/button'
 import { useEditPostStore } from 'src/entities/post/model/editPostStore'
 import { sectionStyles } from '@shared/ui/styles/sectionStyles'
+import { useUpdatePost } from 'src/entities/post/model/useUpdatePost'
 
 interface FormData {
   description: string
@@ -24,7 +25,9 @@ interface Props {
   onSubmit: () => void
 }
 export const EditPostForm = (props: Props) => {
-  const { description, lat, lng } = useEditPostStore((state) => state)
+  const { description, lat, lng, id } = useEditPostStore((state) => state)
+
+  const { isPending, updatePost } = useUpdatePost()
 
   const {
     control,
@@ -37,13 +40,13 @@ export const EditPostForm = (props: Props) => {
     },
   })
 
-  useEffect(() => {
-    console.log(errors)
-  }, [errors])
-
-  const onSubmit = (data: FormData) => {
-    console.log(data)
+  const onSubmit = ({ description }: FormData) => {
+    if (!id) return
     props.onSubmit()
+    updatePost({
+      id,
+      description,
+    })
     reset()
   }
   return (
@@ -54,7 +57,7 @@ export const EditPostForm = (props: Props) => {
           <Controller
             control={control}
             rules={{
-              required: false,
+              required: true,
             }}
             render={({ field: { onChange, onBlur, value } }) => (
               <TextInput
@@ -80,7 +83,12 @@ export const EditPostForm = (props: Props) => {
       </View>
 
       <View style={styles.btnSection}>
-        <Button type="filled" onPress={handleSubmit(onSubmit)}>
+        <Button
+          withSpinner
+          pending={isPending}
+          type="filled"
+          onPress={handleSubmit(onSubmit)}
+        >
           <Text>Save</Text>
         </Button>
       </View>

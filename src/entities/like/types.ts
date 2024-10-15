@@ -13,3 +13,7 @@ export interface AddLikeDto {
   userId: number
   postId: number
 }
+export interface RemoveLikeDto {
+  userId: number
+  postId: number
+}

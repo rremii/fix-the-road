@@ -11,10 +11,10 @@ export const useGetPost = (postId?: IPost['id']) => {
     isSuccess,
     error,
     isPending,
-  } = useQuery<IPost, ApiError, number>({
-    queryKey: ['post', postId],
+  } = useQuery<IPost, ApiError>({
+    queryKey: ['posts', postId],
     queryFn: () => postApi.getById(postId || -1),
-    enabled: !!postId,
+    enabled: !!postId || postId === 0,
   })
 
   return {

@@ -30,8 +30,8 @@ export const SignInForm = () => {
     formState: { errors },
   } = useForm<FormValues>({
     defaultValues: {
-      email: '',
-      password: '',
+      email: 'noruto2025@ya.ru',
+      password: '123',
     },
   })
 

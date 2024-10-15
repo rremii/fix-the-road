@@ -15,6 +15,13 @@ class PostApi {
 
     return result.data
   }
+
+  async remove(postId: number) {
+    const result = await api.delete<IPost>('post/' + postId)
+
+    return result.data
+  }
+
   async update(dto: UpdatePostDto) {
     const result = await api.put<IPost>('post', dto)
 

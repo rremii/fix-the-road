@@ -16,7 +16,7 @@ export const useGetUser = (id?: number) => {
   } = useQuery<IUser, ApiError>({
     queryKey: ['user', id],
     queryFn: () => userApi.getUserById(id || -1),
-    enabled: !!id,
+    enabled: !!id || id === 0,
   })
 
   useEffect(() => {

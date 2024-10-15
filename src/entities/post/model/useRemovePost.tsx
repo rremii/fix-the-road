@@ -1,47 +1,46 @@
 import { useMutation } from '@tanstack/react-query'
-import { CreatePostDto, IPost } from '../types'
 import { useToast } from '@shared/modules/toast'
 import { AxiosError } from 'axios'
 import { postApi } from '../api/api'
 import { queryApi } from '@shared/api/queryApi'
 import { ApiError } from '@shared/types'
+import { IPost } from '../types'
 
-export const useCreatePost = () => {
+export const useRemovePost = () => {
   const { openToast } = useToast()
 
   const {
     data,
     error,
     isPending,
-    mutate: mutateCreatePost,
+    mutate: mutateRemovePost,
     isSuccess,
-  } = useMutation<IPost[], ApiError, CreatePostDto>({
-    mutationFn: postApi.create,
+  } = useMutation<IPost, ApiError, number>({
+    mutationFn: postApi.remove,
     onError: (error) => {
       if (!error) return
 
       openToast({
         type: 'error',
-        content: error.message,
+        content: 'Could not remove post',
       })
     },
-    onSuccess: (data) => {
-      if (!data) return
+    onSuccess: () => {
       openToast({
         type: 'warn',
-        content: 'Successfully created',
+        content: 'Successfully Removed',
       })
 
       queryApi.invalidateQueries({ queryKey: ['posts'] })
     },
   })
 
-  const createPost = async (createPostDto: CreatePostDto) => {
-    mutateCreatePost(createPostDto)
+  const removePost = async (postId: number) => {
+    mutateRemovePost(postId)
   }
 
   return {
-    createPost,
+    removePost,
     isPending,
     isSuccess,
     error,

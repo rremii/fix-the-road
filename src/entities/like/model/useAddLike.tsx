@@ -4,7 +4,7 @@ import { AddLikeDto, ILike } from '../types'
 import { ApiError } from '@shared/types'
 import { queryApi } from '@shared/api/queryApi'
 
-export const useAddLike = (userId: number, postId: number) => {
+export const useAddLike = () => {
   const {
     mutate: mutateAddLike,
     isPending,
@@ -15,8 +15,11 @@ export const useAddLike = (userId: number, postId: number) => {
     onError: (error) => {
       if (!error) return
     },
-    onSuccess: () => {
-      queryApi.invalidateQueries({ queryKey: ['likesinfo', userId, postId] })
+    onSuccess: (like) => {
+      //void operator lol,remove
+      void queryApi.invalidateQueries({
+        queryKey: ['likesInfo', like.userId, like.postId],
+      })
     },
   })
 
