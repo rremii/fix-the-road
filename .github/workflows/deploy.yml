@@ -8,10 +8,17 @@ jobs:
     runs-on: ubuntu-latest
     concurrency: ci-${{ github.ref }}
     steps:
-      - uses: actions/setup-node@v1
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+          cache: 'yarn'
+      - name: Run npm Install
+        run: |
+          npm i -g corepack
+          npm install
 
       - name: build
         run: |
-          npm install
           npx expo export -p web
           gh-pages -t -d dist
