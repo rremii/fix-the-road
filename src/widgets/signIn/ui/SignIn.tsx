@@ -9,6 +9,7 @@ import { useRegister } from 'src/entities/auth/model/useRegister'
 export const SignIn = () => {
   return (
     <View style={styles.container}>
+      <Text>qweqwewq</Text>
       <SignInForm />
     </View>
   )
