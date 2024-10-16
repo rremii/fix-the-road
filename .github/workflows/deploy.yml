@@ -1,4 +1,4 @@
-name: Deploy React Native Web App to Azure
+name: Deploy React
 
 on:
   push:
