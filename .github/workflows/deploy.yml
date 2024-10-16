@@ -66,6 +66,6 @@ jobs:
         with:
           publish-dir: './dist'
         env:
-          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
-          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+          NETLIFY_AUTH_TOKEN: nfp_2WBGHFV2RktA89FQ3L6fvQvja6ECAsTk983b
+          NETLIFY_SITE_ID: 26a40eb5-4485-461a-8359-609da319ce41
         timeout-minutes: 1
