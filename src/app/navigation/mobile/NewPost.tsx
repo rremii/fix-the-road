@@ -6,7 +6,7 @@ import {
   StackNavigationOptions,
 } from '@react-navigation/stack'
 // import { PhotoPage } from '@pages/mobile/home/newPost/Photo.page'
-import { PreviewPage } from '@pages/mobile/home/newPost/Preview.page'
+// import { PreviewPage } from '@pages/mobile/home/newPost/Preview.page'
 
 const NewPostStack = createStackNavigator<NewPostNavigationParam>()
 
