@@ -9,7 +9,7 @@ import { MapPage } from '@pages/mobile/home/map/Map.page'
 import { ProfilePage } from '@pages/mobile/home/Profile.page'
 
 import { BottomTabsRouteNames } from '@widgets/bottomTabBar/types'
-import { BottomTabBar } from './../../../widgets/bottomTabBar/ui/BottomTabBar'
+// import { BottomTabBar } from './../../../widgets/bottomTabBar/ui/BottomTabBar'
 
 const HomeTabs = createBottomTabNavigator<HomeNavigationParam>()
 
@@ -35,7 +35,7 @@ const HomeNavigation = () => {
   return (
     <HomeTabs.Navigator
       screenOptions={tabsOptions}
-      tabBar={(props) => <BottomTabBar {...props} />}
+      // tabBar={(props) => <BottomTabBar {...props} />}
       initialRouteName={'map'}
     >
       {routes.map((route, index) => (
