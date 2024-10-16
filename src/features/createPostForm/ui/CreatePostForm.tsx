@@ -19,7 +19,7 @@ export const CreatePostForm = () => {
   const { location, photoUri } = useCreatePostStore((state) => state)
 
   const { me } = useGetMe()
-  const { createPost } = useCreatePost()
+  const { createPost, isPending } = useCreatePost()
 
   const { control, handleSubmit, reset } = useForm<FormData>({
     defaultValues: {
@@ -79,6 +79,8 @@ export const CreatePostForm = () => {
 
       <View style={styles.btnSection}>
         <Button
+          withSpinner
+          pending={isPending}
           type="filled"
           mainColor="green"
           onPress={handleSubmit(onSubmit)}

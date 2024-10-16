@@ -6,6 +6,7 @@
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
     "userInterfaceStyle": "light",
+    "scheme": "fix-the-road",
     "splash": {
       "image": "./assets/images/splash.png",
       "resizeMode": "contain",
@@ -24,7 +25,9 @@
       "package": "com.remii.fixtheroad"
     },
     "web": {
-      "favicon": "./assets/images/favicon.png"
+      "favicon": "./assets/images/favicon.png",
+      "output": "single",
+      "bundler": "metro"
     },
     "plugins": [
       [
@@ -61,9 +64,7 @@
           "locationAlwaysAndWhenInUsePermission": "Allow $(PRODUCT_NAME) to use your location."
         }
       ],
-      [
-        "expo-asset"
-      ],
+      ["expo-asset"],
       "expo-secure-store"
     ]
   }

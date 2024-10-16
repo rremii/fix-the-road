@@ -1,9 +1,9 @@
 import React from 'react'
 import { View, StyleSheet, Text, Image } from 'react-native'
 
-import Avatar from '@icons/profile.svg'
 import { useGetUser } from 'src/entities/user/model/useGetUser'
 import { sectionStyles } from '@shared/ui/styles/sectionStyles'
+import { Avatar } from '@shared/ui/Avatar'
 
 interface Props {
   userId: number
@@ -19,7 +19,7 @@ export const AuthorInfo = ({ userId }: Props) => {
       </View>
       <View style={[sectionStyles.sectionRow, sectionStyles.withPadding]}>
         <View style={sectionStyles.image}>
-          <Avatar width={50} height={50} />
+          <Avatar avatar={user?.avatar} size={50} />
         </View>
         <Text style={sectionStyles.label}>{user?.userName}</Text>
       </View>

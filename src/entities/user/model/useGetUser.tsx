@@ -5,6 +5,8 @@ import { userApi } from '../api/api'
 import { useEffect } from 'react'
 import { useToast } from '@shared/modules/toast'
 
+//todo make responsive
+//todo make deep linking
 export const useGetUser = (id?: number) => {
   const { openToast } = useToast()
 
