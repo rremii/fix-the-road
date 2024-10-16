@@ -19,10 +19,10 @@ const NewPostNavigation = () => {
     //   name: 'photo',
     //   component: PhotoPage,
     // },
-    {
-      name: 'preview',
-      component: PreviewPage,
-    },
+    // {
+    //   name: 'preview',
+    //   component: PreviewPage,
+    // },
   ]
 
   return (
