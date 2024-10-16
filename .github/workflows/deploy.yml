@@ -12,4 +12,4 @@ jobs:
 
       - name: build
         run: |
-          npm run deploy-hosting
+          npm run predeploy

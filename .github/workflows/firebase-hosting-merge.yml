@@ -10,7 +10,7 @@ jobs:
   build_and_deploy:
     runs-on: ubuntu-latest
     steps:
-      - run: npm run deploy-hosting
+      - run: npm run predeploy
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: ${{ secrets.GITHUB_TOKEN }}
