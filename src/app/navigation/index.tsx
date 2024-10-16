@@ -4,12 +4,10 @@ import DesktopNavigation from './desktop/Root'
 import React from 'react'
 
 export const RootNavigation = () => {
-  console.log(Platform.OS)
-
-  return Platform.OS === 'ios' || Platform.OS === 'android' ? (
-    <MobileNavigation />
-  ) : (
-    <DesktopNavigation />
-  )
-  // return <DesktopNavigation />
+  // return Platform.OS === 'ios' || Platform.OS === 'android' ? (
+  //   <MobileNavigation />
+  // ) : (
+  //   <DesktopNavigation />
+  // )
+  return <DesktopNavigation />
 }
