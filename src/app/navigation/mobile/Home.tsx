@@ -35,7 +35,7 @@ const HomeNavigation = () => {
   return (
     <HomeTabs.Navigator
       screenOptions={tabsOptions}
-      // tabBar={(props) => <BottomTabBar {...props} />}
+      tabBar={(props) => <BottomTabBar {...props} />}
       initialRouteName={'map'}
     >
       {routes.map((route, index) => (
