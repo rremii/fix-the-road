@@ -8,7 +8,7 @@
     "userInterfaceStyle": "light",
     "scheme": "fix-the-road",
     "experiments": {
-      "baseUrl": "/fix-the-road"
+      // "baseUrl": "/fix-the-road"
     },
     "splash": {
       "image": "./assets/images/splash.png",
