@@ -9,5 +9,7 @@ jobs:
     concurrency: ci-${{ github.ref }}
     steps:
       - uses: actions/setup-node@v1
-        with:
-          node-version: 'latest'
+
+      - name: build
+        run: |
+          npm install
