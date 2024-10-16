@@ -62,3 +62,5 @@ yarn-error.*
 # @end expo-cli
 # Local Netlify folder
 .netlify
+
+.vercel
