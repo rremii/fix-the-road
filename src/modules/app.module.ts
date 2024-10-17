@@ -12,6 +12,7 @@ import { ServeStaticModule } from "@nestjs/serve-static"
 import { join } from "path"
 import { PostModule } from "./post/post.module"
 import { LikeModule } from './like/like.module';
+import { StorageModule } from './storage/storage.module';
 
 @Module({
   imports: [
@@ -38,6 +39,7 @@ import { LikeModule } from './like/like.module';
       inject: [ConfigService],
     }),
     LikeModule,
+    StorageModule,
   ],
   controllers: [],
   providers: [],

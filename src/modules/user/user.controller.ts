@@ -32,13 +32,9 @@ export class UserController {
   }
 
   @Put("/me")
-  @UseInterceptors(FileInterceptor("avatar", getMulterConfig()))
   @UseGuards(AccessTokenGuard)
-  updateMe(
-    @Body() updateDto: UpdateUserDto,
-    @UploadedFile() avatar?: Express.Multer.File,
-  ) {
-    return this.userService.update({ ...updateDto, avatar: avatar?.filename })
+  updateMe(@Body() updateDto: UpdateUserDto) {
+    return this.userService.update(updateDto)
   }
 
   @Get("/:id")

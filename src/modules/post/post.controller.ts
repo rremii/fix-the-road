@@ -7,17 +7,13 @@ import {
   ParseIntPipe,
   Post,
   Put,
-  UploadedFile,
   UseGuards,
-  UseInterceptors,
   UsePipes,
   ValidationPipe,
 } from "@nestjs/common"
 import { PostService } from "./post.service"
 import { CreatePostDto } from "./dto/create-post.dto"
 import { UpdatePostDto } from "./dto/update-post.dto"
-import { FileInterceptor } from "@nestjs/platform-express"
-import { getMulterConfig } from "src/common/helpers/getMulterConfig"
 import { AccessTokenGuard } from "src/guards/access-token.guard"
 
 @Controller("post")
@@ -39,21 +35,9 @@ export class PostController {
 
   @Post()
   @UseGuards(AccessTokenGuard)
-  @UseInterceptors(FileInterceptor("photo", getMulterConfig()))
-  @UsePipes(new ValidationPipe({ transform: true }))
-  async create(
-    @UploadedFile() photo: Express.Multer.File,
-    @Body() createPostDto: CreatePostDto,
-  ) {
-    return this.postService.create(
-      {
-        description: createPostDto.description,
-        lat: +createPostDto.lat,
-        lng: +createPostDto.lng,
-        userId: +createPostDto.userId,
-      },
-      photo.filename,
-    )
+  @UsePipes(ValidationPipe)
+  async create(@Body() createPostDto: CreatePostDto) {
+    return this.postService.create(createPostDto)
   }
 
   @Put("")

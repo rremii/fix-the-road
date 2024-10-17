@@ -29,16 +29,9 @@ export class AuthController {
 
   @Post("register")
   @UsePipes(ValidationPipe)
-  @UseInterceptors(FileInterceptor("avatar", getMulterConfig()))
-  async register(
-    @UploadedFile() avatar: Express.Multer.File,
-    @Body() userInfo: CreateUserDto,
-    @Res() response: Response,
-  ) {
-    const { accessToken, refreshToken } = await this.authService.registerUser({
-      ...userInfo,
-      avatar: avatar?.filename,
-    })
+  async register(@Body() userInfo: CreateUserDto, @Res() response: Response) {
+    const { accessToken, refreshToken } =
+      await this.authService.registerUser(userInfo)
     response.cookie("refreshToken", refreshToken, {
       httpOnly: true,
       sameSite: false,

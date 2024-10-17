@@ -33,6 +33,8 @@ export class Post extends BaseEntity implements IPost {
   @ManyToOne(() => User, (user) => user.id)
   user: User
 
-  @OneToMany(() => Like, (like) => like.post)
+  @OneToMany(() => Like, (like) => like.post, {
+    cascade: true,
+  })
   likes: Like[]
 }

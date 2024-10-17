@@ -20,9 +20,13 @@ export class Like extends BaseEntity implements ILike {
   @Column()
   postId: number
 
-  @ManyToOne(() => User, (user) => user.likes)
+  @ManyToOne(() => User, (user) => user.likes, {
+    onDelete: "CASCADE",
+  })
   user: User
 
-  @ManyToOne(() => Post, (post) => post.likes)
+  @ManyToOne(() => Post, (post) => post.likes, {
+    onDelete: "CASCADE",
+  })
   post: Post
 }

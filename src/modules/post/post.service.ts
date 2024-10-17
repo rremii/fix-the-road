@@ -26,12 +26,7 @@ export class PostService {
     return this.postRepository.find()
   }
 
-  async create(
-    { description, lat, lng, userId }: CreatePostDto,
-    photo: string,
-  ) {
-    if (!photo) throw new BadRequestException(ApiError.PHOTO_REQUIRED)
-
+  async create({ description, lat, lng, userId, photo }: CreatePostDto) {
     const user = await this.userService.getById(userId)
     if (!user) throw new BadRequestException(ApiError.USER_NOT_FOUND)
 
