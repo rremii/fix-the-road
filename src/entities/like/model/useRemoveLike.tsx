@@ -1,7 +1,6 @@
-import { useMutation, useQuery } from '@tanstack/react-query'
+import { useMutation } from '@tanstack/react-query'
 import { likeApi } from '../api/api'
 import { ApiError } from '@shared/types'
-import { useToast } from '@shared/modules/toast'
 import { queryApi } from '@shared/api/queryApi'
 import { ILike, RemoveLikeDto } from '../types'
 

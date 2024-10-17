@@ -1,9 +1,7 @@
-import { tabBarHeight } from '@shared/constants'
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { ModalView } from './ModalView'
 import { OpenHeader } from './OpenHeader'
 import { Overlay } from '@shared/ui/Overlay'
-import { Location } from '@shared/types'
 import { CloseHeader } from './CloseHeader'
 import { CreatePostForm } from '@features/createPostForm/ui/CreatePostForm'
 

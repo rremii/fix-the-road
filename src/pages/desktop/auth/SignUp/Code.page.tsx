@@ -1,6 +1,6 @@
 import { SignUpCode } from '@widgets/signUpCode/ui/SignUpCode'
 import React from 'react'
-import { View, Text, StyleSheet } from 'react-native'
+import { StyleSheet, View } from 'react-native'
 
 export const CodePage = () => {
   return (

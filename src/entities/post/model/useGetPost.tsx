@@ -1,7 +1,5 @@
-import { useMemo } from 'react'
 import { IPost } from '../types'
 import { useQuery } from '@tanstack/react-query'
-import { AxiosError } from 'axios'
 import { postApi } from '../api/api'
 import { ApiError } from '@shared/types'
 

@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Pressable, TouchableOpacity, StyleSheet } from 'react-native'
+import { StyleSheet, TouchableOpacity } from 'react-native'
 import PhotoIcon from '@icons/photo.svg'
 import { PhotoPreview } from './PhotoPreview'
 

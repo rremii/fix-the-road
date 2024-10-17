@@ -1,7 +1,6 @@
 import { Portal } from '@gorhom/portal'
-import { Overlay } from '@shared/ui/Overlay'
 import React, { useEffect } from 'react'
-import { View, StyleSheet, Pressable } from 'react-native'
+import { Pressable, StyleSheet } from 'react-native'
 import Animated, {
   useAnimatedStyle,
   useSharedValue,

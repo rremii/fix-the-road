@@ -1,6 +1,5 @@
 import React from 'react'
-import { View, Text, TouchableOpacity, StyleSheet } from 'react-native'
-import LikeIcon from '@icons/like.svg'
+import { StyleSheet, Text, View } from 'react-native'
 import { useGetLikesInfo } from 'src/entities/like/model/useGetLikesInfo'
 import { useGetMe } from 'src/entities/user/model/useGetMe'
 import { RemoveLike } from './RemoveLike'

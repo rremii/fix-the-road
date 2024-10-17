@@ -1,12 +1,10 @@
-import { useContext, useEffect } from 'react'
-import * as SecureStore from 'expo-secure-store'
+import { useEffect } from 'react'
 import { useAuthStore } from './useAuthStore'
 import { ACCESS_TOKEN } from '@shared/api/constants'
 import { useQuery } from '@tanstack/react-query'
 import { authApi } from '../api/api'
 import { useToast } from '@shared/modules/toast'
 import { storage } from '@modules/storage'
-import { Platform } from 'react-native'
 
 export const useAuth = () => {
   const setAuthState = useAuthStore((state) => state.setAuthState)

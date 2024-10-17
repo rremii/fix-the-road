@@ -1,14 +1,9 @@
 import { BottomTabNavigationProp } from '@react-navigation/bottom-tabs'
-import {
-  CommonActions,
-  RouteProp,
-  useNavigation,
-  useRoute,
-} from '@react-navigation/native'
+import { CommonActions, useNavigation } from '@react-navigation/native'
 import { CreatePostModal } from '@widgets/createPostModal/ui/CreatePostModal'
 import { PostPreview } from '@widgets/postPreview/ui/PostPreview'
 import React from 'react'
-import { View, StyleSheet } from 'react-native'
+import { StyleSheet, View } from 'react-native'
 import { NewPostNavigationParam } from 'src/app/navigation/mobile/types'
 
 export const PreviewPage = () => {

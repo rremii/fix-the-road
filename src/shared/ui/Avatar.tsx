@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react'
-import { View, StyleSheet, useWindowDimensions, Platform } from 'react-native'
+import React from 'react'
+import { StyleSheet, useWindowDimensions, View } from 'react-native'
 import { Image } from 'expo-image'
 import DefaultAvatar from '@icons/profile.svg'
 
@@ -7,7 +7,6 @@ interface Props {
   avatar?: string
   size?: number
 }
-const fallbackAvatar = 'ht'
 
 export const Avatar = ({ avatar = '', size = 50 }: Props) => {
   const { width: windowWidth } = useWindowDimensions()

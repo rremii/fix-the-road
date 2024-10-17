@@ -1,7 +1,6 @@
 import { useCameraPermissions } from 'expo-camera'
-import React from 'react'
-import { useEffect } from 'react'
-import { View, Text } from 'react-native'
+import React, { useEffect } from 'react'
+import { Text, View } from 'react-native'
 
 export const useHandleCameraPermission = () => {
   const [permission, requestPermission] = useCameraPermissions()

@@ -1,11 +1,9 @@
-import React from 'react'
-import { FC } from 'react'
+import React, { FC } from 'react'
 import {
-  StyleSheet,
-  TouchableOpacity,
-  Text,
   ActivityIndicator,
-  Pressable,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
 } from 'react-native'
 import { BtnParams } from '../../types'
 

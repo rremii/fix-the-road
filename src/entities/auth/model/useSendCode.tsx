@@ -1,13 +1,7 @@
 import { useMutation } from '@tanstack/react-query'
-import { ReactNode, useContext, useEffect } from 'react'
 import { AxiosError } from 'axios'
-import * as SecureStore from 'expo-secure-store'
-import { useAuthStore } from './useAuthStore'
-import { AuthResponse, LoginDto } from '../types'
 import { authApi } from '../api/api'
 import { useToast } from '@shared/modules/toast'
-import { ACCESS_TOKEN } from '@shared/api/constants'
-import { storage } from '@modules/storage'
 import { DefaultApiResponse } from '@shared/api/types'
 
 export const useSendCode = () => {

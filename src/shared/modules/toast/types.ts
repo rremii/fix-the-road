@@ -1,4 +1,3 @@
-import { Toast } from './ui/Toast'
 export type ToastType = 'error' | 'warn'
 
 export interface ToastInfo {

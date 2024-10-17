@@ -1,7 +1,7 @@
 import { tabBarHeight } from '@shared/constants'
 import { UserProfile } from '@widgets/userProife/ui/UserProfile'
 import React from 'react'
-import { View, Text, StyleSheet } from 'react-native'
+import { StyleSheet, View } from 'react-native'
 
 export const ProfilePage = () => {
   return (

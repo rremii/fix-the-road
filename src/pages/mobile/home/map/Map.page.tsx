@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react'
-import { View, StyleSheet } from 'react-native'
+import React from 'react'
+import { StyleSheet, View } from 'react-native'
 
 import { Map } from '@widgets/map/ui/Map'
 import { tabBarHeight } from '@shared/constants'

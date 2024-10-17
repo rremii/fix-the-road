@@ -2,12 +2,10 @@ import { createContext } from 'react'
 
 import {
   AddToastAction,
-  CloseToastAction,
   IToast,
   RemoveToastAction,
   ToastAction,
 } from '../types'
-import { TOUCHABLE_STATE } from 'react-native-gesture-handler/lib/typescript/components/touchables/GenericTouchable'
 import { DEFAULT_TOAST_DURATION } from '../constants'
 
 interface InitialState {

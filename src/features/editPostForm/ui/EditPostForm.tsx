@@ -1,17 +1,6 @@
-import { tabBarHeight } from '@shared/constants'
-import React, { FC, useEffect, useState } from 'react'
-import {
-  StyleSheet,
-  TextInput,
-  View,
-  Text,
-  Pressable,
-  TouchableOpacity,
-  TouchableOpacityProps,
-} from 'react-native'
+import React from 'react'
+import { StyleSheet, Text, TextInput, View } from 'react-native'
 import { Controller, useForm } from 'react-hook-form'
-import { Location } from '@shared/types'
-import { IPost } from 'src/entities/post/types'
 import { Button } from '@shared/ui/button'
 import { useEditPostStore } from 'src/entities/post/model/editPostStore'
 import { sectionStyles } from '@shared/ui/styles/sectionStyles'

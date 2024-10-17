@@ -1,13 +1,5 @@
-import React, { useEffect, useState } from 'react'
-import {
-  View,
-  StyleSheet,
-  useWindowDimensions,
-  TextInput,
-  Text,
-  Platform,
-} from 'react-native'
-import { Avatar } from '../../../shared/ui/Avatar'
+import React, { useState } from 'react'
+import { StyleSheet, TextInput, View } from 'react-native'
 import { useGetMe } from 'src/entities/user/model/useGetMe'
 import { Controller, useForm } from 'react-hook-form'
 import { Button } from '@shared/ui/button'

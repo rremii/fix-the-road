@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, StyleSheet, Text, Image } from 'react-native'
+import { StyleSheet, Text, View } from 'react-native'
 
 import { useGetUser } from 'src/entities/user/model/useGetUser'
 import { sectionStyles } from '@shared/ui/styles/sectionStyles'

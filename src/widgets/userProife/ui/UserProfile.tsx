@@ -1,10 +1,8 @@
-import React, { useEffect, useState } from 'react'
-import { View, StyleSheet, Text } from 'react-native'
+import React, { useState } from 'react'
+import { StyleSheet, Text, View } from 'react-native'
 import { Avatar } from '../../../shared/ui/Avatar'
 import { useGetMe } from 'src/entities/user/model/useGetMe'
-import { Controller, useForm } from 'react-hook-form'
 import { Button } from '@shared/ui/button'
-import { AvatarPicker } from '@shared/ui/AvatarPicker'
 import { EditUserProfile } from './EditUserProfile'
 
 export const UserProfile = () => {

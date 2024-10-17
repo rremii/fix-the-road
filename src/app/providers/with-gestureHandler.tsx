@@ -1,5 +1,4 @@
-import React from 'react'
-import { FC } from 'react'
+import React, { FC } from 'react'
 import { GestureHandlerRootView } from 'react-native-gesture-handler'
 
 export const withGestureHandler = (Component: FC): FC => {

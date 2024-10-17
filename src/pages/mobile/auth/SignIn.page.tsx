@@ -1,6 +1,6 @@
 import { SignIn } from '@widgets/signIn/ui/SignIn'
 import React from 'react'
-import { View, Text, StyleSheet } from 'react-native'
+import { StyleSheet, View } from 'react-native'
 
 export const SignInPage = () => {
   return (

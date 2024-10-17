@@ -1,6 +1,5 @@
 import { useMutation } from '@tanstack/react-query'
 import { useToast } from '@shared/modules/toast'
-import { AxiosError } from 'axios'
 import { postApi } from '../api/api'
 import { queryApi } from '@shared/api/queryApi'
 import { ApiError } from '@shared/types'

@@ -1,6 +1,6 @@
 import { SignUpInfo } from '@widgets/signUpInfo/ui/SignUpInfo'
 import React from 'react'
-import { View, Text, StyleSheet } from 'react-native'
+import { StyleSheet, View } from 'react-native'
 
 export const InfoPage = () => {
   return (

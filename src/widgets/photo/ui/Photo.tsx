@@ -1,15 +1,14 @@
 import { CameraView } from 'expo-camera'
-import React, { useEffect, useRef } from 'react'
-import { useState } from 'react'
+import React, { useRef, useState } from 'react'
 import {
   ActivityIndicator,
   ImageBackground,
   Platform,
+  Pressable,
   StyleSheet,
   Text,
   View,
 } from 'react-native'
-import { Pressable } from 'react-native'
 import { useHandleCameraPermission } from '../model/useHandleCameraPermission'
 import { useNavigation } from '@react-navigation/native'
 import { StackNavigationProp } from '@react-navigation/stack'

@@ -1,12 +1,6 @@
 import { OpenPhoto } from '@features/openPhoto/ui/OpenPhoto'
 import React, { useState } from 'react'
-import {
-  View,
-  Text,
-  StyleSheet,
-  Touchable,
-  TouchableOpacity,
-} from 'react-native'
+import { StyleSheet, View } from 'react-native'
 import { IPost } from 'src/entities/post/types'
 import { AuthorInfo } from '../../../features/authorInfo/ui/AuthorInfo'
 import { Button } from '@shared/ui/button'

@@ -1,17 +1,10 @@
-import {
-  createContext,
-  FC,
-  PropsWithChildren,
-  useEffect,
-  useReducer,
-} from 'react'
+import React, { FC, PropsWithChildren, useReducer } from 'react'
 import {
   initialState,
   ToastContext,
   ToastDispatchContext,
   ToastReducer,
 } from '../model/toastStore'
-import React from 'react'
 import { Toast } from './Toast'
 import { ToastBox } from './ToastsBox'
 

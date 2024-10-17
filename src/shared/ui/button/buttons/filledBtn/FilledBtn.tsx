@@ -1,10 +1,9 @@
-import React from 'react'
-import { FC } from 'react'
+import React, { FC } from 'react'
 import {
-  StyleSheet,
-  TouchableOpacity,
-  Text,
   ActivityIndicator,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
 } from 'react-native'
 import { BtnParams } from '../../types'
 
@@ -29,9 +28,11 @@ export const FilledBtn: FC<FilledBtnProps> = ({
   textStyles,
   children,
   withSpinner = false,
-  ...colors
+  activeColor = '#14833b',
+  mainColor = '#1a9f49',
+  subColor = '#fff',
 }) => {
-  const styles = getStyles({ pending, ...colors })
+  const styles = getStyles({ pending, activeColor, mainColor, subColor })
 
   return (
     <TouchableOpacity
@@ -40,11 +41,7 @@ export const FilledBtn: FC<FilledBtnProps> = ({
       style={[styles.btn, btnStyles]}
     >
       {withSpinner && pending ? (
-        <ActivityIndicator
-          size="small"
-          animating={true}
-          color={colors.subColor}
-        />
+        <ActivityIndicator size="small" animating={true} color={subColor} />
       ) : (
         <Text style={[styles.text, textStyles]}>{children}</Text>
       )}
@@ -54,9 +51,9 @@ export const FilledBtn: FC<FilledBtnProps> = ({
 
 const getStyles = ({
   pending,
-  activeColor = '#14833b',
-  mainColor = '#1a9f49',
-  subColor = '#fff',
+  activeColor,
+  mainColor,
+  subColor,
 }: StyleParams) =>
   StyleSheet.create({
     btn: {

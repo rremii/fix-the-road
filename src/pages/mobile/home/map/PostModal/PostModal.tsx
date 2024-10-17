@@ -1,14 +1,9 @@
-import {
-  BottomTabBarProps,
-  BottomTabNavigationProp,
-} from '@react-navigation/bottom-tabs'
-import { RouteProp, useNavigation, useRoute } from '@react-navigation/native'
+import { RouteProp, useRoute } from '@react-navigation/native'
 import { BottomModal } from '@shared/ui/BottomModal'
 import { Overlay } from '@shared/ui/Overlay'
 import { EditablePost } from '@widgets/editablePost/ui/EditablePost'
 import { Post } from '@widgets/post/ui/Post'
-import React, { useEffect, useState } from 'react'
-import { Text, StyleSheet } from 'react-native'
+import React from 'react'
 import { useGetPost } from 'src/entities/post/model/useGetPost'
 import { useGetMe } from 'src/entities/user/model/useGetMe'
 import { useHandleModalOpen } from './useHandleModalOpen'
