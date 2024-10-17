@@ -5,7 +5,7 @@ export interface IPost {
   lat: number
   lng: number
   description: string
-  photoUri: string
+  photo: string
   userId: number
 }
 

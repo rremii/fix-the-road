@@ -24,8 +24,8 @@ export default function Photo() {
     useNavigation<StackNavigationProp<NewPostNavigationParam, 'photo'>>()
   useHandleCameraPermission()
   useUnlockScreenOrientation()
-  const setCreatePostPhotoUri = useCreatePostStore(
-    (state) => state.setCreatePostPhotoUri,
+  const setCreatePostPhoto = useCreatePostStore(
+    (state) => state.setCreatePostPhoto,
   )
 
   const { pinch, zoom } = useCameraZoom()
@@ -51,7 +51,7 @@ export default function Photo() {
 
   const submit = () => {
     if (!photoUri) return
-    setCreatePostPhotoUri(photoUri)
+    setCreatePostPhoto(photoUri)
     navigation.navigate('preview')
   }
 
