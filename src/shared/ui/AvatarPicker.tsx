@@ -9,6 +9,7 @@ import { UploadFileResponse } from '@shared/types'
 import { URIToFile } from '@shared/utils/URIToFile'
 import axios from 'axios'
 import { useAssets } from 'expo-asset'
+import { BASE_URL } from '@shared/api/constants'
 
 interface Props {
   initialAvatar?: string
@@ -37,7 +38,10 @@ export const AvatarPicker = ({ size = 50, onChange, initialAvatar }: Props) => {
   const styles = getStyles(size, windowWidth)
   return (
     <Pressable onPress={pickImageAsync} style={styles.container}>
-      <Image style={styles.image} source={{ uri: avatar || fallbackAvatar }} />
+      <Image
+        style={styles.image}
+        source={{ uri: avatar ? BASE_URL + avatar : fallbackAvatar }}
+      />
     </Pressable>
   )
 }

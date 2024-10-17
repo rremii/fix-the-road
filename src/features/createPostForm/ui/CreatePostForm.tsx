@@ -12,9 +12,7 @@ interface FormData {
 }
 
 export const CreatePostForm = () => {
-  //todo move all data to store and logic of creation to feature btn
-  //todo !!! handle uri and form data how send files
-  const { location, photoUri } = useCreatePostStore((state) => state)
+  const { location, photo } = useCreatePostStore((state) => state)
 
   const { me } = useGetMe()
   const { createPost, isPending } = useCreatePost()
@@ -26,14 +24,14 @@ export const CreatePostForm = () => {
   })
 
   const onSubmit = async ({ description }: FormData) => {
-    if (!photoUri || !me || !location) return
+    if (!photo || !me || !location) return
 
     await createPost({
       description,
       userId: me?.id,
       lat: location.lat,
       lng: location.lng,
-      photoUri,
+      photoUri: photo,
     })
     reset()
   }

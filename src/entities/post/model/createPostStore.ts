@@ -3,12 +3,12 @@ import { Location } from '@shared/types'
 
 type State = {
   location: Location
-  photoUri: string
+  photo: string
 }
 
 type Action = {
   setCreatePostLocation: (location: Location) => void
-  setCreatePostPhotoUri: (photoUri: string) => void
+  setCreatePostPhoto: (photoUri: string) => void
 }
 
 export const useCreatePostStore = create<State & Action>((set) => ({
@@ -16,8 +16,8 @@ export const useCreatePostStore = create<State & Action>((set) => ({
     lat: 0,
     lng: 0,
   },
-  photoUri: '',
+  photo: '',
 
   setCreatePostLocation: (location: Location) => set(() => ({ location })),
-  setCreatePostPhotoUri: (photoUri: string) => set(() => ({ photoUri })),
+  setCreatePostPhoto: (photo: string) => set(() => ({ photo })),
 }))

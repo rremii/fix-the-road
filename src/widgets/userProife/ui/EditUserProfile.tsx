@@ -23,6 +23,10 @@ export const EditUserProfile = ({ onSubmit }: Props) => {
   //todo make responsive
   //todo make feature btns
   //todo make modals close from store
+  //todo make logout
+  //todo add validation
+  //todo hide splash after auth
+  //todo make splash screen
   //todo ********************************************
   const {
     control,

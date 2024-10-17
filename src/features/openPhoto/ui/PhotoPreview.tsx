@@ -7,14 +7,15 @@ import Animated, {
   withTiming,
 } from 'react-native-reanimated'
 import { Image } from 'expo-image'
+import { BASE_URL } from '@shared/api/constants'
 
 interface Props {
-  photoUri: string
+  photo: string
   isOpen: boolean
   close: () => void
 }
 
-export const PhotoPreview = ({ photoUri, isOpen, close }: Props) => {
+export const PhotoPreview = ({ photo, isOpen, close }: Props) => {
   const fadeAnim = useSharedValue(0)
   const fadeStyles = useAnimatedStyle(() => ({
     opacity: fadeAnim.value,
@@ -33,7 +34,11 @@ export const PhotoPreview = ({ photoUri, isOpen, close }: Props) => {
     <Portal>
       <Animated.View style={[styles.container, fadeStyles]}>
         <Pressable style={styles.pressableCont} onPress={close}>
-          <Image contentFit="contain" source={photoUri} style={styles.photo} />
+          <Image
+            contentFit="contain"
+            source={BASE_URL + photo}
+            style={styles.photo}
+          />
         </Pressable>
       </Animated.View>
     </Portal>

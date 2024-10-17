@@ -33,7 +33,7 @@ export const EditablePost = (post: Props) => {
   return (
     <View style={styles.container}>
       <View style={styles.btnSection}>
-        <OpenPhoto photoUri={post.photoUri} />
+        <OpenPhoto photo={post.photo} />
       </View>
       <AuthorInfo userId={post.userId} />
       {isEditing ? (

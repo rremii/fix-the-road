@@ -12,7 +12,7 @@ export const Post = (post: Props) => {
   return (
     <View style={styles.container}>
       <View style={styles.btnSection}>
-        <OpenPhoto photoUri={post.photoUri} />
+        <OpenPhoto photo={post.photo} />
         <Likes postId={post.id} />
       </View>
       <AuthorInfo userId={post.userId} />
