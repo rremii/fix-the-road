@@ -1,4 +1,5 @@
 import { SignInForm } from '@features/signInForm/ui/SignInForm'
+import { AvatarPicker } from '@shared/ui/AvatarPicker'
 import React from 'react'
 import { StyleSheet, View } from 'react-native'
 

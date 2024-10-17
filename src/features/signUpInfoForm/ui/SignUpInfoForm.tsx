@@ -36,16 +36,11 @@ export const SignUpInfoForm = () => {
 
   const onSubmit = ({ password, userName }: FormValues) => {
     if (!params) return
-    const formDataAvatar: FormDataAsset = {
-      uri: avatar?.uri || '',
-      name: avatar?.fileName || '',
-      type: avatar?.mimeType || '',
-    }
     register({
       password,
       userName,
       email: params.email,
-      avatar: formDataAvatar,
+      avatarUri: avatar?.uri,
     })
     reset()
   }

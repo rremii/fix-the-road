@@ -15,5 +15,5 @@ export interface UpdateMeInfoDto {
 export interface UpdateMeDto {
   id: number
   userName?: string
-  avatar?: FormDataAsset
+  avatarUri?: string
 }

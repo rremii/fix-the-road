@@ -52,18 +52,18 @@ export const useRegister = () => {
   })
 
   const handleRegister = (registerDto: RegisterDto) => {
-    let dto: RegisterDto
+    // let dto: RegisterDto
 
-    if (registerDto.avatar && Platform.OS === 'web') {
-      dto = {
-        ...registerDto,
-        avatar: URIToFile(registerDto.avatar.uri, registerDto.avatar.name),
-      }
-    } else {
-      dto = registerDto
-    }
+    // if (registerDto.avatar && Platform.OS === 'web') {
+    //   dto = {
+    //     ...registerDto,
+    //     avatar: URIToFile(registerDto.avatar.uri, registerDto.avatar.name),
+    //   }
+    // } else {
+    //   dto = registerDto
+    // }
 
-    mutateRegister(dto)
+    mutateRegister(registerDto)
   }
 
   return { register: handleRegister, isPending, isSuccess, error, isError }

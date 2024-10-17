@@ -18,8 +18,10 @@ class AuthApi {
     return response.data
   }
 
-  async uploadAvatar(avatar: FormDataAsset) {
+  async uploadAvatar(avatarUri: string) {
     const formData = new FormData()
+
+    const avatar = await URIToFile(avatarUri, 'avatar')
     formData.append('file', avatar)
 
     const response = await api.post<UploadFileResponse>('storage', formData, {

@@ -6,9 +6,9 @@ import { postApi } from './api'
 class CreatePostSaga {
   photoResponse?: UploadFileResponse
 
-  async execute({ photo, ...postInfo }: CreatePostDto) {
+  async execute({ photoUri, ...postInfo }: CreatePostDto) {
     try {
-      this.photoResponse = await postApi.uploadPhoto(photo)
+      this.photoResponse = await postApi.uploadPhoto(photoUri)
       if (!this.photoResponse) throw new Error('Could not upload photo')
 
       const addPostDto: AddPostDto = {

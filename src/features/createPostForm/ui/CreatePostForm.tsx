@@ -33,11 +33,7 @@ export const CreatePostForm = () => {
       userId: me?.id,
       lat: location.lat,
       lng: location.lng,
-      photo: {
-        uri: photoUri,
-        name: 'post-photo',
-        type: 'image/png',
-      },
+      photoUri,
     })
     reset()
   }

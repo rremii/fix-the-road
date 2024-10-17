@@ -38,16 +38,6 @@ export const useCreatePost = () => {
   })
 
   const create = async (createPostDto: CreatePostDto) => {
-    // let dto: CreatePostDto
-    // if (Platform.OS === 'web') {
-    //   dto = {
-    //     ...createPostDto,
-    //     photo: URIToFile(createPostDto.photo.uri, createPostDto.photo.name),
-    //   }
-    // } else {
-    //   dto = createPostDto
-    // }
-
     mutateCreatePost(createPostDto)
   }
 

@@ -13,7 +13,7 @@ export interface RegisterDto {
   email: string
   password: string
   userName: string
-  avatar?: FormDataAsset
+  avatarUri?: string
 }
 
 export interface RegisterUserDto {

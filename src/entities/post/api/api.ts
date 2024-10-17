@@ -28,8 +28,9 @@ class PostApi {
     return result.data
   }
 
-  async uploadPhoto(photo: FormDataAsset) {
+  async uploadPhoto(photoUri: string) {
     const formData = new FormData()
+    const photo = await URIToFile(photoUri, 'post-photo')
     formData.append('file', photo)
 
     const result = await api.post<UploadFileResponse>('storage', formData, {

@@ -28,13 +28,9 @@ export const useGetMe = () => {
     })
   }, [error])
 
-  const user: IUser | undefined = me
-    ? { ...me, avatar: me.avatar ? BASE_URL + '/' + me.avatar : undefined }
-    : undefined
-
   return useMemo(
     () => ({
-      me: user,
+      me,
       isSuccess,
       error,
       isPending,

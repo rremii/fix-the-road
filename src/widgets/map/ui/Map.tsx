@@ -15,6 +15,7 @@ import { HomeNavigationParam } from 'src/app/navigation/mobile/types'
 import { useGetPosts } from 'src/entities/post/model/useGetPosts'
 import { useGetMe } from 'src/entities/user/model/useGetMe'
 import { useMapStore } from 'src/entities/map/model/mapStore'
+import { AvatarPicker } from '@shared/ui/AvatarPicker'
 
 export const Map = () => {
   const navigation =

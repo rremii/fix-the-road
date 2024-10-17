@@ -42,18 +42,7 @@ export const useUpdateMe = () => {
   })
 
   const update = (updateMeDto: UpdateMeDto) => {
-    let dto: UpdateMeDto
-
-    if (updateMeDto.avatar && Platform.OS === 'web') {
-      dto = {
-        ...updateMeDto,
-        avatar: URIToFile(updateMeDto.avatar.uri, updateMeDto.avatar.name),
-      }
-    } else {
-      dto = updateMeDto
-    }
-
-    mutateUpdateMe(dto)
+    mutateUpdateMe(updateMeDto)
   }
 
   return { updateMe: update, isPending, isSuccess, error, isError }
