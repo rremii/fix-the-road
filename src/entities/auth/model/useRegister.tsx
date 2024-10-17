@@ -6,6 +6,9 @@ import { ACCESS_TOKEN } from '@shared/api/constants'
 import { storage } from '@modules/storage'
 import { useToast } from '@shared/modules/toast'
 import { useAuthStore } from './useAuthStore'
+import { register } from '../api/register.saga'
+import { URIToFile } from '@shared/utils/URIToFile'
+import { Platform } from 'react-native'
 
 export const useRegister = () => {
   const setAuthState = useAuthStore((state) => state.setAuthState)
@@ -19,7 +22,7 @@ export const useRegister = () => {
     isError,
     isSuccess,
   } = useMutation<AuthResponse, AxiosError, RegisterDto>({
-    mutationFn: authApi.register,
+    mutationFn: register,
     onError: (error) => {
       if (!error) return
 
@@ -48,9 +51,20 @@ export const useRegister = () => {
     },
   })
 
-  const register = (registerDto: RegisterDto) => {
-    mutateRegister(registerDto)
+  const handleRegister = (registerDto: RegisterDto) => {
+    let dto: RegisterDto
+
+    if (registerDto.avatar && Platform.OS === 'web') {
+      dto = {
+        ...registerDto,
+        avatar: URIToFile(registerDto.avatar.uri, registerDto.avatar.name),
+      }
+    } else {
+      dto = registerDto
+    }
+
+    mutateRegister(dto)
   }
 
-  return { register, isPending, isSuccess, error, isError }
+  return { register: handleRegister, isPending, isSuccess, error, isError }
 }

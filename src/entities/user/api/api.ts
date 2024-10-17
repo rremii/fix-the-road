@@ -1,7 +1,8 @@
 import { api } from '@shared/api/api'
 import { Platform } from 'react-native'
 import { URIToFile } from '@shared/utils/URIToFile'
-import { IUser, UpdateMeDto } from '../types'
+import { IUser, UpdateMeDto, UpdateMeInfoDto } from '../types'
+import { FormDataAsset, UploadFileResponse } from '@shared/types'
 
 class UserApi {
   async getMe(): Promise<IUser> {
@@ -9,20 +10,21 @@ class UserApi {
 
     return result.data
   }
-  async updateMe({ id, userName, avatar }: UpdateMeDto): Promise<IUser> {
+
+  async uploadMeAvatar(avatar: FormDataAsset): Promise<UploadFileResponse> {
     const formData = new FormData()
-    formData.append('id', id.toString())
-    if (userName) formData.append('userName', userName)
+    formData.append('file', avatar)
 
-    if (avatar && Platform.OS !== 'web') formData.append('avatar', avatar)
-    if (avatar && Platform.OS === 'web')
-      formData.append('avatar', URIToFile(avatar.uri, avatar.name))
-
-    const result = await api.put<IUser>('user/me', formData, {
+    const result = await api.post<UploadFileResponse>('storage', formData, {
       headers: {
         'Content-Type': 'multipart/form-data',
       },
     })
+    return result.data
+  }
+
+  async updateMeInfo(updateDto: UpdateMeInfoDto) {
+    const result = await api.put<IUser>('user/me', updateDto)
 
     return result.data
   }

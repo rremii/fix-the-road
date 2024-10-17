@@ -22,3 +22,10 @@ export interface CreatePostDto {
   lng: number
   userId: number
 }
+export interface AddPostDto {
+  description: string
+  photo: string
+  lat: number
+  lng: number
+  userId: number
+}

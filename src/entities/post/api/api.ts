@@ -1,7 +1,8 @@
-import { CreatePostDto, IPost, UpdatePostDto } from '../types'
+import { AddPostDto, CreatePostDto, IPost, UpdatePostDto } from '../types'
 import { api } from '@shared/api/api'
 import { Platform } from 'react-native'
 import { URIToFile } from '@shared/utils/URIToFile'
+import { FormDataAsset, UploadFileResponse } from '@shared/types'
 
 class PostApi {
   async getAll(): Promise<IPost[]> {
@@ -26,21 +27,21 @@ class PostApi {
 
     return result.data
   }
-  async create({ description, photo, lat, lng, userId }: CreatePostDto) {
+
+  async uploadPhoto(photo: FormDataAsset) {
     const formData = new FormData()
-    formData.append('description', description)
-    formData.append('lat', lat.toString())
-    formData.append('lng', lng.toString())
-    formData.append('userId', userId.toString())
-    formData.append(
-      'photo',
-      Platform.OS === 'web' ? URIToFile(photo.uri, photo.name) : photo,
-    )
-    const result = await api.post<IPost[]>('post', formData, {
+    formData.append('file', photo)
+
+    const result = await api.post<UploadFileResponse>('storage', formData, {
       headers: {
         'Content-Type': 'multipart/form-data',
       },
     })
+    return result.data
+  }
+
+  async addPost(addPostDto: AddPostDto) {
+    const result = await api.post<IPost[]>('post', addPostDto)
 
     return result.data
   }
