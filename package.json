@@ -3,8 +3,6 @@
   "version": "1.0.0",
   "main": "expo/AppEntry.js",
   "scripts": {
-    "deploy": "gh-pages -t -d dist",
-    "predeploy": "expo export -p web",
     "start": "expo start",
     "android": "expo run:android",
     "ios": "expo run:ios",
