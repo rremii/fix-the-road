@@ -3,7 +3,7 @@
   "compilerOptions": {
     "strict": true,
     "jsx": "react",
-    "baseUrl": "./fix-the-road/",
+    "baseUrl": ".",
     "paths": {
       "@shared/*": ["./src/shared/*"],
       "@widgets/*": ["./src/widgets/*"],

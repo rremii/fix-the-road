@@ -3,7 +3,7 @@ name: Deploy React
 on:
   push:
     branches:
-      - CD-config
+      - '*'
     paths-ignore:
       - 'README.md'
       - '.husky'
@@ -20,10 +20,9 @@ jobs:
     runs-on: ubuntu-latest
 
     permissions:
-      pages: write # to deploy to Pages
-      id-token: write # to verify the deployment originates from an appropriate source
+      pages: write
+      id-token: write
 
-    # Deploy to the github-pages environment
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
@@ -38,17 +37,15 @@ jobs:
       - name: Install dependencies
         run: npm install --legacy-peer-deps
 
+      - name: Run lint
+        run: npm run lint
+
       - name: Build for web deployment
         run: npx expo export -p web
 
-      # - name: Upload artifact
-      #   uses: actions/upload-artifact@v3
-      #   with:
-      #     name: github-pages
-      #     path: dist
       - name: Upload static files as artifact
         id: deployment
-        uses: actions/upload-pages-artifact@v3 # or specific "vX.X.X" version tag for this action
+        uses: actions/upload-pages-artifact@v3
         with:
           path: dist/
 
