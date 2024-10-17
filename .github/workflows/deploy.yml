@@ -34,10 +34,8 @@ jobs:
         run: npx expo export -p web
 
       - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./dist
+        id: deployment
+        uses: actions/deploy-pages@v4
 
       - name: Zip artifact for deployment
         run: zip release.zip dist/* .env -r
