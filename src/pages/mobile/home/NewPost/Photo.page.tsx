@@ -2,7 +2,7 @@ import { useOnPageSwitch } from '@shared/hooks/useOnPageSwitch'
 import { useUIStore } from '@shared/store/UIStore'
 import Photo from '@widgets/photo/ui/Photo'
 import React from 'react'
-import { View, StyleSheet } from 'react-native'
+import { StyleSheet, View } from 'react-native'
 
 export const PhotoPage = () => {
   const hideTabBar = useUIStore((state) => state.hideTabBar)

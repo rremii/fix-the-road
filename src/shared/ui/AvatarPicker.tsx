@@ -1,14 +1,7 @@
-import React, { useEffect, useState } from 'react'
-import {
-  View,
-  StyleSheet,
-  useWindowDimensions,
-  Platform,
-  Pressable,
-} from 'react-native'
+import React, { useState } from 'react'
+import { Pressable, StyleSheet, useWindowDimensions } from 'react-native'
 import { Image } from 'expo-image'
 import * as ImagePicker from 'expo-image-picker'
-import { useRegister } from 'src/entities/auth/model/useRegister'
 
 import { fallbackAvatar } from '@shared/constants'
 

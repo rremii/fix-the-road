@@ -4,7 +4,6 @@ import { useQuery } from '@tanstack/react-query'
 import { userApi } from '../api/api'
 import { ApiError } from '@shared/types'
 import { useToast } from '@shared/modules/toast'
-import { Avatar } from '@shared/ui/Avatar'
 import { BASE_URL } from '@shared/api/constants'
 
 export const useGetMe = () => {

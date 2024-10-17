@@ -1,8 +1,6 @@
 import { Portal } from '@gorhom/portal'
-import { useUIStore } from '@shared/store/UIStore'
-import { Overlay } from '@shared/ui/Overlay'
 import React, { PropsWithChildren, useEffect, useState } from 'react'
-import { StyleSheet, LayoutChangeEvent } from 'react-native'
+import { LayoutChangeEvent, StyleSheet } from 'react-native'
 import Animated, {
   useAnimatedStyle,
   useSharedValue,

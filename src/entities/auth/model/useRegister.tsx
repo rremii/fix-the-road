@@ -1,7 +1,5 @@
 import { useMutation } from '@tanstack/react-query'
-import { ReactNode, useContext, useEffect } from 'react'
 import { AxiosError } from 'axios'
-import * as SecureStore from 'expo-secure-store'
 import { AuthResponse, RegisterDto } from '../types'
 import { authApi } from '../api/api'
 import { ACCESS_TOKEN } from '@shared/api/constants'

@@ -4,14 +4,8 @@ import Animated, {
   withDelay,
   withTiming,
 } from 'react-native-reanimated'
-import React, { PropsWithChildren, useEffect, useState } from 'react'
-import {
-  LayoutChangeEvent,
-  Pressable,
-  StyleSheet,
-  TouchableOpacity,
-  View,
-} from 'react-native'
+import React, { useEffect } from 'react'
+import { StyleSheet, TouchableOpacity, View } from 'react-native'
 import { slideDelay } from '@widgets/createPostModal/constants'
 import Cross from '@icons/cross.svg'
 

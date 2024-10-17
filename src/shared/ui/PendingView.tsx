@@ -1,11 +1,11 @@
 import React from 'react'
 import {
-  View,
-  Text,
-  StyleSheet,
   ActivityIndicator,
-  Platform,
   ActivityIndicatorProps,
+  Platform,
+  StyleSheet,
+  Text,
+  View,
 } from 'react-native'
 
 interface Props {

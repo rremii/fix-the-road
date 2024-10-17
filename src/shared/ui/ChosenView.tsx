@@ -1,6 +1,5 @@
-import React from 'react'
-import { PropsWithChildren } from 'react'
-import { View, StyleSheet } from 'react-native'
+import React, { PropsWithChildren } from 'react'
+import { StyleSheet, View } from 'react-native'
 
 interface Props extends PropsWithChildren {
   isChosen: boolean

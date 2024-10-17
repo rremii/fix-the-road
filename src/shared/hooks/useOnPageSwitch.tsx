@@ -1,5 +1,4 @@
 import { useNavigation } from '@react-navigation/native'
-import { useUIStore } from '@shared/store/UIStore'
 import { useEffect } from 'react'
 
 interface Params {

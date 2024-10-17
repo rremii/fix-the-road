@@ -1,7 +1,6 @@
-import { FC } from 'react'
-import { TouchableOpacity, Text, StyleSheet } from 'react-native'
+import React, { FC } from 'react'
+import { StyleSheet, Text, TouchableOpacity } from 'react-native'
 import { BtnParams } from '../../types'
-import React from 'react'
 
 type StyleParams = {
   pending?: boolean

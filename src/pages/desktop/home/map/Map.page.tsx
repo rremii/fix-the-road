@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, StyleSheet } from 'react-native'
+import { StyleSheet, View } from 'react-native'
 import { Map } from '@widgets/map/ui/Map'
 import { Burger } from '@features/toggleLeftSideBar/ui/Burger'
 import { SideBarRight } from '@shared/ui/SideBarRight'

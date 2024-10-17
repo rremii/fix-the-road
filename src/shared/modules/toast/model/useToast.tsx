@@ -1,10 +1,5 @@
-import { useCallback, useContext, useEffect } from 'react'
-import {
-  addToast,
-  removeToast,
-  ToastContext,
-  ToastDispatchContext,
-} from './toastStore'
+import { useContext } from 'react'
+import { addToast, removeToast, ToastDispatchContext } from './toastStore'
 import { ToastInfo } from '../types'
 
 export const useToast = () => {

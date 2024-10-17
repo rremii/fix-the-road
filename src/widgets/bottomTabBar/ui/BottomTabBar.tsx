@@ -1,6 +1,6 @@
 import { BottomTabBarProps } from '@react-navigation/bottom-tabs'
 import React, { useEffect } from 'react'
-import { Pressable, Text, StyleSheet } from 'react-native'
+import { Pressable, StyleSheet, Text } from 'react-native'
 import Animated, {
   useAnimatedStyle,
   useSharedValue,

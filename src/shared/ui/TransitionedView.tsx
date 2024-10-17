@@ -1,13 +1,10 @@
-import { PropsWithChildren } from 'react'
+import React, { PropsWithChildren } from 'react'
 import Animated, {
-  EntryExitTransition,
   FadeInLeft,
   FadeInRight,
   FadeOutRight,
   LinearTransition,
-  SequencedTransition,
 } from 'react-native-reanimated'
-import React from 'react'
 
 FadeInLeft.duration(300)
 FadeOutRight.duration(300)

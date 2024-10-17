@@ -1,19 +1,13 @@
-import React, { FC, ReactNode, useEffect, useState } from 'react'
-import { LayoutChangeEvent, StyleSheet, Text } from 'react-native'
+import React, { FC, useEffect } from 'react'
+import { StyleSheet, Text } from 'react-native'
 import { IToast, ToastType } from '../types'
 
 import WarnIcon from '@icons/warn.svg'
 import CheckMarkIcon from '@icons/check-mark.svg'
 import Animated, {
-  FadeIn,
   FadeInDown,
-  FadeInLeft,
-  FadeInUp,
-  FadeOut,
   FadeOutRight,
   LinearTransition,
-  useAnimatedStyle,
-  useSharedValue,
 } from 'react-native-reanimated'
 import { useToast } from '../model/useToast'
 

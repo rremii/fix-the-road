@@ -1,6 +1,5 @@
-import { useEffect, useState } from 'react'
-import { View, Text, Pressable, StyleSheet, Platform } from 'react-native'
-import React from 'react'
+import React, { useEffect } from 'react'
+import { Platform, Pressable, StyleSheet } from 'react-native'
 import { useUIStore } from '@shared/store/UIStore'
 import Animated, {
   interpolate,

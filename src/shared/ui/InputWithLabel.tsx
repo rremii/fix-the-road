@@ -1,17 +1,12 @@
-import React from 'react'
-import { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import {
-  TextInput,
-  View,
-  Text,
-  StyleSheet,
-  LayoutChangeEvent,
-  TouchableOpacity,
-  Touchable,
-  TouchableHighlight,
   KeyboardTypeOptions,
+  LayoutChangeEvent,
   StyleProp,
+  StyleSheet,
+  TextInput,
   TextStyle,
+  View,
   ViewStyle,
 } from 'react-native'
 import Animated, {

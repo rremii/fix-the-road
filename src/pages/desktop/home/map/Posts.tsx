@@ -1,17 +1,10 @@
-import { Route, RouteProp, useRoute } from '@react-navigation/native'
 import { ChosenView } from '@shared/ui/ChosenView'
 import { TransitionedView } from '@shared/ui/TransitionedView'
 import { EditablePost } from '@widgets/editablePost/ui/EditablePost'
 import { Post } from '@widgets/post/ui/Post'
-import React, { PropsWithChildren } from 'react'
-import { View, StyleSheet, FlatList } from 'react-native'
-import Animated, {
-  FadeIn,
-  FadeInLeft,
-  FadeOutRight,
-  LinearTransition,
-} from 'react-native-reanimated'
-import { HomeNavigationParam } from 'src/app/navigation/mobile/types'
+import React from 'react'
+import { FlatList, StyleSheet, View } from 'react-native'
+import { FadeInLeft, FadeOutRight } from 'react-native-reanimated'
 import { useMapStore } from 'src/entities/map/model/mapStore'
 import { useGetPosts } from 'src/entities/post/model/useGetPosts'
 import { filterPostsByBounds } from 'src/entities/post/utils/filterPostsByBounds'

@@ -4,8 +4,7 @@ import {
   panGestureBreak,
   tabBarHeight,
 } from '@shared/constants'
-import React from 'react'
-import { PropsWithChildren, useEffect, useState } from 'react'
+import React, { PropsWithChildren, useEffect, useState } from 'react'
 import { LayoutChangeEvent, StyleSheet } from 'react-native'
 import { Gesture, GestureDetector } from 'react-native-gesture-handler'
 import Animated, {

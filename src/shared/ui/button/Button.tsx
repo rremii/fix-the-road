@@ -1,9 +1,8 @@
-import { ReactNode } from 'react'
+import React, { ReactNode } from 'react'
 import { UIBtnProps } from './types'
 import { SimpleBtn } from './buttons/simpleBtn/SimpleBtn'
 import { DangerBtn } from './buttons/dangerBtn/DangerBtn'
 import { FilledBtn } from './buttons/filledBtn/FilledBtn'
-import React from 'react'
 
 export const Button = ({ type, ...btnParams }: UIBtnProps): ReactNode => {
   switch (type) {

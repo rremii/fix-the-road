@@ -3,7 +3,7 @@ import { Likes } from '@features/likes/ui/Likes'
 import { OpenPhoto } from '@features/openPhoto/ui/OpenPhoto'
 import { AuthorInfo } from '@features/authorInfo/ui/AuthorInfo'
 import React from 'react'
-import { View, Text, StyleSheet } from 'react-native'
+import { StyleSheet, View } from 'react-native'
 import { IPost } from 'src/entities/post/types'
 
 interface Props extends IPost {}

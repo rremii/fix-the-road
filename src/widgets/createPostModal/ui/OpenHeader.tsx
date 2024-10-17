@@ -4,13 +4,12 @@ import Animated, {
   withDelay,
   withTiming,
 } from 'react-native-reanimated'
-import React, { PropsWithChildren, useEffect, useState } from 'react'
-import { LayoutChangeEvent, Pressable, StyleSheet } from 'react-native'
-import { tabBarHeight } from '@shared/constants'
+import React, { useEffect } from 'react'
+import { Pressable, StyleSheet } from 'react-native'
 import WideArrow from '@icons/wide-arrow.svg'
 import {
-  slideDelay,
   openHeaderHeight,
+  slideDelay,
 } from '@widgets/createPostModal/constants'
 
 interface Props {

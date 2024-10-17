@@ -1,4 +1,3 @@
-import { create } from 'zustand'
 import { CreatePostDto, IPost, UpdatePostDto } from '../types'
 import { api } from '@shared/api/api'
 import { Platform } from 'react-native'

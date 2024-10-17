@@ -1,8 +1,6 @@
 import { api } from '@shared/api/api'
 import { AuthResponse, LoginDto, RegisterDto } from '../types'
 import { DefaultApiResponse } from '@shared/api/types'
-import { Axios, AxiosError } from 'axios'
-import { ApiError } from '@shared/types'
 import { Platform } from 'react-native'
 import { URIToFile } from '@shared/utils/URIToFile'
 

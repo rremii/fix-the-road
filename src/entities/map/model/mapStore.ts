@@ -1,5 +1,4 @@
 import { create } from 'zustand'
-import { Location } from '@shared/types'
 import { Bounds } from '@modules/map/types'
 
 type State = {
