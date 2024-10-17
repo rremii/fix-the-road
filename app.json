@@ -7,6 +7,9 @@
     "icon": "./assets/images/icon.png",
     "userInterfaceStyle": "light",
     "scheme": "fix-the-road",
+    "experiments": {
+      "baseUrl": "/fix-the-road"
+    },
     "splash": {
       "image": "./assets/images/splash.png",
       "resizeMode": "contain",
