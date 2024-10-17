@@ -4,6 +4,11 @@ import { Image } from 'expo-image'
 import * as ImagePicker from 'expo-image-picker'
 
 import { fallbackAvatar } from '@shared/constants'
+import { api } from '@shared/api/api'
+import { UploadFileResponse } from '@shared/types'
+import { URIToFile } from '@shared/utils/URIToFile'
+import axios from 'axios'
+import { useAssets } from 'expo-asset'
 
 interface Props {
   initialAvatar?: string

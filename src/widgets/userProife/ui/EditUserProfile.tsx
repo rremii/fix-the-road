@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { StyleSheet, TextInput, View } from 'react-native'
 import { useGetMe } from 'src/entities/user/model/useGetMe'
 import { Controller, useForm } from 'react-hook-form'
@@ -17,9 +17,13 @@ interface Props {
 
 export const EditUserProfile = ({ onSubmit }: Props) => {
   const { me } = useGetMe()
-  const { updateMe, isPending } = useUpdateMe()
+  const { updateMe, isPending, isError, isSuccess } = useUpdateMe()
   const [newAvatar, setAvatar] = useState<ImagePickerAsset>()
 
+  //todo make responsive
+  //todo make feature btns
+  //todo make modals close from store
+  //todo ********************************************
   const {
     control,
     handleSubmit,
@@ -31,22 +35,21 @@ export const EditUserProfile = ({ onSubmit }: Props) => {
     },
   })
 
+  useEffect(() => {
+    if (isError || isSuccess) {
+      onSubmit()
+      reset()
+    }
+  }, [isPending, isError, isSuccess])
+
   const onSave = (userInfo: UserInfo) => {
     if (!me) return
 
     updateMe({
       id: me.id,
       ...userInfo,
-      avatar: newAvatar
-        ? {
-            uri: newAvatar.uri,
-            name: newAvatar.fileName || 'avatar',
-            type: newAvatar.type || 'image/jpeg',
-          }
-        : undefined,
+      avatarUri: newAvatar?.uri,
     })
-    onSubmit()
-    reset()
   }
 
   return (

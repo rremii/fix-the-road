@@ -6,9 +6,9 @@ import { authApi } from './api'
 class RegisterSaga {
   avatarResponse?: UploadFileResponse
 
-  async execute({ avatar, ...userInfo }: RegisterDto) {
+  async execute({ avatarUri, ...userInfo }: RegisterDto) {
     try {
-      if (avatar) this.avatarResponse = await authApi.uploadAvatar(avatar)
+      if (avatarUri) this.avatarResponse = await authApi.uploadAvatar(avatarUri)
 
       const registerUserDto: RegisterUserDto = {
         ...userInfo,

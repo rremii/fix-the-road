@@ -1,7 +1,6 @@
 import React from 'react'
 import { HomeNavigationParam } from './types'
 import {
-  BottomTabBar,
   BottomTabNavigationOptions,
   createBottomTabNavigator,
 } from '@react-navigation/bottom-tabs'
@@ -9,6 +8,7 @@ import NewPostNavigation from './NewPost'
 import { MapPage } from '@pages/mobile/home/map/Map.page'
 import { ProfilePage } from '@pages/mobile/home/Profile.page'
 import { BottomTabsRouteNames } from '@widgets/bottomTabBar/types'
+import { BottomTabBar } from '@widgets/bottomTabBar/ui/BottomTabBar'
 
 const HomeTabs = createBottomTabNavigator<HomeNavigationParam>()
 

@@ -1,3 +1,4 @@
+import { Avatar } from './../../../shared/ui/Avatar'
 import { api } from '@shared/api/api'
 import { Platform } from 'react-native'
 import { URIToFile } from '@shared/utils/URIToFile'
@@ -11,8 +12,9 @@ class UserApi {
     return result.data
   }
 
-  async uploadMeAvatar(avatar: FormDataAsset): Promise<UploadFileResponse> {
+  async uploadMeAvatar(avatarUri: string): Promise<UploadFileResponse> {
     const formData = new FormData()
+    const avatar = await URIToFile(avatarUri, 'avatar')
     formData.append('file', avatar)
 
     const result = await api.post<UploadFileResponse>('storage', formData, {

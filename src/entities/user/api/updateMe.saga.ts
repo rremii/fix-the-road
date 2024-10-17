@@ -6,9 +6,10 @@ import { userApi } from './api'
 class UpdateMeSaga {
   avatarResponse?: UploadFileResponse
 
-  async execute({ id, avatar, userName }: UpdateMeDto) {
+  async execute({ id, avatarUri, userName }: UpdateMeDto) {
     try {
-      if (avatar) this.avatarResponse = await userApi.uploadMeAvatar(avatar)
+      if (avatarUri)
+        this.avatarResponse = await userApi.uploadMeAvatar(avatarUri)
 
       const updateMeDto: UpdateMeInfoDto = {
         id,

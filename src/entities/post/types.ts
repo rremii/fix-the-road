@@ -11,13 +11,12 @@ export interface IPost {
 
 export interface UpdatePostDto {
   id: number
-
   description?: string
 }
 
 export interface CreatePostDto {
   description: string
-  photo: FormDataAsset
+  photoUri: string
   lat: number
   lng: number
   userId: number
