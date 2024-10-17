@@ -4,6 +4,10 @@ import { ApiError } from '@shared/types'
 import { userApi } from '../api/api'
 import { useToast } from '@shared/modules/toast'
 import { queryApi } from '@shared/api/queryApi'
+import { updateMe, UpdateMeSaga, updateMeSaga } from '../api/updateMe.saga'
+import { Avatar } from '@shared/ui/Avatar'
+import { Platform } from 'react-native'
+import { URIToFile } from '@shared/utils/URIToFile'
 
 export const useUpdateMe = () => {
   const { openToast } = useToast()
@@ -16,7 +20,7 @@ export const useUpdateMe = () => {
     isError,
     isSuccess,
   } = useMutation<IUser, ApiError, UpdateMeDto>({
-    mutationFn: userApi.updateMe,
+    mutationFn: updateMe,
     mutationKey: ['me'],
     onError: (error) => {
       if (!error) return
@@ -37,9 +41,20 @@ export const useUpdateMe = () => {
     },
   })
 
-  const updateMe = (updateMeDto: UpdateMeDto) => {
-    mutateUpdateMe(updateMeDto)
+  const update = (updateMeDto: UpdateMeDto) => {
+    let dto: UpdateMeDto
+
+    if (updateMeDto.avatar && Platform.OS === 'web') {
+      dto = {
+        ...updateMeDto,
+        avatar: URIToFile(updateMeDto.avatar.uri, updateMeDto.avatar.name),
+      }
+    } else {
+      dto = updateMeDto
+    }
+
+    mutateUpdateMe(dto)
   }
 
-  return { updateMe, isPending, isSuccess, error, isError }
+  return { updateMe: update, isPending, isSuccess, error, isError }
 }

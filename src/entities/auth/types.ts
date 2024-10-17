@@ -15,3 +15,10 @@ export interface RegisterDto {
   userName: string
   avatar?: FormDataAsset
 }
+
+export interface RegisterUserDto {
+  email: string
+  password: string
+  userName: string
+  avatar?: string
+}

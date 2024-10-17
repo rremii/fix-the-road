@@ -1,9 +1,11 @@
 import { useMutation } from '@tanstack/react-query'
 import { CreatePostDto, IPost } from '../types'
 import { useToast } from '@shared/modules/toast'
-import { postApi } from '../api/api'
 import { queryApi } from '@shared/api/queryApi'
 import { ApiError } from '@shared/types'
+import { createPost } from '../api/createPost.saga'
+import { Platform } from 'react-native'
+import { URIToFile } from '@shared/utils/URIToFile'
 
 export const useCreatePost = () => {
   const { openToast } = useToast()
@@ -15,7 +17,7 @@ export const useCreatePost = () => {
     mutate: mutateCreatePost,
     isSuccess,
   } = useMutation<IPost[], ApiError, CreatePostDto>({
-    mutationFn: postApi.create,
+    mutationFn: createPost,
     onError: (error) => {
       if (!error) return
 
@@ -35,12 +37,22 @@ export const useCreatePost = () => {
     },
   })
 
-  const createPost = async (createPostDto: CreatePostDto) => {
+  const create = async (createPostDto: CreatePostDto) => {
+    // let dto: CreatePostDto
+    // if (Platform.OS === 'web') {
+    //   dto = {
+    //     ...createPostDto,
+    //     photo: URIToFile(createPostDto.photo.uri, createPostDto.photo.name),
+    //   }
+    // } else {
+    //   dto = createPostDto
+    // }
+
     mutateCreatePost(createPostDto)
   }
 
   return {
-    createPost,
+    createPost: create,
     isPending,
     isSuccess,
     error,

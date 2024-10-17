@@ -11,6 +11,11 @@ export type FormDataAsset = {
   type: string
 }
 
+export type UploadFileResponse = {
+  fileName: string
+  mimeType: string
+}
+
 export type ApiError = {
   message: string
   name: string
