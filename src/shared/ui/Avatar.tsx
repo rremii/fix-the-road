@@ -2,7 +2,7 @@ import React from 'react'
 import { StyleSheet, useWindowDimensions, View } from 'react-native'
 import { Image } from 'expo-image'
 import DefaultAvatar from '@icons/profile.svg'
-import { fallbackAvatar } from '@shared/constants'
+import { FALLBACK_AVATAR } from '@shared/constants'
 import { BASE_URL } from '@shared/api/constants'
 
 interface Props {
@@ -18,7 +18,7 @@ export const Avatar = ({ avatar = '', size = 50 }: Props) => {
     <View style={styles.container}>
       <Image
         style={styles.image}
-        source={{ uri: avatar ? BASE_URL + avatar : fallbackAvatar }}
+        source={{ uri: avatar ? BASE_URL + avatar : FALLBACK_AVATAR }}
       />
     </View>
   )

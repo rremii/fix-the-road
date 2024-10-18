@@ -5,6 +5,7 @@ import { Button } from '@shared/ui/button'
 import { useEditPostStore } from 'src/entities/post/model/editPostStore'
 import { sectionStyles } from '@shared/ui/styles/sectionStyles'
 import { useUpdatePost } from 'src/entities/post/model/useUpdatePost'
+import { textAreaSchema } from '@shared/constants/schemas'
 
 interface FormData {
   description: string
@@ -45,9 +46,7 @@ export const EditPostForm = (props: Props) => {
         <View style={sectionStyles.withPadding}>
           <Controller
             control={control}
-            rules={{
-              required: true,
-            }}
+            rules={textAreaSchema}
             render={({ field: { onChange, onBlur, value } }) => (
               <TextInput
                 onBlur={onBlur}

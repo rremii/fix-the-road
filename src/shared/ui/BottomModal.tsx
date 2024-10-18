@@ -1,8 +1,8 @@
 import { Portal } from '@gorhom/portal'
 import {
-  modalSlideAnimDuration,
-  panGestureBreak,
-  tabBarHeight,
+  MODAL_SLIDE_ANIM_DURATION,
+  PAN_GESTURE_BREAK,
+  TAB_BAR_HEIGHT,
 } from '@shared/constants'
 import React, { PropsWithChildren, useEffect, useState } from 'react'
 import { LayoutChangeEvent, StyleSheet } from 'react-native'
@@ -24,16 +24,16 @@ export const BottomModal = ({ children, isOpen, closeModal }: Props) => {
   const slideAnim = useSharedValue(0)
 
   const panGesture = Gesture.Pan().onChange((e) => {
-    if (e.translationY > panGestureBreak) return runOnJS(closeModal)()
+    if (e.translationY > PAN_GESTURE_BREAK) return runOnJS(closeModal)()
   })
 
   useEffect(() => {
     if (isOpen) {
       slideAnim.value = withTiming(-modalHeight, {
-        duration: modalSlideAnimDuration,
+        duration: MODAL_SLIDE_ANIM_DURATION,
       })
     } else {
-      slideAnim.value = withTiming(0, { duration: modalSlideAnimDuration })
+      slideAnim.value = withTiming(0, { duration: MODAL_SLIDE_ANIM_DURATION })
     }
   }, [isOpen, modalHeight])
 
@@ -61,7 +61,7 @@ export const BottomModal = ({ children, isOpen, closeModal }: Props) => {
 }
 const styles = StyleSheet.create({
   container: {
-    paddingBottom: tabBarHeight,
+    paddingBottom: TAB_BAR_HEIGHT,
     zIndex: 2,
     flex: 1,
     backgroundColor: 'white',

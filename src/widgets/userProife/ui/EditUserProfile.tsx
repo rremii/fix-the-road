@@ -6,6 +6,7 @@ import { Button } from '@shared/ui/button'
 import { AvatarPicker } from '@shared/ui/AvatarPicker'
 import { useUpdateMe } from 'src/entities/user/model/useUpdateMe'
 import { ImagePickerAsset } from 'expo-image-picker'
+import { userNameSchema } from '@shared/constants/schemas'
 
 type UserInfo = {
   userName: string
@@ -63,9 +64,7 @@ export const EditUserProfile = ({ onSubmit }: Props) => {
       <View style={styles.form}>
         <Controller
           control={control}
-          rules={{
-            required: true,
-          }}
+          rules={userNameSchema}
           render={({ field: { onChange, onBlur, value } }) => (
             <TextInput
               onBlur={onBlur}
