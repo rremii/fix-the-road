@@ -54,5 +54,10 @@ class AuthApi {
     const response = await api.get<AuthResponse>('auth/refresh')
     return response.data
   }
+
+  async logout(): Promise<DefaultApiResponse> {
+    const result = await api.delete<DefaultApiResponse>('auth/logout')
+    return result.data
+  }
 }
 export const authApi = new AuthApi()

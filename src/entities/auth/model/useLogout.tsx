@@ -1,29 +1,48 @@
-// import { setAuthRejected } from "@entities/auth"
-// import { useLogoutMutation } from "@entities/auth/api/AuthApi.ts"
-// import { useAppDispatch } from "@shared/hooks/storeHooks.ts"
-// import { useEffect } from "react"
+import { useMutation } from '@tanstack/react-query'
+import { useEffect } from 'react'
+import { authApi } from '../api/api'
+import { useToast } from '@shared/modules/toast'
+import { DefaultApiResponse } from '@shared/api/types'
+import { ApiError } from '@shared/types'
+import { useAuthStore } from './useAuthStore'
+import { storage } from '@modules/storage'
+import { ACCESS_TOKEN } from '@shared/api/constants'
 
-// export const useLogout = () => {
-//   const dispatch = useAppDispatch()
+export const useLogout = () => {
+  const { openToast } = useToast()
+  const setAuthState = useAuthStore((state) => state.setAuthState)
 
-//   const [logout, { isLoading, isError, error, isSuccess }] = useLogoutMutation()
+  const {
+    isPending,
+    isError,
+    error,
+    isSuccess,
+    mutate: mutateLogout,
+  } = useMutation<DefaultApiResponse, ApiError, void>({
+    mutationFn: authApi.logout,
+    onError: (error) => {
+      console.log(error)
+    },
+    onSuccess: () => {
+      openToast({
+        type: 'warn',
+        content: 'You were logged out',
+      })
+    },
+  })
 
-//   useEffect(() => {
-//     if (!isSuccess && !isError) return
+  const handleLogout = async () => {
+    await mutateLogout()
+    await storage.removeItem(ACCESS_TOKEN)
 
-//     localStorage.removeItem("accessToken")
-//     dispatch(setAuthRejected())
-//   }, [isLoading])
+    setAuthState(null)
+  }
 
-//   const handleLogout = async () => {
-//     await logout()
-//   }
-
-//   return {
-//     logout: handleLogout,
-//     isLoading,
-//     isError,
-//     error,
-//     isSuccess,
-//   }
-// }
+  return {
+    logout: handleLogout,
+    isPending,
+    isError,
+    error,
+    isSuccess,
+  }
+}

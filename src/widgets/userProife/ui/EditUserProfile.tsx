@@ -20,8 +20,6 @@ export const EditUserProfile = ({ onSubmit }: Props) => {
   const { updateMe, isPending, isError, isSuccess } = useUpdateMe()
   const [newAvatar, setAvatar] = useState<ImagePickerAsset>()
 
-  //todo make modals close from store
-  //todo make logout
   //todo add validation
   //todo hide splash after auth
   //todo add customs fonts
