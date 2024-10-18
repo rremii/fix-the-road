@@ -9,21 +9,21 @@ import Animated, {
 import { getRouteDataByName } from '../utils/getRouteDataByName'
 import { BottomTabsRouteNames } from '../types'
 import { tabBarHeight } from '@shared/constants'
-import { useUIStore } from '@shared/store/UIStore'
+import { useUIStore } from 'src/entities/ui/model/UIStore'
 import { Portal } from '@gorhom/portal'
 
 export const BottomTabBar = ({ state, navigation }: BottomTabBarProps) => {
-  const isBottomTabsHidden = useUIStore((state) => state.isBottomTabBarHidden)
+  const isBottomTabs = useUIStore((state) => state.bottomTabBar)
 
   const slideAnim = useSharedValue(0)
 
   useEffect(() => {
-    if (isBottomTabsHidden) {
-      slideAnim.value = withTiming(tabBarHeight)
-    } else {
+    if (isBottomTabs) {
       slideAnim.value = withTiming(0)
+    } else {
+      slideAnim.value = withTiming(tabBarHeight)
     }
-  }, [isBottomTabsHidden])
+  }, [isBottomTabs])
 
   const slideStyles = useAnimatedStyle(() => ({
     transform: [{ translateY: slideAnim.value }],

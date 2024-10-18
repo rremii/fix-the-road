@@ -1,5 +1,5 @@
 import { OpenPhoto } from '@features/openPhoto/ui/OpenPhoto'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { StyleSheet, View } from 'react-native'
 import { IPost } from 'src/entities/post/types'
 import { AuthorInfo } from '../../../features/authorInfo/ui/AuthorInfo'
@@ -7,19 +7,13 @@ import { Button } from '@shared/ui/button'
 import { EditPostForm } from '@features/editPostForm/ui/EditPostForm'
 import { InfoPost } from '@features/infoPost/ui/InfoPost'
 import { useEditPostStore } from 'src/entities/post/model/editPostStore'
-import { useRemovePost } from 'src/entities/post/model/useRemovePost'
+import { RemovePost } from '@features/removePost/ui/RemovePost'
 
 interface Props extends IPost {}
 
 export const EditablePost = (post: Props) => {
-  const setEditPost = useEditPostStore((state) => state.setEditPost)
   const [isEditing, setIsEditing] = useState(false)
-
-  const { removePost, isPending } = useRemovePost()
-
-  const remove = () => {
-    removePost(post.id)
-  }
+  const setEditPost = useEditPostStore((state) => state.setEditPost)
 
   const onSubmit = () => {
     setIsEditing(false)
@@ -43,14 +37,7 @@ export const EditablePost = (post: Props) => {
       )}
       {!isEditing && (
         <View style={styles.btnSection}>
-          <Button
-            withSpinner
-            pending={isPending}
-            onPress={remove}
-            type="danger"
-          >
-            Remove
-          </Button>
+          <RemovePost postId={post.id} />
           <Button onPress={startEditing} type="filled">
             Edit
           </Button>

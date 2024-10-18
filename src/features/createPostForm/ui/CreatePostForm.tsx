@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { StyleSheet, Text, TextInput, View } from 'react-native'
 import { Controller, useForm } from 'react-hook-form'
 import { Button } from '@shared/ui/button'
@@ -6,6 +6,7 @@ import { useCreatePostStore } from 'src/entities/post/model/createPostStore'
 import { sectionStyles } from '@shared/ui/styles/sectionStyles'
 import { useCreatePost } from 'src/entities/post/model/useCreatePost'
 import { useGetMe } from 'src/entities/user/model/useGetMe'
+import { useUIStore } from 'src/entities/ui/model/UIStore'
 
 interface FormData {
   description: string
@@ -13,15 +14,21 @@ interface FormData {
 
 export const CreatePostForm = () => {
   const { location, photo } = useCreatePostStore((state) => state)
+  const closeMenu = useUIStore((state) => state.closeMenu)
 
   const { me } = useGetMe()
-  const { createPost, isPending } = useCreatePost()
+  const { createPost, isPending, isSuccess } = useCreatePost()
 
   const { control, handleSubmit, reset } = useForm<FormData>({
     defaultValues: {
       description: '',
     },
   })
+
+  useEffect(() => {
+    if (!isSuccess) return
+    closeMenu('createPostModal')
+  }, [isSuccess])
 
   const onSubmit = async ({ description }: FormData) => {
     if (!photo || !me || !location) return

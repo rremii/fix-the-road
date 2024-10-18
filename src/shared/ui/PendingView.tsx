@@ -12,23 +12,32 @@ interface Props {
   msg?: string
   withSpinner?: boolean
   spinnerSize?: ActivityIndicatorProps['size']
-  isAbsolute?: boolean
+  absolute?: boolean
   spinnerColor?: string
+  zIndex?: number
+  background?: string
 }
 
 export const PendingView = ({
   msg,
-  isAbsolute,
+  absolute,
   withSpinner,
   spinnerColor,
   spinnerSize,
+  zIndex = 1,
+  background = 'transparent',
 }: Props) => {
   let size = spinnerSize
   if (Platform.OS === 'ios') size = size || 'large'
   else size = size || 80
 
   return (
-    <View style={isAbsolute ? styles.absoluteContainer : styles.container}>
+    <View
+      style={[
+        absolute ? styles.absoluteContainer : styles.container,
+        { zIndex, backgroundColor: background },
+      ]}
+    >
       {!!msg && <Text style={styles.message}>{msg}</Text>}
       {withSpinner && <ActivityIndicator size={size} color={spinnerColor} />}
     </View>
