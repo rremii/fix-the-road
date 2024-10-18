@@ -1,6 +1,6 @@
 import { BottomTabNavigationProp } from '@react-navigation/bottom-tabs'
 import { RouteProp, useNavigation, useRoute } from '@react-navigation/native'
-import { modalSlideAnimDuration } from '@shared/constants'
+import { MODAL_SLIDE_ANIM_DURATION } from '@shared/constants'
 import { useOnPageSwitch } from '@shared/hooks/useOnPageSwitch'
 import { useEffect, useState } from 'react'
 import { HomeNavigationParam } from 'src/app/navigation/mobile/types'
@@ -34,7 +34,7 @@ export const useHandleModalOpen = () => {
       })
 
       clearTimeout(timeout)
-    }, modalSlideAnimDuration)
+    }, MODAL_SLIDE_ANIM_DURATION)
   }
 
   useOnPageSwitch({

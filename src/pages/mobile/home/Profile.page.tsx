@@ -1,4 +1,4 @@
-import { tabBarHeight } from '@shared/constants'
+import { TAB_BAR_HEIGHT } from '@shared/constants'
 import { UserProfile } from '@widgets/userProife/ui/UserProfile'
 import React from 'react'
 import { StyleSheet, View } from 'react-native'
@@ -13,6 +13,6 @@ export const ProfilePage = () => {
 const styles = StyleSheet.create({
   pageContainer: {
     flex: 1,
-    paddingBottom: tabBarHeight,
+    paddingBottom: TAB_BAR_HEIGHT,
   },
 })

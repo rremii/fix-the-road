@@ -1,4 +1,4 @@
-import { modalSlideAnimDuration } from '@shared/constants'
+import { MODAL_SLIDE_ANIM_DURATION } from '@shared/constants'
 import { Button } from '@shared/ui/button'
 import React from 'react'
 import { Text } from 'react-native'
@@ -15,7 +15,7 @@ export const Logout = () => {
     const timer = setTimeout(() => {
       logout()
       clearTimeout(timer)
-    }, modalSlideAnimDuration)
+    }, MODAL_SLIDE_ANIM_DURATION)
   }
   return (
     <Button withSpinner pending={isPending} onPress={onPress} type="danger">

@@ -8,7 +8,7 @@ import Animated, {
 } from 'react-native-reanimated'
 import { getRouteDataByName } from '../utils/getRouteDataByName'
 import { BottomTabsRouteNames } from '../types'
-import { tabBarHeight } from '@shared/constants'
+import { TAB_BAR_HEIGHT } from '@shared/constants'
 import { useUIStore } from 'src/entities/ui/model/UIStore'
 import { Portal } from '@gorhom/portal'
 
@@ -21,7 +21,7 @@ export const BottomTabBar = ({ state, navigation }: BottomTabBarProps) => {
     if (isBottomTabs) {
       slideAnim.value = withTiming(0)
     } else {
-      slideAnim.value = withTiming(tabBarHeight)
+      slideAnim.value = withTiming(TAB_BAR_HEIGHT)
     }
   }, [isBottomTabs])
 
@@ -73,7 +73,7 @@ const styles = StyleSheet.create({
     zIndex: 10,
     position: 'absolute',
     bottom: 0,
-    height: tabBarHeight,
+    height: TAB_BAR_HEIGHT,
     width: '100%',
     flexDirection: 'row',
   },

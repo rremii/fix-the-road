@@ -8,7 +8,7 @@ import MarkerRedIcon from '@icons/marker-red.png'
 import MarkerBlueIcon from '@icons/marker-blue.png'
 import MarkerGreenIcon from '@icons/marker-green.png'
 import { useAssets } from 'expo-asset'
-import { markerSize } from '@shared/constants'
+import { MARKER_SIZE } from '@shared/constants'
 import { useNavigation } from '@react-navigation/native'
 import { BottomTabNavigationProp } from '@react-navigation/bottom-tabs'
 import { HomeNavigationParam } from 'src/app/navigation/mobile/types'
@@ -53,8 +53,8 @@ export const Map = () => {
           lng: post.lng,
           icon: {
             iconUrl,
-            iconAnchor: [markerSize / 2, markerSize / 2],
-            iconSize: [markerSize, markerSize],
+            iconAnchor: [MARKER_SIZE / 2, MARKER_SIZE / 2],
+            iconSize: [MARKER_SIZE, MARKER_SIZE],
           },
         }
       }) || []

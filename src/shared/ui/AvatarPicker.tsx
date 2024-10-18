@@ -3,7 +3,7 @@ import { Pressable, StyleSheet, useWindowDimensions } from 'react-native'
 import { Image } from 'expo-image'
 import * as ImagePicker from 'expo-image-picker'
 
-import { fallbackAvatar } from '@shared/constants'
+import { FALLBACK_AVATAR } from '@shared/constants'
 import { api } from '@shared/api/api'
 import { UploadFileResponse } from '@shared/types'
 import { URIToFile } from '@shared/utils/URIToFile'
@@ -40,7 +40,7 @@ export const AvatarPicker = ({ size = 50, onChange, initialAvatar }: Props) => {
     <Pressable onPress={pickImageAsync} style={styles.container}>
       <Image
         style={styles.image}
-        source={{ uri: avatar ? BASE_URL + avatar : fallbackAvatar }}
+        source={{ uri: avatar ? BASE_URL + avatar : FALLBACK_AVATAR }}
       />
     </Pressable>
   )

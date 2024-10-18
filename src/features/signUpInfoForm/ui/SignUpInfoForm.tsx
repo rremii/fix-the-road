@@ -10,6 +10,7 @@ import * as ImagePicker from 'expo-image-picker'
 import { AvatarPicker } from '@shared/ui/AvatarPicker'
 import { useRegister } from 'src/entities/auth/model/useRegister'
 import { FormDataAsset } from '@shared/types'
+import { passwordSchema, userNameSchema } from '@shared/constants/schemas'
 
 interface FormValues {
   userName: string
@@ -53,9 +54,7 @@ export const SignUpInfoForm = () => {
       <View style={authFormStyles.gapContainer}>
         <Controller
           control={control}
-          rules={{
-            required: true,
-          }}
+          rules={userNameSchema}
           render={({ field: { onChange, onBlur, value } }) => (
             <InputWithLabel
               isError={!!errors.password}
@@ -69,9 +68,7 @@ export const SignUpInfoForm = () => {
         />
         <Controller
           control={control}
-          rules={{
-            required: true,
-          }}
+          rules={passwordSchema}
           render={({ field: { onChange, onBlur, value } }) => (
             <InputWithLabel
               keyboardType="visible-password"

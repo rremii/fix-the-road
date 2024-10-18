@@ -1,6 +1,6 @@
 import { useNavigation } from '@react-navigation/native'
 import { StackNavigationProp } from '@react-navigation/stack'
-import { emailRegex } from '@shared/constants/emailRegex'
+import { EMAIL_REGEX } from '@shared/constants/regex'
 import { Button } from '@shared/ui/button'
 import { InputWithLabel } from '@shared/ui/InputWithLabel'
 import { authFormStyles } from '@shared/ui/styles/authFormStyles'
@@ -54,7 +54,7 @@ export const SignUpEmailForm = () => {
           control={control}
           rules={{
             required: true,
-            pattern: emailRegex,
+            pattern: EMAIL_REGEX,
           }}
           render={({ field: { onChange, onBlur, value } }) => (
             <InputWithLabel

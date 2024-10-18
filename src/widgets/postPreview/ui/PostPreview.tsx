@@ -7,7 +7,7 @@ import { IMap, Marker } from '@modules/map/types'
 import GeolocationMarker from '@icons/marker-geolocation.png'
 import { Location } from '@shared/types'
 import { useAssets } from 'expo-asset'
-import { geolocationMarkerSize } from '@shared/constants'
+import { GEOLOCATION_MARKER_SIZE } from '@shared/constants'
 import { useCreatePostStore } from 'src/entities/post/model/createPostStore'
 
 export const PostPreview = () => {
@@ -36,8 +36,8 @@ export const PostPreview = () => {
       lng: location?.coords.longitude || 0,
       icon: {
         iconUrl: geolocationMarkerUri,
-        iconSize: [geolocationMarkerSize, geolocationMarkerSize],
-        iconAnchor: [geolocationMarkerSize / 2, geolocationMarkerSize],
+        iconSize: [GEOLOCATION_MARKER_SIZE, GEOLOCATION_MARKER_SIZE],
+        iconAnchor: [GEOLOCATION_MARKER_SIZE / 2, GEOLOCATION_MARKER_SIZE],
       },
     })
   }, [location, isMapLoaded])

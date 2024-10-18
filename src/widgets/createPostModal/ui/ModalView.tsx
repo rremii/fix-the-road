@@ -7,9 +7,9 @@ import Animated, {
 import React, { PropsWithChildren, useEffect, useState } from 'react'
 import { LayoutChangeEvent, StyleSheet } from 'react-native'
 import {
-  modalSlideAnimDuration,
-  panGestureBreak,
-  tabBarHeight,
+  MODAL_SLIDE_ANIM_DURATION,
+  PAN_GESTURE_BREAK,
+  TAB_BAR_HEIGHT,
 } from '@shared/constants'
 import { openHeaderHeight } from '@widgets/createPostModal/constants'
 import { Gesture, GestureDetector } from 'react-native-gesture-handler'
@@ -28,8 +28,8 @@ export const ModalView = ({
 }: Props) => {
   const [modalHeight, setModalHeight] = useState(0)
 
-  const modalOpenY = -modalHeight - tabBarHeight
-  const modalCloseY = -tabBarHeight - openHeaderHeight
+  const modalOpenY = -modalHeight - TAB_BAR_HEIGHT
+  const modalCloseY = -TAB_BAR_HEIGHT - openHeaderHeight
 
   const slideAnim = useSharedValue(0)
   const slideStyles = useAnimatedStyle(() => {
@@ -39,18 +39,18 @@ export const ModalView = ({
   })
 
   const panGesture = Gesture.Pan().onChange((e) => {
-    if (e.translationY < -panGestureBreak) return runOnJS(openModal)()
-    if (e.translationY > panGestureBreak) return runOnJS(closeModal)()
+    if (e.translationY < -PAN_GESTURE_BREAK) return runOnJS(openModal)()
+    if (e.translationY > PAN_GESTURE_BREAK) return runOnJS(closeModal)()
   })
 
   useEffect(() => {
     if (isOpen) {
       slideAnim.value = withTiming(modalOpenY, {
-        duration: modalSlideAnimDuration,
+        duration: MODAL_SLIDE_ANIM_DURATION,
       })
     } else {
       slideAnim.value = withTiming(modalCloseY, {
-        duration: modalSlideAnimDuration,
+        duration: MODAL_SLIDE_ANIM_DURATION,
       })
     }
   }, [isOpen, modalHeight])
