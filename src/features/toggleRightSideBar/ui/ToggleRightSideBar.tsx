@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { Platform, Pressable, StyleSheet } from 'react-native'
 import Arrow from '@icons/arrow.svg'
-import { useUIStore } from '@shared/store/UIStore'
+import { useUIStore } from 'src/entities/ui/model/UIStore'
 import Animated, {
   useAnimatedStyle,
   useSharedValue,
@@ -9,8 +9,9 @@ import Animated, {
 } from 'react-native-reanimated'
 
 export const ToggleRightSideBar = () => {
-  const setRightSideBar = useUIStore((state) => state.setRightSideBar)
-  const isSideBar = useUIStore((state) => state.isRightSideBar)
+  const closeMenu = useUIStore((state) => state.closeMenu)
+  const openMenu = useUIStore((state) => state.openMenu)
+  const isSideBar = useUIStore((state) => state.rightSideBar)
 
   const rotateAnim = useSharedValue(0)
   const rotateStyles = useAnimatedStyle(() => ({
@@ -27,9 +28,9 @@ export const ToggleRightSideBar = () => {
 
   const toggleSideBar = () => {
     if (isSideBar) {
-      setRightSideBar(false)
+      closeMenu('rightSideBar')
     } else {
-      setRightSideBar(true)
+      openMenu('rightSideBar')
     }
   }
   return (

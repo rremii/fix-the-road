@@ -16,6 +16,7 @@ export const useCreatePostStore = create<State & Action>((set) => ({
     lat: 0,
     lng: 0,
   },
+  description: '',
   photo: '',
 
   setCreatePostLocation: (location: Location) => set(() => ({ location })),

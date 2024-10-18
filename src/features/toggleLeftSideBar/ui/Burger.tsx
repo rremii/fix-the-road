@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { Platform, Pressable, StyleSheet } from 'react-native'
-import { useUIStore } from '@shared/store/UIStore'
+import { useUIStore } from 'src/entities/ui/model/UIStore'
 import Animated, {
   interpolate,
   useAnimatedStyle,
@@ -9,8 +9,9 @@ import Animated, {
 } from 'react-native-reanimated'
 
 export const Burger = () => {
-  const setLeftSideBar = useUIStore((state) => state.setLeftSideBar)
-  const isSideBar = useUIStore((state) => state.isLeftSideBar)
+  const closeMenu = useUIStore((state) => state.closeMenu)
+  const openMenu = useUIStore((state) => state.openMenu)
+  const isSideBar = useUIStore((state) => state.leftSideBar)
 
   const arrowAnim = useSharedValue(0)
 
@@ -41,9 +42,9 @@ export const Burger = () => {
 
   const toggleSideBar = () => {
     if (isSideBar) {
-      setLeftSideBar(false)
+      closeMenu('leftSideBar')
     } else {
-      setLeftSideBar(true)
+      openMenu('leftSideBar')
     }
   }
   return (

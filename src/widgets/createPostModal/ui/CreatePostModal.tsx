@@ -4,18 +4,25 @@ import { OpenHeader } from './OpenHeader'
 import { Overlay } from '@shared/ui/Overlay'
 import { CloseHeader } from './CloseHeader'
 import { CreatePostForm } from '@features/createPostForm/ui/CreatePostForm'
+import { useUIStore } from 'src/entities/ui/model/UIStore'
 
 export const CreatePostModal = () => {
-  const [isOpen, setIsOpen] = useState(false)
+  const isCreatePostModal = useUIStore((state) => state.createPostModal)
+  const closeMenu = useUIStore((state) => state.closeMenu)
+  const openMenu = useUIStore((state) => state.openMenu)
 
-  const openModal = () => setIsOpen(true)
-  const closeModal = () => setIsOpen(false)
+  const openModal = () => openMenu('createPostModal')
+  const closeModal = () => closeMenu('createPostModal')
   return (
     <>
-      <Overlay zIndex={1} onPress={closeModal} isActive={isOpen} />
-      <ModalView closeModal={closeModal} openModal={openModal} isOpen={isOpen}>
-        <OpenHeader isOpen={isOpen} onClick={openModal} />
-        <CloseHeader isOpen={isOpen} onClick={closeModal} />
+      <Overlay zIndex={1} onPress={closeModal} isActive={isCreatePostModal} />
+      <ModalView
+        closeModal={closeModal}
+        openModal={openModal}
+        isOpen={isCreatePostModal}
+      >
+        <OpenHeader isOpen={isCreatePostModal} onClick={openModal} />
+        <CloseHeader isOpen={isCreatePostModal} onClick={closeModal} />
 
         <CreatePostForm />
       </ModalView>

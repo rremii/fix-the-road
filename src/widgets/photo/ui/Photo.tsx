@@ -17,6 +17,8 @@ import { GestureDetector } from 'react-native-gesture-handler'
 import { useCameraZoom } from '../model/useCameraZoom'
 import { useUnlockScreenOrientation } from '@shared/hooks/useUnlockScreenOrientation'
 import { useCreatePostStore } from 'src/entities/post/model/createPostStore'
+import { FallbackView } from '@shared/ui/FallbackView'
+import { PendingView } from '@shared/ui/PendingView'
 
 const cameraFacing = 'back'
 export default function Photo() {
@@ -62,9 +64,7 @@ export default function Photo() {
   return (
     <View style={styles.container}>
       {isTakingPhoto && (
-        <View style={styles.loaderCont}>
-          <ActivityIndicator size={Platform.OS === 'ios' ? 'large' : 80} />
-        </View>
+        <PendingView withSpinner absolute background="#050505aa" />
       )}
       {photoUri ? (
         <ImageBackground source={{ uri: photoUri }} style={styles.camera}>
@@ -125,16 +125,5 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: 'bold',
     color: 'black',
-  },
-  loaderCont: {
-    position: 'absolute',
-    zIndex: 1,
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0,
-    backgroundColor: 'rgba(0,0,0,0.5)',
-    justifyContent: 'center',
-    alignItems: 'center',
   },
 })
