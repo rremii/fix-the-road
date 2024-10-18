@@ -5,16 +5,17 @@ import { useQuery } from '@tanstack/react-query'
 import { authApi } from '../api/api'
 import { useToast } from '@shared/modules/toast'
 import { storage } from '@modules/storage'
+import * as SplashScreen from 'expo-splash-screen'
 
 export const useAuth = () => {
   const setAuthState = useAuthStore((state) => state.setAuthState)
   const authState = useAuthStore((state) => state.authState)
-  const { openToast } = useToast()
 
   const {
     error,
     data: refreshData,
     isSuccess,
+    isFetched,
   } = useQuery({
     queryKey: ['refresh'],
     retry: false,
@@ -32,11 +33,6 @@ export const useAuth = () => {
 
   useEffect(() => {
     if (!error) return
-
-    // openToast({
-    //   type: 'error',
-    //   content: 'Session expired',
-    // })
 
     setAuthState('rejected')
 

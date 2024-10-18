@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import {
   createStackNavigator,
   StackNavigationOptions,
@@ -7,11 +7,22 @@ import AuthNavigation from './Auth'
 import { RootNavigationParam } from './types'
 import HomeNavigation from './Home'
 import { useAuthStore } from 'src/entities/auth/model/useAuthStore'
+import { FallbackView } from '@shared/ui/FallbackView'
+
+import * as SplashScreen from 'expo-splash-screen'
 
 const RootStack = createStackNavigator<RootNavigationParam>()
 
 const RootNavigation = () => {
   const authState = useAuthStore((state) => state.authState)
+
+  useEffect(() => {
+    if (!authState) return
+
+    SplashScreen.hideAsync().catch((err) => console.log(err))
+  }, [authState])
+
+  if (!authState) return <FallbackView msg={'Authorization...'} />
 
   const routes: {
     name: keyof RootNavigationParam

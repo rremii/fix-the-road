@@ -34,8 +34,6 @@ export const useLogout = () => {
   const handleLogout = async () => {
     await mutateLogout()
     await storage.removeItem(ACCESS_TOKEN)
-
-    setAuthState(null)
   }
 
   return {

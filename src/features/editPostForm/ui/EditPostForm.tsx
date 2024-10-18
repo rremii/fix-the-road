@@ -49,6 +49,8 @@ export const EditPostForm = (props: Props) => {
             rules={textAreaSchema}
             render={({ field: { onChange, onBlur, value } }) => (
               <TextInput
+                numberOfLines={3}
+                multiline
                 onBlur={onBlur}
                 onChangeText={onChange}
                 value={value}
@@ -89,10 +91,12 @@ const styles = StyleSheet.create({
   },
 
   input: {
-    height: 35,
+    textAlignVertical: 'top',
+    fontSize: 16,
+    minHeight: 35,
     width: '100%',
     padding: 5,
-    paddingLeft: 20,
+    paddingLeft: 15,
     borderRadius: 10,
     borderColor: '#d0bfff',
     color: '#69579b',

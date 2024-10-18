@@ -21,7 +21,6 @@ export const EditUserProfile = ({ onSubmit }: Props) => {
   const { updateMe, isPending, isError, isSuccess } = useUpdateMe()
   const [newAvatar, setAvatar] = useState<ImagePickerAsset>()
 
-  //todo add validation
   //todo hide splash after auth
   //todo add customs fonts
   //todo make splash screen
@@ -70,7 +69,7 @@ export const EditUserProfile = ({ onSubmit }: Props) => {
               onBlur={onBlur}
               onChangeText={onChange}
               value={value}
-              style={styles.input}
+              style={[styles.input, errors.userName && styles.error]}
               placeholder="New user name"
             />
           )}
@@ -110,6 +109,11 @@ const styles = StyleSheet.create({
     borderColor: '#8181818d',
     borderWidth: 1,
   },
+  error: {
+    color: 'red',
+    borderColor: 'red',
+  },
+
   form: {
     marginTop: 20,
   },

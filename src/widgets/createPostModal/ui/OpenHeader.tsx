@@ -8,8 +8,8 @@ import React, { useEffect } from 'react'
 import { Pressable, StyleSheet } from 'react-native'
 import WideArrow from '@icons/wide-arrow.svg'
 import {
-  openHeaderHeight,
-  slideDelay,
+  OPEN_HEADER_HEIGHT,
+  SLIDE_DELAY,
 } from '@widgets/createPostModal/constants'
 
 interface Props {
@@ -18,7 +18,7 @@ interface Props {
 }
 
 export const OpenHeader = ({ isOpen, onClick }: Props) => {
-  const slideAnimOpenHeader = useSharedValue(-openHeaderHeight)
+  const slideAnimOpenHeader = useSharedValue(-OPEN_HEADER_HEIGHT)
 
   const slideStylesOpenHeader = useAnimatedStyle(() => ({
     transform: [{ translateY: slideAnimOpenHeader.value }],
@@ -27,11 +27,11 @@ export const OpenHeader = ({ isOpen, onClick }: Props) => {
   useEffect(() => {
     if (isOpen) {
       slideAnimOpenHeader.value = withDelay(
-        slideDelay,
-        withTiming(-openHeaderHeight),
+        SLIDE_DELAY,
+        withTiming(-OPEN_HEADER_HEIGHT),
       )
     } else {
-      slideAnimOpenHeader.value = withDelay(slideDelay, withTiming(0))
+      slideAnimOpenHeader.value = withDelay(SLIDE_DELAY, withTiming(0))
     }
   }, [isOpen])
 
@@ -45,7 +45,7 @@ export const OpenHeader = ({ isOpen, onClick }: Props) => {
 }
 const styles = StyleSheet.create({
   openHeader: {
-    height: openHeaderHeight,
+    height: OPEN_HEADER_HEIGHT,
     width: '100%',
     justifyContent: 'center',
     alignItems: 'center',

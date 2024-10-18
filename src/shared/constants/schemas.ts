@@ -1,21 +1,21 @@
 type Schema = {
   required?: boolean
-  max?: number
-  min?: number
+  maxLength?: number
+  minLength?: number
 }
 
 export const passwordSchema: Schema = {
   required: true,
-  min: 5,
+  minLength: 5,
 }
 export const textAreaSchema: Schema = {
   required: true,
-  min: 3,
-  max: 50,
+  minLength: 3,
+  maxLength: 50,
 }
 
 export const userNameSchema: Schema = {
   required: true,
-  min: 5,
-  max: 20,
+  minLength: 3,
+  maxLength: 20,
 }

@@ -11,7 +11,7 @@ import {
   PAN_GESTURE_BREAK,
   TAB_BAR_HEIGHT,
 } from '@shared/constants'
-import { openHeaderHeight } from '@widgets/createPostModal/constants'
+import { OPEN_HEADER_HEIGHT } from '@widgets/createPostModal/constants'
 import { Gesture, GestureDetector } from 'react-native-gesture-handler'
 
 interface Props extends PropsWithChildren {
@@ -29,7 +29,7 @@ export const ModalView = ({
   const [modalHeight, setModalHeight] = useState(0)
 
   const modalOpenY = -modalHeight - TAB_BAR_HEIGHT
-  const modalCloseY = -TAB_BAR_HEIGHT - openHeaderHeight
+  const modalCloseY = -TAB_BAR_HEIGHT - OPEN_HEADER_HEIGHT
 
   const slideAnim = useSharedValue(0)
   const slideStyles = useAnimatedStyle(() => {
