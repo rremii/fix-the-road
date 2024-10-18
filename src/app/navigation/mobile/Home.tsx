@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { HomeNavigationParam } from './types'
 import {
   BottomTabNavigationOptions,
@@ -9,6 +9,7 @@ import { MapPage } from '@pages/mobile/home/map/Map.page'
 import { ProfilePage } from '@pages/mobile/home/Profile.page'
 import { BottomTabsRouteNames } from '@widgets/bottomTabBar/types'
 import { BottomTabBar } from '@widgets/bottomTabBar/ui/BottomTabBar'
+import * as SplashScreen from 'expo-splash-screen'
 
 const HomeTabs = createBottomTabNavigator<HomeNavigationParam>()
 

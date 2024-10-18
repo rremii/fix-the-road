@@ -1,5 +1,7 @@
 export const TAB_BAR_HEIGHT = 50
 
+export const TAB_BAR_SLIDE_DURATION = 300
+
 export const MARKER_SIZE = 25
 
 export const GEOLOCATION_MARKER_SIZE = 50

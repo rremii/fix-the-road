@@ -54,6 +54,8 @@ export const CreatePostForm = () => {
             rules={textAreaSchema}
             render={({ field: { onChange, onBlur, value } }) => (
               <TextInput
+                numberOfLines={3}
+                multiline
                 onBlur={onBlur}
                 onChangeText={onChange}
                 value={value}
@@ -96,6 +98,8 @@ const styles = StyleSheet.create({
   },
 
   input: {
+    textAlignVertical: 'top',
+    fontSize: 16,
     width: '100%',
     padding: 5,
     paddingLeft: 20,

@@ -1,2 +1,2 @@
-export const openHeaderHeight = 30
-export const slideDelay = 400
+export const OPEN_HEADER_HEIGHT = 30
+export const SLIDE_DELAY = 400

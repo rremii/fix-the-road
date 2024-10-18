@@ -6,7 +6,7 @@ import Animated, {
 } from 'react-native-reanimated'
 import React, { useEffect } from 'react'
 import { StyleSheet, TouchableOpacity, View } from 'react-native'
-import { slideDelay } from '@widgets/createPostModal/constants'
+import { SLIDE_DELAY } from '@widgets/createPostModal/constants'
 import Cross from '@icons/cross.svg'
 
 interface Props {
@@ -23,9 +23,9 @@ export const CloseHeader = ({ isOpen, onClick }: Props) => {
 
   useEffect(() => {
     if (isOpen) {
-      opacityAnim.value = withDelay(slideDelay, withTiming(1))
+      opacityAnim.value = withDelay(SLIDE_DELAY, withTiming(1))
     } else {
-      opacityAnim.value = withDelay(slideDelay, withTiming(0))
+      opacityAnim.value = withDelay(SLIDE_DELAY, withTiming(0))
     }
   }, [isOpen])
 

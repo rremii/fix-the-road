@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import {
   CardStyleInterpolators,
   createStackNavigator,
@@ -7,6 +7,7 @@ import {
 import SignUpNavigation from './SignUp'
 import { SignInPage } from '@pages/mobile/auth/SignIn.page'
 import { AuthNavigationParam } from '../types'
+import * as SplashScreen from 'expo-splash-screen'
 
 const AuthStack = createStackNavigator<AuthNavigationParam>()
 
