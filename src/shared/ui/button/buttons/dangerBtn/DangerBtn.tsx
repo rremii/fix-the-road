@@ -28,9 +28,11 @@ export const DangerBtn: FC<DangerBtnProps> = ({
   textStyles,
   children,
   withSpinner = false,
-  ...colors
+  activeColor = '#c71f1f',
+  mainColor = '#dc2121',
+  subColor = '#fff',
 }) => {
-  const styles = getStyles({ pending, ...colors })
+  const styles = getStyles({ pending, activeColor, subColor, mainColor })
   return (
     <TouchableOpacity
       activeOpacity={0.8}
@@ -39,11 +41,7 @@ export const DangerBtn: FC<DangerBtnProps> = ({
       style={[styles.btn, btnStyles]}
     >
       {withSpinner && pending ? (
-        <ActivityIndicator
-          size="small"
-          animating={true}
-          color={colors.subColor}
-        />
+        <ActivityIndicator size="small" animating={true} color={subColor} />
       ) : (
         <Text style={[styles.text, textStyles]}>{children}</Text>
       )}
@@ -53,9 +51,9 @@ export const DangerBtn: FC<DangerBtnProps> = ({
 
 const getStyles = ({
   pending,
-  activeColor = '#c71f1f',
-  mainColor = '#dc2121',
-  subColor = '#fff',
+  activeColor,
+  mainColor,
+  subColor,
 }: StyleParams) =>
   StyleSheet.create({
     btn: {

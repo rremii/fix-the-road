@@ -4,6 +4,7 @@ import { Avatar } from '../../../shared/ui/Avatar'
 import { useGetMe } from 'src/entities/user/model/useGetMe'
 import { Button } from '@shared/ui/button'
 import { EditUserProfile } from './EditUserProfile'
+import { Logout } from '@features/logout/ui/Logout'
 
 export const UserProfile = () => {
   const [isEditing, setEditing] = useState(false)
@@ -27,6 +28,7 @@ export const UserProfile = () => {
         <Button onPress={startEditing} type="simple">
           Edit
         </Button>
+        <Logout />
       </View>
     </View>
   )
@@ -50,5 +52,7 @@ const styles = StyleSheet.create({
     width: '100%',
     justifyContent: 'flex-end',
     alignItems: 'flex-end',
+    gap: 10,
+    flexDirection: 'row',
   },
 })

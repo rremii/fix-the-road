@@ -3,11 +3,10 @@ import { AbstractStorage, ISingleStorage } from './types'
 import { createStorage } from './createStorage'
 
 // PLAYING AROUND WITH OOP
-export class SingleStorage extends AbstractStorage {
+export class SingleStorage implements ISingleStorage {
   private static savedStorage: SingleStorage
 
   constructor(private readonly storage: AbstractStorage) {
-    super()
     if (SingleStorage.savedStorage) return SingleStorage.savedStorage
     SingleStorage.savedStorage = this
   }
