@@ -21,10 +21,9 @@ export const EditUserProfile = ({ onSubmit }: Props) => {
   const { updateMe, isPending, isError, isSuccess } = useUpdateMe()
   const [newAvatar, setAvatar] = useState<ImagePickerAsset>()
 
-  //todo hide splash after auth
   //todo add customs fonts
-  //todo make splash screen
   //todo ********************************************
+
   const {
     control,
     handleSubmit,

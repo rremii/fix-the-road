@@ -4,14 +4,14 @@
     "slug": "fix-the-road",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/images/icon.png",
+    "icon": "./assets/images/marker-green.png",
     "userInterfaceStyle": "light",
     "scheme": "fix-the-road",
     "experiments": {
       "baseUrl": "/fix-the-road"
     },
     "splash": {
-      "image": "./assets/images/splash.png",
+      "image": "./assets/images/map.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
@@ -22,13 +22,13 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/images/adaptive-icon.png",
+        "foregroundImage": "./assets/images/splash-screen.png",
         "backgroundColor": "#ffffff"
       },
       "package": "com.remii.fixtheroad"
     },
     "web": {
-      "favicon": "./assets/images/favicon.png",
+      "favicon": "./assets/images/map.png",
       "output": "single",
       "bundler": "metro"
     },
