@@ -4,30 +4,35 @@ import {
 } from '@shared/constants'
 import { Button } from '@shared/ui/button'
 import React, { useEffect } from 'react'
-import { Text } from 'react-native'
+import { Platform, Text } from 'react-native'
 import { useAuthStore } from 'src/entities/auth/model/useAuthStore'
 import { useLogout } from 'src/entities/auth/model/useLogout'
 import { useUIStore } from 'src/entities/ui/model/UIStore'
 
 export const Logout = () => {
-  const { logout, isPending, isSuccess } = useLogout()
+  const { logout, isPending, isSuccess, isError } = useLogout()
   const closeMenu = useUIStore((state) => state.closeMenu)
   const setAuthState = useAuthStore((state) => state.setAuthState)
 
   useEffect(() => {
-    if (!isSuccess) return
-
-    closeMenu('bottomTabBar')
-    const timer = setTimeout(() => {
-      setAuthState('rejected')
-      clearTimeout(timer)
-    }, TAB_BAR_SLIDE_DURATION)
+    if (isSuccess) {
+      closeMenu('bottomTabBar')
+      const timer = setTimeout(() => {
+        setAuthState('rejected')
+        clearTimeout(timer)
+      }, TAB_BAR_SLIDE_DURATION)
+    }
   }, [isSuccess])
 
   const onPress = () => {
     closeMenu('leftSideBar')
 
-    logout()
+    if (Platform.OS === 'web') {
+      setAuthState('rejected')
+    }
+    {
+      logout()
+    }
   }
   return (
     <Button withSpinner pending={isPending} onPress={onPress} type="danger">

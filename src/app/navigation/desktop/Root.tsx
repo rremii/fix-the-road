@@ -30,6 +30,7 @@ const RootNavigation = () => {
             component: AuthNavigation,
           },
         ]
+  console.log(authState)
 
   return (
     <RootStack.Navigator screenOptions={StackOptions} initialRouteName={'auth'}>

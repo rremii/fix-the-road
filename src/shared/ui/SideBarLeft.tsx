@@ -1,6 +1,6 @@
 import { Portal } from '@gorhom/portal'
 import React, { PropsWithChildren, useEffect, useState } from 'react'
-import { LayoutChangeEvent, StyleSheet } from 'react-native'
+import { Dimensions, LayoutChangeEvent, StyleSheet } from 'react-native'
 import Animated, {
   useAnimatedStyle,
   useSharedValue,
@@ -32,7 +32,13 @@ export const SideBarLeft = ({ children, isOpen }: Props) => {
     <Portal>
       <Animated.View
         onLayout={onLayout}
-        style={[styles.container, slideStyles]}
+        style={[
+          styles.container,
+          slideStyles,
+          {
+            zIndex: isOpen ? 500 : 1,
+          },
+        ]}
       >
         {children}
       </Animated.View>
@@ -48,8 +54,13 @@ const styles = StyleSheet.create({
     top: 0,
     right: '100%',
     bottom: 0,
-    minWidth: 300,
     borderTopEndRadius: 15,
     borderBottomEndRadius: 15,
+
+    minWidth:
+      Dimensions.get('window').width > 700
+        ? 300
+        : Dimensions.get('window').width - 70,
+    maxWidth: Dimensions.get('window').width - 50,
   },
 })

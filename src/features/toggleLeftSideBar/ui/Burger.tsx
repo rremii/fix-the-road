@@ -79,11 +79,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     borderRadius: 10,
     padding: 15,
-    gap: 5,
+    gap: 6,
   },
 
   bar: {
-    width: 25,
+    width: 27,
     height: 3,
     backgroundColor: 'black',
     borderRadius: 3,

@@ -1,6 +1,6 @@
 import { Portal } from '@gorhom/portal'
 import React, { PropsWithChildren, useEffect, useState } from 'react'
-import { LayoutChangeEvent, StyleSheet } from 'react-native'
+import { Dimensions, LayoutChangeEvent, StyleSheet } from 'react-native'
 import Animated, {
   useAnimatedStyle,
   useSharedValue,
@@ -48,8 +48,12 @@ const styles = StyleSheet.create({
     top: 0,
     left: '100%',
     bottom: 0,
-    minWidth: 450,
+    minWidth:
+      Dimensions.get('window').width > 700
+        ? 450
+        : Dimensions.get('window').width - 70,
     borderTopStartRadius: 15,
     borderBottomStartRadius: 15,
+    maxWidth: Dimensions.get('window').width - 50,
   },
 })

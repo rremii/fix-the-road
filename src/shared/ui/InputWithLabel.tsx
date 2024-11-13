@@ -28,6 +28,7 @@ interface Props {
   contStyles?: StyleProp<ViewStyle>
   labelStyles?: StyleProp<TextStyle>
   labelContStyles?: StyleProp<ViewStyle>
+  isContentHidden?: boolean
 }
 
 //FOLLOWS THE LOGIC OF NATIVE TEXT INPUT
@@ -43,6 +44,7 @@ export const InputWithLabel = ({
   inputStyles,
   labelStyles,
   onSubmitEditing,
+  isContentHidden,
 }: Props) => {
   const [fieldHeight, setFieldHeight] = useState(40)
   const [labelHeight, setLabelHeight] = useState(20)
@@ -115,6 +117,7 @@ export const InputWithLabel = ({
         </Animated.Text>
       </View>
       <TextInput
+        secureTextEntry={isContentHidden}
         keyboardType={keyboardType}
         onChangeText={onTextChange}
         value={inputValue}

@@ -80,6 +80,7 @@ export const SignInForm = () => {
               onBlur={onBlur}
               onChangeText={onChange}
               value={value}
+              isContentHidden={true}
             />
           )}
           name="password"

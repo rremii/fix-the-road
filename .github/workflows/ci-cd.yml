@@ -4,12 +4,14 @@ on:
   push:
     branches:
       - 'dev'
+      - client
     paths-ignore:
       - 'README.md'
       - '.husky'
   pull_request:
     branches:
       - main
+      - client
     paths-ignore:
       - 'README.md'
       - '.husky'
